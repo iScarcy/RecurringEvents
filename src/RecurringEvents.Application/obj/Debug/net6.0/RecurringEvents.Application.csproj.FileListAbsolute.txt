@@ -1,0 +1,15 @@
+/home/scarcy/Dev/RecurringEvents/src/RecurringEvents.Application/bin/Debug/net6.0/RecurringEvents.Application.deps.json
+/home/scarcy/Dev/RecurringEvents/src/RecurringEvents.Application/bin/Debug/net6.0/RecurringEvents.Application.dll
+/home/scarcy/Dev/RecurringEvents/src/RecurringEvents.Application/bin/Debug/net6.0/ref/RecurringEvents.Application.dll
+/home/scarcy/Dev/RecurringEvents/src/RecurringEvents.Application/bin/Debug/net6.0/RecurringEvents.Application.pdb
+/home/scarcy/Dev/RecurringEvents/src/RecurringEvents.Application/bin/Debug/net6.0/RecurringEvents.Domain.dll
+/home/scarcy/Dev/RecurringEvents/src/RecurringEvents.Application/bin/Debug/net6.0/RecurringEvents.Domain.pdb
+/home/scarcy/Dev/RecurringEvents/src/RecurringEvents.Application/obj/Debug/net6.0/RecurringEvents.Application.csproj.AssemblyReference.cache
+/home/scarcy/Dev/RecurringEvents/src/RecurringEvents.Application/obj/Debug/net6.0/RecurringEvents.Application.GeneratedMSBuildEditorConfig.editorconfig
+/home/scarcy/Dev/RecurringEvents/src/RecurringEvents.Application/obj/Debug/net6.0/RecurringEvents.Application.AssemblyInfoInputs.cache
+/home/scarcy/Dev/RecurringEvents/src/RecurringEvents.Application/obj/Debug/net6.0/RecurringEvents.Application.AssemblyInfo.cs
+/home/scarcy/Dev/RecurringEvents/src/RecurringEvents.Application/obj/Debug/net6.0/RecurringEvents.Application.csproj.CoreCompileInputs.cache
+/home/scarcy/Dev/RecurringEvents/src/RecurringEvents.Application/obj/Debug/net6.0/RecurringEvents.Application.csproj.CopyComplete
+/home/scarcy/Dev/RecurringEvents/src/RecurringEvents.Application/obj/Debug/net6.0/RecurringEvents.Application.dll
+/home/scarcy/Dev/RecurringEvents/src/RecurringEvents.Application/obj/Debug/net6.0/ref/RecurringEvents.Application.dll
+/home/scarcy/Dev/RecurringEvents/src/RecurringEvents.Application/obj/Debug/net6.0/RecurringEvents.Application.pdb
