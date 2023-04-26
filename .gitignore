@@ -22,3 +22,8 @@ src/RecurringEvents.Web/bin/Debug/net6.0/*.*
 src/RecurringEvents.Web/obj/Debug/net6.0/*.*
 src/RecurringEvents.Web/obj/Debug/net6.0/ref/*.*
 
+/.vs/RecurringEvents
+/src/RecurringEvents.Application/obj
+/src/RecurringEvents.Domain/obj/Debug/net6.0/refint
+/src/RecurringEvents.Infrastructure/obj/Debug/net6.0/refint
+/src/RecurringEvents.Web/obj/Debug/net6.0
