@@ -8,13 +8,13 @@ public interface IRepository<TEntity, TPrimaryKey>
 {
     IEnumerable<TEntity> GetAll();
 
-    TEntity GetByID(TPrimaryKey ID) ;
+    Task<TEntity> GetByID(int ID) ;
 
-    IEnumerable<TEntity> GetByDateRange(DateRange rangeDate);
+    Task<IEnumerable<TEntity>> GetByDateRange(DateRange rangeDate);
 
-    void Insert(TEntity entity);
+    Task Insert(TEntity entity);
 
-    void Update(TEntity entity);
+    Task Update(TEntity entity);
 
-    void Delete(TPrimaryKey ID);
+    Task Delete(int ID);
 }

@@ -13,4 +13,6 @@ public class ApplicationDbContext : DbContext
     public DbSet<Saint> Saints{get; set;}
 
     public DbSet<BirthDay> BirthDay{get; set;}
+
+     public DbSet<NameDay> NameDay{get; set;}
 }

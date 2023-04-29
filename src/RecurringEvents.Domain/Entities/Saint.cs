@@ -1,4 +1,6 @@
 namespace RecurringEvents.Domain.Entities;
+
+using System.Threading.Tasks;
 using RecurringEvents.Domain.Primitives;
 
 public class Saint : EntityBase<Guid>
@@ -9,5 +11,10 @@ public class Saint : EntityBase<Guid>
     {
         this.Description = Description;
         this.Date = Date;
+    }
+
+    public static implicit operator Task<object>(Saint v)
+    {
+        throw new NotImplementedException();
     }
 }

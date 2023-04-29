@@ -12,37 +12,44 @@ public class SaintRepository : ISaintRepository
         _dbContext = dbContext;
     }
 
-    void IRepository<Saint, Guid>.Delete(Guid ID)
+    public Task Delete(int ID)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<IEnumerable<Saint>> GetAll()
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<IEnumerable<Saint>> GetByDateRange(DateRange rangeDate)
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task<Saint> GetByID(int ID)
+    {
+        Saint? saint = await _dbContext.Saints.FindAsync(ID);
+        return saint;
+    }
+
+    public IEnumerable<Saint> GetBySaintName(string SaintName)
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task Insert(Saint entity)
+    {
+         _dbContext.Add(entity);
+        await _dbContext.SaveChangesAsync();
+    }
+
+    public Task Update(Saint entity)
     {
         throw new NotImplementedException();
     }
 
     IEnumerable<Saint> IRepository<Saint, Guid>.GetAll()
-    {
-        throw new NotImplementedException();
-    }
-
-    IEnumerable<Saint> IRepository<Saint, Guid>.GetByDateRange(DateRange rangeDate)
-    {
-        throw new NotImplementedException();
-    }
-
-    Saint IRepository<Saint, Guid>.GetByID(Guid ID)
-    {
-        throw new NotImplementedException();
-    }
-
-    IEnumerable<Saint> ISaintRepository.GetBySaintName(string SaintName)
-    {
-        throw new NotImplementedException();
-    }
-
-    void IRepository<Saint, Guid>.Insert(Saint entity)
-    {
-        throw new NotImplementedException();
-    }
-
-    void IRepository<Saint, Guid>.Update(Saint entity)
     {
         throw new NotImplementedException();
     }

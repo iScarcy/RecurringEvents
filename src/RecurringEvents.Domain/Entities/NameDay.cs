@@ -3,11 +3,11 @@ namespace RecurringEvents.Domain.Entities;
 using RecurringEvents.Domain.Primitives;
 public class NameDay : Event
 {
-    private string Who  {get; init;} 
-    private Saint Saint {get; init;}     
-    public NameDay(string personName, Saint saint):base(0, "NameDay") 
+    public string personName  {get; init;} 
+    public int IdSaint {get; init;}     
+    public NameDay(int id, string personName, int idSaint):base(id, "NameDay") 
     {
-        this.Who       = personName;
-        this.Saint     = saint;    
+        this.personName  = personName;
+        this.IdSaint     = idSaint;    
     }
 }

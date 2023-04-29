@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using MediatR;
 using RecurringEvents.Domain.Events;
 using RecurringEvents.Application.DomainEvents;
-using RecurringEvents.Application.Interface.Repository;
 using RecurringEvents.Domain.Entities;
 
 namespace RecurringEvents.Web.Controllers;
@@ -13,12 +12,10 @@ namespace RecurringEvents.Web.Controllers;
 public class RecurringEventController : ControllerBase
 {
     private readonly IMediator _mediator;
-    private readonly ISaintRepository _saintRepository ;
-  
-    public RecurringEventController(IMediator mediator, ISaintRepository saintRepository)
+   
+    public RecurringEventController(IMediator mediator)
     {
-        _mediator = mediator;
-        _saintRepository = saintRepository;
+        _mediator = mediator;       
     }
 
     [Route("PersonWasCreated")]
@@ -30,31 +27,16 @@ public class RecurringEventController : ControllerBase
         return _mediator.Send(birthDayEvent);
     }
 
-    [Route("AddSaint")]
+
+
+    [Route("NameDayWasCreated")]
     [HttpPost]
-    public IActionResult AddSaint(string Description, DateTime Data)
+    public Task AddNameDay(string personName, int idSaint)
     {
-        try
-        {
-            Saint ss = new Saint(0, Description, Data);
-            _saintRepository.Insert(ss);
-            return Ok();
-        }
-        catch (Exception e)
-        {
-            return BadRequest();
-        }
-    }
+        NameDay nameDay  = new NameDay(0, personName, idSaint);
+        var nameDayEvent = new NameDayWasCreated(nameDay);
+        return _mediator.Send(nameDayEvent);
+    } 
 
-    /*
-    [HttpPost]
-public async Task<ActionResult<TodoItem>> PostTodoItem(TodoItem todoItem)
-{
-    _context.TodoItems.Add(todoItem);
-    await _context.SaveChangesAsync();
 
-    //return CreatedAtAction("GetTodoItem", new { id = todoItem.Id }, todoItem);
-    return CreatedAtAction(nameof(GetTodoItem), new { id = todoItem.Id }, todoItem);
-}
-    */
 }
