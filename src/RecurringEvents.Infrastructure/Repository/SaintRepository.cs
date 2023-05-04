@@ -48,9 +48,9 @@ public class SaintRepository : ISaintRepository
     {
         throw new NotImplementedException();
     }
-
+/*
     IEnumerable<Saint> IRepository<Saint, Guid>.GetAll()
     {
         throw new NotImplementedException();
-    }
+    }*/
 }

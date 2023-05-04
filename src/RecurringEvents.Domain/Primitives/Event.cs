@@ -1,10 +1,16 @@
 namespace RecurringEvents.Domain.Primitives;
 
-public abstract class Event : EntityBase<Guid>
+public  class Event 
 {   
-    string Type {get; set;} 
-    public Event(int Id, string type): base(Id)
+    public string Type {get; set;} 
+    public DateTime Date {get; set;}
+    public string Description {get; set;}
+    public Event(string type, DateTime date, string description)
     {
        Type = type;
+       Date = date;
+       Description = description;
     }
+    
+    
 }

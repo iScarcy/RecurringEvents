@@ -6,7 +6,7 @@ namespace RecurringEvents.Application.DomainEvents;
 
 public class SistemWasStared : IRequest<List<Event>>
 {
-    DateRange DateRange;
+    public DateRange DateRange;
 
     public SistemWasStared(DateRange dateRange)
     {
