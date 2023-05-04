@@ -1,4 +1,4 @@
-
+﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
@@ -12,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecurringEvents.Application", "src\RecurringEvents.Application\RecurringEvents.Application.csproj", "{7B60BBD4-1591-48E7-8845-544A91EC665F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecurringEvents.Web", "src\RecurringEvents.Web\RecurringEvents.Web.csproj", "{4ED7A5B5-C91A-47FE-A88D-225114C2D2E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RunningEvents.Rabbit", "src\RunningEvents.Rabbit\RunningEvents.Rabbit.csproj", "{3FE82B0E-775E-4B94-9C06-54DAC60302E2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,11 +40,16 @@ Global
 		{4ED7A5B5-C91A-47FE-A88D-225114C2D2E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4ED7A5B5-C91A-47FE-A88D-225114C2D2E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4ED7A5B5-C91A-47FE-A88D-225114C2D2E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FE82B0E-775E-4B94-9C06-54DAC60302E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FE82B0E-775E-4B94-9C06-54DAC60302E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FE82B0E-775E-4B94-9C06-54DAC60302E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FE82B0E-775E-4B94-9C06-54DAC60302E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{175DF0A9-2875-4612-AF0D-B1F37DE6884A} = {F00B5BE7-9385-49EE-B2F1-7AFF0458B76E}
 		{2EF093EF-1446-49E9-B3E1-F70D30DEFA6B} = {F00B5BE7-9385-49EE-B2F1-7AFF0458B76E}
 		{7B60BBD4-1591-48E7-8845-544A91EC665F} = {F00B5BE7-9385-49EE-B2F1-7AFF0458B76E}
 		{4ED7A5B5-C91A-47FE-A88D-225114C2D2E3} = {F00B5BE7-9385-49EE-B2F1-7AFF0458B76E}
+		{3FE82B0E-775E-4B94-9C06-54DAC60302E2} = {F00B5BE7-9385-49EE-B2F1-7AFF0458B76E}
 	EndGlobalSection
 EndGlobal
