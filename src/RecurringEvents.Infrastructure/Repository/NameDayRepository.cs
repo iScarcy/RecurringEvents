@@ -42,8 +42,5 @@ public class NameDayRepository : INameDayRepository
         throw new NotImplementedException();
     }
 
-    IEnumerable<NameDay> IRepository<NameDay, Guid>.GetAll()
-    {
-        throw new NotImplementedException();
-    }
+    
 }
