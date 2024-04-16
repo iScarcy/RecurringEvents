@@ -1,0 +1,9 @@
+2023-10-16 23:20:23.069 +02:00 [INF] From: 11/07/2023, To: 16/10/2023
+2023-10-16 23:20:24.371 +02:00 [WRN] Error, "InternalServerError"
+2023-10-16 23:24:00.944 +02:00 [INF] From: 16/10/2023, To: 16/10/2023
+2023-10-16 23:24:01.031 +02:00 [WRN] Error, "InternalServerError"
+2023-10-16 23:33:02.466 +02:00 [INF] From: 01/01/2023, To: 01/09/2023
+2023-10-16 23:33:04.151 +02:00 [WRN] Error, "InternalServerError"
+2023-10-16 23:38:48.831 +02:00 [INF] From: 01/01/2023, To: 01/09/2023
+2023-10-16 23:38:50.305 +02:00 [INF]  22/08/1983, Compleanno:Giuseppe Scarcella
+2023-10-16 23:38:50.308 +02:00 [INF]  22/08/1983, Compleanno:Il 22/8, Giuseppe Scarcella ha compiuto 40 anni

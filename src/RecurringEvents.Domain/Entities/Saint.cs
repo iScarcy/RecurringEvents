@@ -1,14 +1,16 @@
 namespace RecurringEvents.Domain.Entities;
 
 using System.Threading.Tasks;
-using RecurringEvents.Domain.Primitives;
+ 
 
-public class Saint : EntityBase<Guid>
+public class Saint 
 {
+    public int Id { get; set; }
     public string Description { get; private init;} 
     public DateTime Date { get; private init; }
-    public Saint(int Id, string Description, DateTime Date):base(Id)
+    public Saint(int Id, string Description, DateTime Date)
     {
+        this.Id = Id;
         this.Description = Description;
         this.Date = Date;
     }

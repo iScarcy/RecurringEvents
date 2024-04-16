@@ -1,29 +1,18 @@
 
-src/RecurringEvents.Domain/bin/*.*
-src/RecurringEvents.Domain/obj/*.*
-src/RecurringEvents.Domain/bin/Debug/net6.0/*.*
-src/RecurringEvents.Domain/obj/Debug/net6.0/*.*
-src/RecurringEvents.Domain/obj/Debug/net6.0/ref/*.*
+src/RecurringEvents.Domain/bin
+src/RecurringEvents.Domain/obj
 
-src/RecurringEvents.Application/bin/*.*
-src/RecurringEvents.Application/bin/*.*
-src/RecurringEvents.Application/bin/Debug/net6.0/*.*
-src/RecurringEvents.Application/bin/Debug/net6.0/ref/*.*
+src/RecurringEvents.Application/bin
+src/RecurringEvents.Application/obj
 
-src/RecurringEvents.Infrastructure/bin/*.*
-src/RecurringEvents.Infrastructure/obj/*.*
-src/RecurringEvents.Infrastructure/bin/Debug/net6.0/*.*
-src/RecurringEvents.Infrastructure/obj/Debug/net6.0/*.*
-src/RecurringEvents.Infrastructure/obj/Debug/net6.0/ref/*.*
+src/RecurringEvents.Infrastructure/bin
+src/RecurringEvents.Infrastructure/obj
 
-src/RecurringEvents.Web/bin/*.*
-src/RecurringEvents.Web/obj/*.*
-src/RecurringEvents.Web/bin/Debug/net6.0/*.*
-src/RecurringEvents.Web/obj/Debug/net6.0/*.*
-src/RecurringEvents.Web/obj/Debug/net6.0/ref/*.*
+src/RecurringEvents.Web/bin
+src/RecurringEvents.Web/obj
+
+src/RecurringEvents.Remember/bin
+src/RecurringEvents.Remember/obj
+
 
 /.vs/RecurringEvents
-/src/RecurringEvents.Application/obj
-/src/RecurringEvents.Domain/obj/Debug/net6.0/refint
-/src/RecurringEvents.Infrastructure/obj/Debug/net6.0/refint
-/src/RecurringEvents.Web/obj/Debug/net6.0

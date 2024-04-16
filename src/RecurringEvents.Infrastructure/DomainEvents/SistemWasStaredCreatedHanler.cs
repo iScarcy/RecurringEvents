@@ -1,42 +1,102 @@
 using MediatR;
 using RecurringEvents.Application.DomainEvents;
-using RecurringEvents.Domain.Entities;
-using RecurringEvents.Domain.Events;
-using RecurringEvents.Domain.Primitives;
+using RecurringEvents.Domain.ValueObject;
 
 namespace RecurringEvents.Infrastructure.DomainEvents;
 
-public class SistemWasStaredCreatedHanler : IRequestHandler<SistemWasStared, List<Event>>
+public class SistemWasStartedCreatedHanler : IRequestHandler<SistemWasStarted, List<Event>>
 {
    
     private readonly ApplicationDbContext _dbContext;
 
-    public SistemWasStaredCreatedHanler(ApplicationDbContext dbContext)
+    public SistemWasStartedCreatedHanler(ApplicationDbContext dbContext)
     {
         _dbContext = dbContext;
     }
    
 
-    async Task<List<Event>> IRequestHandler<SistemWasStared, List<Event>>.Handle(SistemWasStared request, CancellationToken cancellationToken)
+    public async Task<List<Event>> Handle(SistemWasStarted request, CancellationToken cancellationToken)
     {
     
        List<Event> eventi = new List<Event>(); 
         //compleanni
-       List<Event> compleanni = (List<Event>)_dbContext.BirthDay.Where(x => x.DataBirth.Date >= request.DateRange.From.Date && x.DataBirth.Date <= request.DateRange.From.Date );
-       
+        
+       var compleanni = from x in  _dbContext.BirthDay
+                                where //mesi precedenti
+                                (   
+                                    
+                                    (   request.DateRange.From.Date.Month <= x.DataBirth.Date.Month 
+                                        && 
+                                        request.DateRange.To.Date.Month > x.DataBirth.Date.Month 
+                                       
+                                    )
+                                    || //mese from minore e mese to uguale + giorno to minore uguale al giorno del compleanno
+                                    (
+                                        (
+                                            (request.DateRange.From.Date.Month < x.DataBirth.Date.Month )
+                                            &&
+                                            (request.DateRange.To.Date.Month == x.DataBirth.Date.Month )
+                                            &&
+                                            (request.DateRange.To.Date.Day >= x.DataBirth.Date.Day )
+                                        )
+
+                                    )|| //mesi uguali e giorno compresi
+                                    (
+                                       (request.DateRange.From.Date.Month == x.DataBirth.Date.Month )
+                                            &&
+                                            (request.DateRange.To.Date.Month == x.DataBirth.Date.Month )
+                                            &&
+                                            (request.DateRange.From.Date.Day <= x.DataBirth.Date.Day )     
+                                            &&
+                                            (request.DateRange.To.Date.Day >= x.DataBirth.Date.Day )    
+                                    )
+                                )                               
+                                select new Event("Compleanno", x.DataBirth,x.Name);
       
+       
        //onomastici
-       List<Event> onomastici = (List<Event>)(from n in _dbContext.NameDay
+      var onomastici = from n in _dbContext.NameDay
                 join s in _dbContext.Saints on n.IdSaint equals s.Id
-                where s.Date.Date >= request.DateRange.From.Date && s.Date.Date <= request.DateRange.To.Date
-                select new Event("Onomastico", s.Date, n.personName));
-                
-      foreach(Event compleanno in compleanni)
+                 where //mesi compresi
+                                (   
+                                    
+                                    (   request.DateRange.From.Date.Month < s.Date.Date.Month 
+                                        && 
+                                        request.DateRange.To.Date.Month > s.Date.Date.Month 
+                                       
+                                    )
+                                    || //mese from minore e mese to uguale + giorno to minore uguale al giorno del compleanno
+                                    (
+                                        (
+                                            (request.DateRange.From.Date.Month < s.Date.Date.Month )
+                                            &&
+                                            (request.DateRange.To.Date.Month == s.Date.Date.Month )
+                                            &&
+                                            (request.DateRange.To.Date.Day >= s.Date.Date.Day )
+                                        )
+
+                                    )|| //mesi uguali e giorno compresi
+                                    (
+                                       (request.DateRange.From.Date.Month == s.Date.Date.Month )
+                                            &&
+                                            (request.DateRange.To.Date.Month == s.Date.Date.Month )
+                                            &&
+                                            (request.DateRange.From.Date.Day >= s.Date.Date.Day )     
+                                            &&
+                                            (request.DateRange.To.Date.Day <= s.Date.Date.Day )    
+                                    )
+                                )
+                select new Event("Onomastico", s.Date, n.PersonName);
+    
+       foreach(var compleanno in compleanni){
             eventi.Add(compleanno);
-
-      foreach(Event onomastico in onomastici)
+        }
+      
+       
+        foreach(var onomastico in onomastici){
             eventi.Add(onomastico);
-
+        }
+   
       return await Task.FromResult<List<Event>>(eventi);
         
     }

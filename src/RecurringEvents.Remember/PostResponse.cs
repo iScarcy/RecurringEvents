@@ -1,0 +1,8 @@
+namespace RecurringEvents.Remember;
+
+public class PostResponse
+{
+    public string value { get; set; }
+    public int statusCode { get; set; }
+    public string contentType { get; set; }
+}

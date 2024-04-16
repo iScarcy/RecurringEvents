@@ -3,7 +3,6 @@ namespace RecurringEvents.Application.Service;
 using System.Collections.Generic;
 using RecurringEvents.Application.Interface.Repository;
 using RecurringEvents.Application.Interface.Service;
-using RecurringEvents.Domain.Primitives;
 using RecurringEvents.Domain.ValueObject;
 
 public class NameDayService : IRecurringEventService

@@ -1,13 +1,14 @@
 namespace RecurringEvents.Domain.Entities;
-
-using RecurringEvents.Domain.Primitives;
+ 
 public class NameDay 
 {
-    public string personName  {get; init;} 
+    public int Id { get; set; }
+    public string PersonName  {get; init;} 
     public int IdSaint {get; init;}     
     public NameDay(int id, string personName, int idSaint)
     {
-        this.personName  = personName;
+        this.Id          = id;
+        this.PersonName  = personName;
         this.IdSaint     = idSaint;    
     }
 }

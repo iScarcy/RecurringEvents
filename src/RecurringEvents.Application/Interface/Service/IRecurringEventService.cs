@@ -1,6 +1,5 @@
 namespace RecurringEvents.Application.Interface.Service;
 
-using RecurringEvents.Domain.Primitives;
 using RecurringEvents.Domain.ValueObject;
 public interface IRecurringEventService
 {

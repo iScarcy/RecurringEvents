@@ -4,6 +4,8 @@ using MediatR;
 using RecurringEvents.Domain.Events;
 using RecurringEvents.Application.DomainEvents;
 using RecurringEvents.Domain.Entities;
+using RecurringEvents.Domain.ValueObject;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RecurringEvents.Web.Controllers;
 
@@ -18,7 +20,8 @@ public class RecurringEventController : ControllerBase
         _mediator = mediator;       
     }
 
-    [Route("PersonWasCreated")]
+    [Authorize]
+    [Route("PersonWasCreated/{Name}/{DataBirth}")]
     [HttpPost]
     public Task AddBirthDay(string Name, DateTime DataBirth)
     {
@@ -38,5 +41,18 @@ public class RecurringEventController : ControllerBase
         return _mediator.Send(nameDayEvent);
     } 
 
+    [Authorize]
+    [Route("SystemWasStarted")]
+    [HttpPost]
+    public Task<List<Event>> SystemWasStarted(DateRange date) 
+    {
+        Console.WriteLine(date.From);
+        Console.WriteLine(date.To);
+        
+        SistemWasStarted systemEvent = new SistemWasStarted(date);       
+        return _mediator.Send(systemEvent);
+         
+    } 
 
+    
 }
