@@ -10,7 +10,7 @@ namespace RecurringEvents.Infrastructure;
 
 public static class DependencyInjection
 {
-    private static string DefaultConnection = "server=localhost;port=3306;uid=root;pwd=myPassword1215.admin;database=RecurringEvents";
+    
     public static IServiceCollection AddInfrastructure(this IServiceCollection service, string dbConnString)
     {
         

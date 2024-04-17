@@ -41,11 +41,12 @@ public class RecurringEventController : ControllerBase
         return _mediator.Send(nameDayEvent);
     } 
 
-    [Authorize]
-    [Route("SystemWasStarted")]
-    [HttpPost]
-    public Task<List<Event>> SystemWasStarted(DateRange date) 
+   
+    
+    [HttpGet("SystemWasStarted/{from}/{to}")]
+    public Task<List<Event>> SystemWasStarted(DateTime from, DateTime to) 
     {
+        DateRange date = new DateRange(from, to);
         Console.WriteLine(date.From);
         Console.WriteLine(date.To);
         
