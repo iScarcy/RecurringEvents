@@ -1,18 +1,19 @@
 
 using RecurringEvents.Domain.ValueObject;
+using System.Collections.Generic;
 
 namespace RecurringEvents.Application.Interface.Repository;
 
-public interface IRepository<TEntity, TPrimaryKey>
+public interface IRepository<T> where T : class
    
 {
-  //  IEnumerable<TEntity> GetAll();
+    Task<IEnumerable<T>> GetAll();
 
-    Task<TEntity> GetByID(int ID) ;
+    Task<T> GetByID(int ID) ;
 
-    Task Insert(TEntity entity);
+    Task Insert(T entity);
 
-    Task Update(TEntity entity);
+    Task Update(T entity);
 
-    Task Delete(int ID);
+   // Task Delete(int ID);
 }

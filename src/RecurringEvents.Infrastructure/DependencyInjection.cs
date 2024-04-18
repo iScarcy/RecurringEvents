@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using RecurringEvents.Application.DomainEvents;
 using RecurringEvents.Application.Interface.DomainEvents;
 using RecurringEvents.Application.Interface.Repository;
-
+using RecurringEvents.Domain.Entities;
 using RecurringEvents.Infrastructure.Repository;
 
 namespace RecurringEvents.Infrastructure;
@@ -19,7 +19,7 @@ public static class DependencyInjection
         
         
         service.AddScoped<INameDayRepository, NameDayRepository>();
-        service.AddScoped<ISaintRepository, SaintRepository>();
+        service.AddScoped<IRepository<Saint>, SaintRepository>();
         return service;
     }
 }

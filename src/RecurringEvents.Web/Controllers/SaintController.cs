@@ -8,21 +8,51 @@ namespace RecurringEvents.Web.Controllers;
 [Route("api/[controller]")]
 public class SaintController : ControllerBase
 {
-     private readonly ISaintRepository _saintRepository ;
+     private readonly IRepository<Saint> _saintRepository ;
 
-    [Route("AddSaint")]
+    public SaintController(IRepository<Saint> saintRepository)
+    {
+        _saintRepository = saintRepository;
+    }
+     
+    
+    /// <summary>
+    /// Add
+    /// Censisce un nuovo santo del giorno
+    /// </summary>
+    /// <param name="Description"></param>
+    /// <param name="Data"></param>
+    /// <returns></returns>
     [HttpPost]
-    public  IActionResult AddSaint(string Description, DateTime Data)
+    public async Task<ActionResult> Add(string Description, DateTime Data)
     {
         try
         {
             Saint ss = new Saint(0, Description, Data);
-            _saintRepository.Insert(ss);
+            await _saintRepository.Insert(ss);
             return Ok();
         }
         catch (Exception e)
         {
-            return BadRequest();
+            return Problem(e.Message);
         }
     }
+    /// <summary>
+    /// allSaints
+    /// Recupera tutti i santi censiti nel sistema
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet("allSaints")]
+    public async Task<ActionResult> Get()
+    {
+        try 
+        { 
+            var saints = await _saintRepository.GetAll();
+            return Ok(saints);
+        }catch(Exception e) 
+        {
+            return Problem(e.Message);
+        }
+    } 
+
 }

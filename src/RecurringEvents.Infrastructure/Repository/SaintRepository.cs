@@ -4,11 +4,12 @@ using RecurringEvents.Domain.ValueObject;
 
 namespace RecurringEvents.Infrastructure.Repository;
 
-public class SaintRepository : ISaintRepository
+public class SaintRepository : RepositoryDbService<Saint>, ISaintRepository
 {
     private readonly ApplicationDbContext _dbContext;
 
-    public SaintRepository(ApplicationDbContext dbContext){
+    public SaintRepository(ApplicationDbContext dbContext) : base(dbContext)
+    {
         _dbContext = dbContext;
     }
 
@@ -17,37 +18,19 @@ public class SaintRepository : ISaintRepository
         throw new NotImplementedException();
     }
 
-    public Task<IEnumerable<Saint>> GetAll()
-    {
-        throw new NotImplementedException();
-    }
 
     public Task<IEnumerable<Saint>> GetByDateRange(DateRange rangeDate)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<Saint> GetByID(int ID)
-    {
-        Saint? saint = await _dbContext.Saints.FindAsync(ID);
-        return saint;
-    }
+ 
 
     public IEnumerable<Saint> GetBySaintName(string SaintName)
     {
         throw new NotImplementedException();
     }
-
-    public async Task Insert(Saint entity)
-    {
-         _dbContext.Add(entity);
-        await _dbContext.SaveChangesAsync();
-    }
-
-    public Task Update(Saint entity)
-    {
-        throw new NotImplementedException();
-    }
+        
 /*
     IEnumerable<Saint> IRepository<Saint, Guid>.GetAll()
     {
