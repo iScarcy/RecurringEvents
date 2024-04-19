@@ -6,9 +6,14 @@ namespace RecurringEvents.Domain.Events;
 public class BirthDay 
 {
     public int Id { get; set; }
-    [Required]
+    [Display(Name = "Il nome della persona")]
+    [Required(ErrorMessageResourceType = typeof(ValidationErrors), ErrorMessageResourceName = nameof(ValidationErrors.Mandatory))]
+
     public string Name { get; set; }
-    [Required]
+
+    [Display(Name = "La data di nascita della persona")]
+    [Required(ErrorMessageResourceType = typeof(ValidationErrors), ErrorMessageResourceName = nameof(ValidationErrors.Mandatory))]
+
     public DateTime DataBirth {get; set;}
     
     public BirthDay(int id, string name, DateTime dataBirth) 

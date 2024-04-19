@@ -7,11 +7,13 @@ using System.Threading.Tasks;
 public class Saint 
 {
     public int Id { get; set; }
-    
-    [Required]
+
+    [Display(Name = "Il nome del santo")]
+    [Required(ErrorMessageResourceType = typeof(ValidationErrors), ErrorMessageResourceName = nameof(ValidationErrors.Mandatory))]
     public string Description { get; private init;}
 
-    [Required]
+    [Display(Name = "La data del santo")]
+    [Required(ErrorMessageResourceType = typeof(ValidationErrors), ErrorMessageResourceName = nameof(ValidationErrors.Mandatory))]
     public DateTime Date { get; private init; }
     
     

@@ -36,11 +36,10 @@ public class RecurringEventController : ControllerBase
     /// <param name="DataBirth"></param>
     /// <returns></returns>
     [Authorize]
-    [Route("PersonWasCreated/{Name}/{DataBirth}")]
+    [Route("PersonWasCreated")]
     [HttpPost]
-    public Task AddBirthDay(string Name, DateTime DataBirth)
+    public Task AddBirthDay(BirthDay birthDay)
     {
-        BirthDay birthDay = new BirthDay(0,Name, DataBirth);
         var birthDayEvent = new PersonWasCreated(birthDay);
         return _mediator.Send(birthDayEvent);
     }
@@ -55,9 +54,8 @@ public class RecurringEventController : ControllerBase
     /// <returns></returns>
     [Route("NameDayWasCreated")]
     [HttpPost]
-    public Task AddNameDay(string personName, int idSaint)
+    public Task AddNameDay(NameDay nameDay)
     {
-        NameDay nameDay  = new NameDay(0, personName, idSaint);
         var nameDayEvent = new NameDayWasCreated(nameDay);
         return _mediator.Send(nameDayEvent);
     } 

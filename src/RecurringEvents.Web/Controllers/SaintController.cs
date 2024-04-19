@@ -24,12 +24,11 @@ public class SaintController : ControllerBase
     /// <param name="Data"></param>
     /// <returns></returns>
     [HttpPost]
-    public async Task<ActionResult> Add(string Description, DateTime Data)
+    public async Task<ActionResult> Add(Saint saint)
     {
         try
         {
-            Saint ss = new Saint(0, Description, Data);
-            await _saintRepository.Insert(ss);
+            await _saintRepository.Insert(saint);
             return Ok();
         }
         catch (Exception e)
