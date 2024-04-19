@@ -2,8 +2,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using RecurringEvents.Application.Interface.Repository;
 using RecurringEvents.Domain.Entities;
+using RecurringEvents.Domain.Events;
 using RecurringEvents.Infrastructure.Repository;
-
+using RecurringEvents.Infrastructure.Service;
 namespace RecurringEvents.Infrastructure;
 
 public static class DependencyInjection
@@ -18,6 +19,7 @@ public static class DependencyInjection
         
       //  service.AddScoped<IRepository<NameDay>, NameDayRepository>();
         service.AddScoped<IRepository<Saint>, RepositoryDbService<Saint>>();
+        service.AddScoped<IEventPeopleRepository<BirthDay>, BirthDaysService>();
         return service;
     }
 }

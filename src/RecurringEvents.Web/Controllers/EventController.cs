@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RecurringEvents.Application.Interface.Service;
+using RecurringEvents.Domain.Events;
 
 namespace RecurringEvents.Web.Controllers
 {
@@ -7,12 +9,16 @@ namespace RecurringEvents.Web.Controllers
     [ApiController]
     public class EventController : ControllerBase
     {
+
+        private readonly IEventPeopleService<BirthDay> _peopleService;
+
         /// <summary>
         /// costruttore
         /// </summary>
-        public EventController()
+     
+        public EventController(IEventPeopleService<BirthDay> peopleService)
         {
-
+            _peopleService  = peopleService;
         }
         
         /// <summary>
@@ -23,6 +29,7 @@ namespace RecurringEvents.Web.Controllers
         [HttpGet("birdays")]
         public Task<ActionResult> GetBirthdays() 
         {
+            
             throw new NotImplementedException();
         }
 
@@ -53,7 +60,7 @@ namespace RecurringEvents.Web.Controllers
         /// <param name="day"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        [HttpGet("{day}")]
+        [HttpGet("day/{day}")]
         public Task<ActionResult> GetByDay(DateTime day)
         {
             throw new NotImplementedException();
@@ -65,10 +72,11 @@ namespace RecurringEvents.Web.Controllers
         /// <param name="person"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        [HttpGet("{person}")]
-        public Task<ActionResult> GetByPerson(string person)
+        [HttpGet("person/{person}")]
+        public async Task<ActionResult> GetByPerson(string person)
         {
-            throw new NotImplementedException();
+            var birdays = await _peopleService.GetEventsByPerson(person);
+            return Ok(birdays);
         }
     }
 }

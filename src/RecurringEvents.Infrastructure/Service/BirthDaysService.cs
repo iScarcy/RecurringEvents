@@ -1,19 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using RecurringEvents.Application.Interface.Repository;
 using RecurringEvents.Domain.Events;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace RecurringEvents.Infrastructure.Service
-{
-    internal class BithDayService: IEventPeopleRepository<BirthDay>
+namespace RecurringEvents.Infrastructure.Service;
+
+public class BirthDaysService : IEventPeopleRepository<BirthDay>
     {
         private readonly ApplicationDbContext _context;
 
-        public BithDayService(ApplicationDbContext context)
+        public BirthDaysService(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -24,4 +19,3 @@ namespace RecurringEvents.Infrastructure.Service
 
        
     }
-}
