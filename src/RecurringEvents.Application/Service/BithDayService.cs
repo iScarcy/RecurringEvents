@@ -1,4 +1,6 @@
-﻿using RecurringEvents.Application.Interface.Service;
+﻿using RecurringEvents.Application.Interface.Repository;
+using RecurringEvents.Application.Interface.Service;
+using RecurringEvents.Domain.Events;
 using RecurringEvents.Domain.ValueObject;
 using System;
 using System.Collections.Generic;
@@ -8,18 +10,22 @@ using System.Threading.Tasks;
 
 namespace RecurringEvents.Application.Service
 {
-    public class BithDayService
+    public class BithDayService : IEventPeopleService
     {
-       
-        public BithDayService()
+        private readonly IEventPeopleRepository<BirthDay> _dataProvider;
+        public BithDayService(IEventPeopleRepository<BirthDay> repository) 
         {
-          
+            _dataProvider = repository;
         }
-        /*
-        public IEnumerable<Event> GetEventsByPerson(string Person)
+
+        public async Task<IEnumerable<Event>> GetEventsByPerson(string Person)
         {
-            //LEGGENDA: Mi serve un qualcosa che mi legga i compleanni della persa che passo come parametro
-        }*/
+           var eventPeople = await _dataProvider.GetEventsByPerson(Person);
+            var birthDays = from e in eventPeople
+                    select new Event(EventType.BirthDay, e.DataBirth, e.Name);
+            return birthDays;
+        }
+
 
     }
 }

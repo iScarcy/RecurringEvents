@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RecurringEvents.Application.Interface.Repository;
-using RecurringEvents.Application.Interface.Service;
 using RecurringEvents.Domain.Events;
 using System;
 using System.Collections.Generic;
@@ -10,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace RecurringEvents.Infrastructure.Service
 {
-    internal class BithDayService: IEventPeopleService<BirthDay>
+    internal class BithDayService: IEventPeopleRepository<BirthDay>
     {
         private readonly ApplicationDbContext _context;
 

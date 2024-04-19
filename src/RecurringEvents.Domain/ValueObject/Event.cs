@@ -1,5 +1,5 @@
 namespace RecurringEvents.Domain.ValueObject;
 
-public record Event(string type, DateTime date, string description)
+public record Event(EventType type, DateTime date, string description)
 {
 }

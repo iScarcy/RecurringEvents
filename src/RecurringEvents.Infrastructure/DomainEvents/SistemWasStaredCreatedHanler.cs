@@ -51,7 +51,7 @@ public class SistemWasStartedCreatedHanler : IRequestHandler<SistemWasStarted, L
                                             (request.DateRange.To.Date.Day >= x.DataBirth.Date.Day )    
                                     )
                                 )                               
-                                select new Event("Compleanno", x.DataBirth,x.Name);
+                                select new Event(EventType.BirthDay, x.DataBirth,x.Name);
       
        
        //onomastici
@@ -86,7 +86,7 @@ public class SistemWasStartedCreatedHanler : IRequestHandler<SistemWasStarted, L
                                             (request.DateRange.To.Date.Day <= s.Date.Date.Day )    
                                     )
                                 )
-                select new Event("Onomastico", s.Date, n.PersonName);
+                select new Event(EventType.NameDay, s.Date, n.PersonName);
     
        foreach(var compleanno in compleanni){
             eventi.Add(compleanno);

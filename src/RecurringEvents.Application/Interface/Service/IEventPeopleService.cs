@@ -4,8 +4,8 @@
 namespace RecurringEvents.Application.Interface.Service
 {
     //Eventi legati ad una persona
-    public interface IEventPeopleService<T> where T : class  
+    public interface IEventPeopleService
     {
-       Task<IEnumerable<T>> GetEventsByPerson(string Person);
+       Task<IEnumerable<Event>> GetEventsByPerson(string Person);
     }
 }
