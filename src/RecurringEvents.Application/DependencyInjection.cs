@@ -8,7 +8,8 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddApplication(this IServiceCollection service)
     {
-        service.AddScoped<IRecurringEventService, NameDayService>();
+      //  service.AddScoped<IRecurringEventService, NameDayService>();
         return service;
+      
     }
 }

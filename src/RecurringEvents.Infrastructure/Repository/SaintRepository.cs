@@ -1,10 +1,11 @@
+using Microsoft.EntityFrameworkCore;
 using RecurringEvents.Application.Interface.Repository;
 using RecurringEvents.Domain.Entities;
 using RecurringEvents.Domain.ValueObject;
 
 namespace RecurringEvents.Infrastructure.Repository;
 
-public class SaintRepository : RepositoryDbService<Saint>, ISaintRepository
+public class SaintRepository : RepositoryDbService<Saint> 
 {
     private readonly ApplicationDbContext _dbContext;
 
@@ -13,27 +14,9 @@ public class SaintRepository : RepositoryDbService<Saint>, ISaintRepository
         _dbContext = dbContext;
     }
 
-    public Task Delete(int ID)
+    public async Task<IEnumerable<NameDay>> GetByPerson(string person)
     {
-        throw new NotImplementedException();
+        //var saint = async _dbContext.Saints.Include<NameDay>().Where(x => x.)
+        return await  _dbContext.NameDay.Where(x => x.PersonName == person).ToListAsync();
     }
-
-
-    public Task<IEnumerable<Saint>> GetByDateRange(DateRange rangeDate)
-    {
-        throw new NotImplementedException();
-    }
-
- 
-
-    public IEnumerable<Saint> GetBySaintName(string SaintName)
-    {
-        throw new NotImplementedException();
-    }
-        
-/*
-    IEnumerable<Saint> IRepository<Saint, Guid>.GetAll()
-    {
-        throw new NotImplementedException();
-    }*/
 }

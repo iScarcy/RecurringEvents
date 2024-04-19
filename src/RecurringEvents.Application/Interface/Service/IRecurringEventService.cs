@@ -1,7 +1,9 @@
 namespace RecurringEvents.Application.Interface.Service;
 
 using RecurringEvents.Domain.ValueObject;
+//eventi ricorrenti generici
 public interface IRecurringEventService
 {
-    IEnumerable<Event> GetEvents(DateRange date);
+
+    IEnumerable<Event> GetEventsByRange(DateRange dataRange);
 }

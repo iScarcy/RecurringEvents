@@ -1,8 +1,14 @@
-using RecurringEvents.Domain.Entities;
+﻿using RecurringEvents.Domain.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace RecurringEvents.Application.Interface.Repository;
-
-public interface ISaintRepository  
+namespace RecurringEvents.Application.Interface.Repository
 {
-    IEnumerable<Saint> GetBySaintName(string SaintName);
+    public interface ISaintRepository
+    {
+        Task<IEnumerable<Saint>> GetByPerson();
+    }
 }
