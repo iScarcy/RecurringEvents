@@ -1,6 +1,8 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace RecurringEvents.Domain.ValueObject;
 
-public record DateRange (DateTime From, DateTime To)
+public record DateRange ([Required] DateTime From, [Required] DateTime To)
 {
     
 }
