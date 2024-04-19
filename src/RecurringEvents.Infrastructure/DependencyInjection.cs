@@ -1,7 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using RecurringEvents.Application.DomainEvents;
-using RecurringEvents.Application.Interface.DomainEvents;
 using RecurringEvents.Application.Interface.Repository;
 using RecurringEvents.Domain.Entities;
 using RecurringEvents.Infrastructure.Repository;
