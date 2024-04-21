@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using RecurringEvents.Application.Interface.Service;
 using RecurringEvents.Domain.Events;
+using RecurringEvents.Domain.ValueObject;
+
 
 namespace RecurringEvents.Web.Controllers
 {
@@ -11,14 +13,15 @@ namespace RecurringEvents.Web.Controllers
     {
 
         private readonly IEventPeopleService<BirthDay> _peopleService;
-
+        private readonly IEventPeopleService<NameDayDate> _nameDayService;
         /// <summary>
         /// costruttore
         /// </summary>
      
-        public EventController(IEventPeopleService<BirthDay> peopleService)
+        public EventController(IEventPeopleService<BirthDay> peopleService, IEventPeopleService<NameDayDate> nameDaysService)
         {
             _peopleService  = peopleService;
+            _nameDayService = nameDaysService;
         }
         
         /// <summary>
@@ -75,8 +78,12 @@ namespace RecurringEvents.Web.Controllers
         [HttpGet("person/{person}")]
         public async Task<ActionResult> GetByPerson(string person)
         {
-            var birdays = await _peopleService.GetEventsByPerson(person);
-            return Ok(birdays);
+            var birthdays = await _peopleService.GetEventsByPerson(person);
+             
+            var namedays = await _nameDayService.GetEventsByPerson(person);
+
+            //IEnumerable<Event> event = birthdays.Union(namedays);
+            return Ok( birthdays.Union(namedays));
         }
     }
 }
