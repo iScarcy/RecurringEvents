@@ -20,6 +20,8 @@ public static class DependencyInjection
       //  service.AddScoped<IRepository<NameDay>, NameDayRepository>();
         service.AddScoped<IRepository<Saint>, RepositoryDbService<Saint>>();
         service.AddScoped<IEventPeopleRepository<BirthDay>, BirthDaysService>();
+        service.AddScoped<IEventPeopleRepository<NameDayDate>, NameDayService>();
+        
         return service;
     }
 }
