@@ -19,7 +19,17 @@ public class NameDayService: IEventPeopleService<NameDayDate>
             _dataProvider = repository;
         }
 
-        public async Task<IEnumerable<Event>> GetEventsByPerson(string Person)
+    public async Task<IEnumerable<Event>> GetEventsByDays(DateRange days)
+    {
+         var eventPeople = await _dataProvider.GetEventsByDays(days);
+           
+            var nameDays = from e in eventPeople
+                    select new Event (EventType.NameDay, e.date, e.personName);
+           
+            return nameDays;
+    }
+
+    public async Task<IEnumerable<Event>> GetEventsByPerson(string Person)
         {
            var eventPeople = await _dataProvider.GetEventsByPerson(Person);
            

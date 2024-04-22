@@ -7,5 +7,7 @@ namespace RecurringEvents.Application.Interface.Service
     public interface IEventPeopleService<T> where T : class 
     {
        Task<IEnumerable<Event>> GetEventsByPerson(string Person);
+
+       Task<IEnumerable<Event>> GetEventsByDays(DateRange days);
     }
 }

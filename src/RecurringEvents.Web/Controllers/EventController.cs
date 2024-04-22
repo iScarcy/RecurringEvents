@@ -63,10 +63,22 @@ namespace RecurringEvents.Web.Controllers
         /// <param name="day"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        [HttpGet("day/{day}")]
-        public Task<ActionResult> GetByDay(DateTime day)
+        [HttpGet("days/{from}/{to}")]
+        public async Task<ActionResult> GetByDay(DateTime from, DateTime to)
         {
-            throw new NotImplementedException();
+            try
+            {
+                DateRange rangeDays = new DateRange(from, to);
+                var birthdays = await _peopleService.GetEventsByDays(rangeDays);
+                
+                var namedays = await _nameDayService.GetEventsByDays(rangeDays);
+
+                return Ok(birthdays.Union(namedays));
+
+            }catch(Exception ex)
+            {
+                return Problem(ex.Message);    
+            }
         }
 
         /// <summary>
@@ -78,12 +90,18 @@ namespace RecurringEvents.Web.Controllers
         [HttpGet("person/{person}")]
         public async Task<ActionResult> GetByPerson(string person)
         {
-            var birthdays = await _peopleService.GetEventsByPerson(person);
-             
-            var namedays = await _nameDayService.GetEventsByPerson(person);
+            try
+            {
+                var birthdays = await _peopleService.GetEventsByPerson(person);
+                
+                var namedays = await _nameDayService.GetEventsByPerson(person);
 
-            //IEnumerable<Event> event = birthdays.Union(namedays);
-            return Ok( birthdays.Union(namedays));
+                //IEnumerable<Event> event = birthdays.Union(namedays);
+                return Ok( birthdays.Union(namedays));
+            }catch(Exception ex)
+            {
+                return Problem(ex.Message);    
+            }
         }
     }
 }

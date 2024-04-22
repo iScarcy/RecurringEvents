@@ -18,6 +18,14 @@ namespace RecurringEvents.Application.Service
             _dataProvider = repository;
         }
 
+        public async Task<IEnumerable<Event>> GetEventsByDays(DateRange days)
+        {
+            var eventDays = await _dataProvider.GetEventsByDays(days);
+            var nameDays = from e in eventDays
+                    select new Event(EventType.BirthDay, e.DataBirth, e.Name);
+            return nameDays;
+        }
+
         public async Task<IEnumerable<Event>> GetEventsByPerson(string Person)
         {
            var eventPeople = await _dataProvider.GetEventsByPerson(Person);
