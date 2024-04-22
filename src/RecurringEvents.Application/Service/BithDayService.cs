@@ -10,20 +10,30 @@ using System.Threading.Tasks;
 
 namespace RecurringEvents.Application.Service
 {
-    public class BithDayService : IEventPeopleService<BirthDay>
+    public class BithDayService : IEventPeopleService<BirthDay>, IRecurringEventService
     {
         private readonly IEventPeopleRepository<BirthDay> _dataProvider;
-        public BithDayService(IEventPeopleRepository<BirthDay> repository) 
+        private readonly IRepository<BirthDay> _dataRepository;
+        public BithDayService(IEventPeopleRepository<BirthDay> provider, IRepository<BirthDay> repository) 
         {
-            _dataProvider = repository;
+            _dataProvider = provider;
+            _dataRepository = repository;
+        }
+
+        public async Task<IEnumerable<Event>> GetAll()
+        {
+            var eventPeople = await _dataRepository.GetAll();
+            var birthDays = from e in eventPeople
+                    select new Event(EventType.BirthDay, e.DataBirth, e.Name);
+            return birthDays;
         }
 
         public async Task<IEnumerable<Event>> GetEventsByDays(DateRange days)
         {
-            var eventDays = await _dataProvider.GetEventsByDays(days);
-            var nameDays = from e in eventDays
+            var eventPeople = await _dataProvider.GetEventsByDays(days);
+            var birthDays = from e in eventPeople
                     select new Event(EventType.BirthDay, e.DataBirth, e.Name);
-            return nameDays;
+            return birthDays;
         }
 
         public async Task<IEnumerable<Event>> GetEventsByPerson(string Person)

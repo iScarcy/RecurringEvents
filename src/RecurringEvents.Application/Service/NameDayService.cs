@@ -10,14 +10,20 @@ using System.Threading.Tasks;
 
 namespace RecurringEvents.Application.Service;
 
-public class NameDayService: IEventPeopleService<NameDayDate>
+public class NameDayService: IEventPeopleService<NameDayDate>, IRecurringEventService
     {
         private readonly IEventPeopleRepository<NameDayDate> _dataProvider;
+        
 
         public NameDayService(IEventPeopleRepository<NameDayDate> repository) 
         {
             _dataProvider = repository;
         }
+
+    public Task<IEnumerable<Event>> GetAll()
+    {
+        throw new NotImplementedException();
+    }
 
     public async Task<IEnumerable<Event>> GetEventsByDays(DateRange days)
     {
