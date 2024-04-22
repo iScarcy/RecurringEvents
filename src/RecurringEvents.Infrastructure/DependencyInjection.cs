@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using RecurringEvents.Application.Interface.Repository;
 using RecurringEvents.Domain.Entities;
 using RecurringEvents.Domain.Events;
+using RecurringEvents.Domain.ValueObject;
 using RecurringEvents.Infrastructure.Repository;
 using RecurringEvents.Infrastructure.Service;
 namespace RecurringEvents.Infrastructure;
