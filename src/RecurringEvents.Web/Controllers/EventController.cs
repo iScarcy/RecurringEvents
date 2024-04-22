@@ -30,10 +30,21 @@ namespace RecurringEvents.Web.Controllers
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
         [HttpGet("birdays")]
-        public Task<ActionResult> GetBirthdays() 
+        public async Task<ActionResult> GetBirthdays() 
         {
-            
-            throw new NotImplementedException();
+            try
+            {
+                
+                var birthdays = await _peopleService.GetAll();
+                
+               // var namedays = await _nameDayService.GetEventsByDays(rangeDays);
+
+                return Ok(birthdays);
+
+            }catch(Exception ex)
+            {
+                return Problem(ex.Message);    
+            }
         }
 
         /// <summary>
@@ -41,9 +52,19 @@ namespace RecurringEvents.Web.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("namedays")]
-        public Task<ActionResult> GetNameDays()
+        public async Task<ActionResult> GetNameDays()
         {
-            throw new NotImplementedException();
+            try
+            {
+                
+                 var namedays = await _nameDayService.GetAll();
+
+                return Ok(namedays);
+
+            }catch(Exception ex)
+            {
+                return Problem(ex.Message);    
+            }
         }
 
         /// <summary>
@@ -52,9 +73,21 @@ namespace RecurringEvents.Web.Controllers
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
         [HttpGet("all")]
-        public Task<ActionResult> GetAll()
+        public async Task<ActionResult> GetAll()
         {
-            throw new NotImplementedException();
+             try
+            {
+                
+                var birthdays = await _peopleService.GetAll();
+                
+               // var namedays = await _nameDayService.GetEventsByDays(rangeDays);
+
+                return Ok(birthdays);
+
+            }catch(Exception ex)
+            {
+                return Problem(ex.Message);    
+            }
         }
 
         /// <summary>
