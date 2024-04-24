@@ -1,4 +1,6 @@
-﻿namespace RecurringEvents.Reminder
+﻿using Microsoft.Extensions.Configuration;
+
+namespace RecurringEvents.Reminder
 {
     internal class Program
     {
@@ -16,7 +18,12 @@
              5. Aggiornare la schedulazione come completata
              */
 
-
+            //1.Lettura file di configurazione
+            IConfiguration Configuration = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddEnvironmentVariables()
+                .AddCommandLine(args)
+                .Build();
         }
     }
 }
