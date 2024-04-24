@@ -14,5 +14,7 @@ public class ApplicationDbContext : DbContext
 
     public DbSet<BirthDay> BirthDay{get; set;}
 
-     public DbSet<NameDay> NameDay{get; set;}
+    public DbSet<NameDay> NameDay{get; set;}
+
+    public DbSet<Executions> Executions{get; set;}
 }

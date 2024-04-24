@@ -12,6 +12,7 @@ public static class DependencyInjection
     {
         service.AddScoped<IEventPeopleService<BirthDay>, BithDayService>();
         service.AddScoped<IEventPeopleService<NameDayDate>, NameDayService>();        
+        service.AddScoped<IExecutionsService, ExecutionsService>();    
         return service;      
     }
 
