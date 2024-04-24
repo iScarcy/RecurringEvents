@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.Json;
+using RecurringEvents.Reminder.Configurations;
 
 namespace RecurringEvents.Reminder
 {
@@ -19,11 +21,19 @@ namespace RecurringEvents.Reminder
              */
 
             //1.Lettura file di configurazione
-            IConfiguration Configuration = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddEnvironmentVariables()
-                .AddCommandLine(args)
-                .Build();
+            var builder = new ConfigurationBuilder();
+
+            builder.SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+
+            IConfiguration config = builder.Build();
+            var optsRecurringEventSettings = new RecurringEventSettings();
+            var configRecurringEventSettings = config.GetSection("RecurringEventSettings");
+           
+            configRecurringEventSettings.Bind(optsRecurringEventSettings);
+            
+            Console.WriteLine($"Batch Size {optsRecurringEventSettings.ApiSystemWasStarted}");
         }
     }
+ 
 }

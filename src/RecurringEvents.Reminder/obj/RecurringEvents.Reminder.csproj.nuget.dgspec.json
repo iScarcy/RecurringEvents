@@ -1,34 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Dev\\RecurringEvents\\src\\RecurringEvents.Reminder\\RecurringEvents.Reminder.csproj": {}
+    "/home/scarcy/Dev/RecurringEvents/src/RecurringEvents.Reminder/RecurringEvents.Reminder.csproj": {}
   },
   "projects": {
-    "C:\\Dev\\RecurringEvents\\src\\RecurringEvents.Reminder\\RecurringEvents.Reminder.csproj": {
+    "/home/scarcy/Dev/RecurringEvents/src/RecurringEvents.Reminder/RecurringEvents.Reminder.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Dev\\RecurringEvents\\src\\RecurringEvents.Reminder\\RecurringEvents.Reminder.csproj",
+        "projectUniqueName": "/home/scarcy/Dev/RecurringEvents/src/RecurringEvents.Reminder/RecurringEvents.Reminder.csproj",
         "projectName": "RecurringEvents.Reminder",
-        "projectPath": "C:\\Dev\\RecurringEvents\\src\\RecurringEvents.Reminder\\RecurringEvents.Reminder.csproj",
-        "packagesPath": "C:\\Users\\Giuseppe Scarcella\\.nuget\\packages\\",
-        "outputPath": "C:\\Dev\\RecurringEvents\\src\\RecurringEvents.Reminder\\obj\\",
+        "projectPath": "/home/scarcy/Dev/RecurringEvents/src/RecurringEvents.Reminder/RecurringEvents.Reminder.csproj",
+        "packagesPath": "/home/scarcy/.nuget/packages/",
+        "outputPath": "/home/scarcy/Dev/RecurringEvents/src/RecurringEvents.Reminder/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Giuseppe Scarcella\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/home/scarcy/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://nexusrepo.aruba.it/repository/nuget-arch": {},
-          "https://nexusrepo.aruba.it/repository/nuget-devspa-progettigenerali": {},
-          "https://proget.staff.aruba.it/nuget/DEVELOPMENT": {},
-          "https://proget.staff.aruba.it/nuget/ExternalLibs": {},
-          "https://proget.staff.aruba.it/nuget/PRODUCTION": {},
-          "https://proget.staff.aruba.it/nuget/STABLE": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
@@ -49,6 +41,14 @@
             "Microsoft.Extensions.Configuration": {
               "target": "Package",
               "version": "[6.0.1, )"
+            },
+            "Microsoft.Extensions.Configuration.Binder": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "Microsoft.Extensions.Configuration.Json": {
+              "target": "Package",
+              "version": "[6.0.0, )"
             }
           },
           "imports": [
@@ -57,8 +57,7 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -67,7 +66,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.118\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/6.0.129/RuntimeIdentifierGraph.json"
         }
       }
     }
