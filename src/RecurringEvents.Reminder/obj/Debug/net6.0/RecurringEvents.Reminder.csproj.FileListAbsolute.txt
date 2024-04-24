@@ -1,0 +1,15 @@
+C:\Dev\RecurringEvents\src\RecurringEvents.Reminder\bin\Debug\net6.0\RecurringEvents.Reminder.exe
+C:\Dev\RecurringEvents\src\RecurringEvents.Reminder\bin\Debug\net6.0\RecurringEvents.Reminder.deps.json
+C:\Dev\RecurringEvents\src\RecurringEvents.Reminder\bin\Debug\net6.0\RecurringEvents.Reminder.runtimeconfig.json
+C:\Dev\RecurringEvents\src\RecurringEvents.Reminder\bin\Debug\net6.0\RecurringEvents.Reminder.dll
+C:\Dev\RecurringEvents\src\RecurringEvents.Reminder\bin\Debug\net6.0\RecurringEvents.Reminder.pdb
+C:\Dev\RecurringEvents\src\RecurringEvents.Reminder\obj\Debug\net6.0\RecurringEvents.Reminder.csproj.AssemblyReference.cache
+C:\Dev\RecurringEvents\src\RecurringEvents.Reminder\obj\Debug\net6.0\RecurringEvents.Reminder.GeneratedMSBuildEditorConfig.editorconfig
+C:\Dev\RecurringEvents\src\RecurringEvents.Reminder\obj\Debug\net6.0\RecurringEvents.Reminder.AssemblyInfoInputs.cache
+C:\Dev\RecurringEvents\src\RecurringEvents.Reminder\obj\Debug\net6.0\RecurringEvents.Reminder.AssemblyInfo.cs
+C:\Dev\RecurringEvents\src\RecurringEvents.Reminder\obj\Debug\net6.0\RecurringEvents.Reminder.csproj.CoreCompileInputs.cache
+C:\Dev\RecurringEvents\src\RecurringEvents.Reminder\obj\Debug\net6.0\RecurringEvents.Reminder.dll
+C:\Dev\RecurringEvents\src\RecurringEvents.Reminder\obj\Debug\net6.0\refint\RecurringEvents.Reminder.dll
+C:\Dev\RecurringEvents\src\RecurringEvents.Reminder\obj\Debug\net6.0\RecurringEvents.Reminder.pdb
+C:\Dev\RecurringEvents\src\RecurringEvents.Reminder\obj\Debug\net6.0\RecurringEvents.Reminder.genruntimeconfig.cache
+C:\Dev\RecurringEvents\src\RecurringEvents.Reminder\obj\Debug\net6.0\ref\RecurringEvents.Reminder.dll

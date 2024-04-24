@@ -16,5 +16,5 @@ src/RecurringEvents.Remember/obj
 
 src/RecurringEvents.Web/RecurringEvents.Web.csproj.user
 
-/.vs/RecurringEvents
+.vs/RecurringEvents
 
