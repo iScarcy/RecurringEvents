@@ -14,6 +14,7 @@ namespace RecurringEvents.Web.Controllers
 
         private readonly IEventPeopleService<BirthDay> _peopleService;
         private readonly IEventPeopleService<NameDayDate> _nameDayService;
+    
         /// <summary>
         /// costruttore
         /// </summary>

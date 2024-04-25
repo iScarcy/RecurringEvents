@@ -15,7 +15,9 @@ public class ExecutionsRepositoryService : IExecutionsRepository
  
     public async Task<DateTime> GetLastExecution()
     {
-        DateTime dateTo =  _context.Executions.Max(x => x.DateTo);
+        
+        var dateTo =  _context.Executions.Select(x => x.DateTo).OrderByDescending(x => x.Date).FirstOrDefault();
+        
         return await Task.FromResult(dateTo);
     }
 
