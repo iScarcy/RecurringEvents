@@ -4,4 +4,6 @@ public class RecurringEventSettings
 {
     public  string? UriRecurringEvent { get; set; }
     public string? ApiSystemWasStarted { get; set; }
+
+    public string? ApiLastExecutions { get; set; }
 }

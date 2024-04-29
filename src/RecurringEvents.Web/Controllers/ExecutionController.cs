@@ -19,7 +19,7 @@ public class ExecutionController : ControllerBase
     {
         try
         {
-            var result = await _service.GetDateRange();
+            var result = await _service.GetLastExecution();
             return Ok(result);
         }
         catch(Exception ex)

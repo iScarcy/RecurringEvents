@@ -2,6 +2,8 @@
 using Microsoft.Extensions.Configuration;
 using RecurringEvents.Reminder;
 using RecurringEvents.Reminder.Configurations;
+using RecurringEvents.Reminder.Interface;
+using RecurringEvents.Reminder.Models;
 
 using HttpClient client = new();
 client.DefaultRequestHeaders.Accept.Clear();
@@ -22,54 +24,26 @@ Console.WriteLine("Hello, World!");
              5. Aggiornare la schedulazione come completata
              */
     //1.Lettura file di configurazione
-            var builder = new ConfigurationBuilder();
+    var builder = new ConfigurationBuilder();
 
-            builder.SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+    builder.SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
-            IConfiguration config = builder.Build();
-            var optsRecurringEventSettings = new RecurringEventSettings();
-            var configRecurringEventSettings = config.GetSection("RecurringEventSettings");
-           
-            configRecurringEventSettings.Bind(optsRecurringEventSettings);
-            
-           
-            Console.WriteLine($"Batch Size {optsRecurringEventSettings.ApiSystemWasStarted}");
-                      
-RecurringEventsClientAPI webClientAPI = new RecurringEventsClientAPI();
+    IConfiguration config = builder.Build();
+    var optsRecurringEventSettings = new RecurringEventSettings();
+    var configRecurringEventSettings = config.GetSection("RecurringEventSettings");
+    
+    configRecurringEventSettings.Bind(optsRecurringEventSettings);
+    
+    
+    Console.WriteLine($"Batch Size {optsRecurringEventSettings.ApiSystemWasStarted}");
+    
+    //2. Lettura dal db (o da altro) dei giorni delle schedulazioni.                  
+    IRecurringEventsAPI webClientAPI = new RecurringEventsClientAPI(client,optsRecurringEventSettings);
 
-await webClientAPI.ProcessRepositoriesAsync(client);
-
-      
-
-
-/*using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Configuration.Json;
-using RecurringEvents.Reminder.Configurations;
-
-namespace RecurringEvents.Reminder
-{
-    internal class Program
-    {
-        static void Main(string[] args)
-        {
-  
-            //1.Lettura file di configurazione
-            var builder = new ConfigurationBuilder();
-
-            builder.SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
-
-            IConfiguration config = builder.Build();
-            var optsRecurringEventSettings = new RecurringEventSettings();
-            var configRecurringEventSettings = config.GetSection("RecurringEventSettings");
-           
-            configRecurringEventSettings.Bind(optsRecurringEventSettings);
-            
-           
-            Console.WriteLine($"Batch Size {optsRecurringEventSettings.ApiSystemWasStarted}");
-        }
-    }
- 
-}
-*/
+    DateTime dateFrom = await webClientAPI.GetLastExecutions();
+    dateFrom = dateFrom.AddDays(1);
+    DateTime dateTo = DateTime.Now;
+    DateRange lastExecution = new DateRange(dateFrom, dateTo);
+    Console.WriteLine(lastExecution.From);
+    Console.WriteLine(lastExecution.To);

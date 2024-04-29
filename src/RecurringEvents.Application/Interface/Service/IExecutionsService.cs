@@ -4,7 +4,7 @@ namespace RecurringEvents.Application.Interface.Service;
 
 public interface IExecutionsService
 {
-    Task<DateRange> GetDateRange();
+    Task<DateTime> GetLastExecution();
 
     int NewExecution(DateRange dateRange);
 

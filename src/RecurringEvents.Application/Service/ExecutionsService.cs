@@ -16,13 +16,10 @@ public class ExecutionsService : IExecutionsService
         throw new NotImplementedException();
     }
 
-    public async Task<DateRange> GetDateRange()
+    public async Task<DateTime> GetLastExecution()
     {
         DateTime dateFrom = await _executionsRepository.GetLastExecution();
-        dateFrom = dateFrom.AddDays(1);
-        DateTime dateTo = DateTime.Now;
-        DateRange dateRange = new DateRange(dateFrom, dateTo);
-        return await Task.FromResult(dateRange);
+        return await Task.FromResult(dateFrom);
     }
 
     public int NewExecution(DateRange dateRange)
