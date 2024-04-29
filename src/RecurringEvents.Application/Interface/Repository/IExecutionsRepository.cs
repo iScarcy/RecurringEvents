@@ -8,7 +8,7 @@ public interface IExecutionsRepository
 
     int InsertExecution(DateRange dateRange);
 
-    void InsertExecutionDetails(List<Event> events, int ExecutionID);
+    void InsertExecutionDetails(Event events, int ExecutionID);
     void UpdateExecution(int Id);
 }
 

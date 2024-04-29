@@ -26,7 +26,7 @@ public class ExecutionsRepositoryService : IExecutionsRepository
         throw new NotImplementedException();
     }
 
-    public void InsertExecutionDetails(List<Event> events, int ExecutionID)
+    public void InsertExecutionDetails(Event events, int ExecutionID)
     {
         throw new NotImplementedException();
     }
