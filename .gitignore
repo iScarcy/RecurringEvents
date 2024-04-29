@@ -15,6 +15,7 @@ src/RecurringEvents.Remember/bin
 src/RecurringEvents.Remember/obj
 
 src/RecurringEvents.Reminder/bin
+src/RecurringEvents.Reminder/bin
 src/RecurringEvents.Reminder/obj
 
 src/RecurringEvents.Web/RecurringEvents.Web.csproj.user
