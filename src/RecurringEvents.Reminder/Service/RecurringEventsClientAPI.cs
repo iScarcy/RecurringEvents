@@ -7,7 +7,8 @@ using System.Text.Json;
 using RecurringEvents.Reminder.Configurations;
 using RecurringEvents.Reminder.Interface;
 using RecurringEvents.Reminder.Models;
-namespace RecurringEvents.Reminder;
+
+namespace RecurringEvents.Reminder.Service;
 
 public class RecurringEventsClientAPI : IRecurringEventsAPI
 {
@@ -19,12 +20,12 @@ public class RecurringEventsClientAPI : IRecurringEventsAPI
         _settingsAPI = settings;
     }
 
-   
+
 
     public async Task<DateTime> GetLastExecutions()
     {
         await using Stream stream =
-        await _client.GetStreamAsync(_settingsAPI.UriRecurringEvent+_settingsAPI.ApiLastExecution);
+        await _client.GetStreamAsync(_settingsAPI.UriRecurringEvent + _settingsAPI.ApiLastExecution);
         var dateFrom =
         await JsonSerializer.DeserializeAsync<DateTime>(stream);
         return dateFrom;
@@ -42,8 +43,8 @@ public class RecurringEventsClientAPI : IRecurringEventsAPI
        jsonContent);
 
         int executionID = 0;
-        switch(response.StatusCode)  
-        { 
+        switch (response.StatusCode)
+        {
             case HttpStatusCode.OK:
                 executionID = await response.Content.ReadFromJsonAsync<int>();
                 break;
@@ -56,7 +57,7 @@ public class RecurringEventsClientAPI : IRecurringEventsAPI
     public async Task<IEnumerable<Event>> GetEvents(DateRange date)
     {
         await using Stream stream =
-        await _client.GetStreamAsync(_settingsAPI.UriRecurringEvent + String.Format(_settingsAPI.ApiSystemWasStarted, date.From.ToString("yyy-MM-dd"), date.To.ToString("yyy-MM-dd")));
+        await _client.GetStreamAsync(_settingsAPI.UriRecurringEvent + string.Format(_settingsAPI.ApiSystemWasStarted, date.From.ToString("yyy-MM-dd"), date.To.ToString("yyy-MM-dd")));
         var events =
         await JsonSerializer.DeserializeAsync<List<Event>>(stream);
         return events;
@@ -67,16 +68,16 @@ public class RecurringEventsClientAPI : IRecurringEventsAPI
         using StringContent jsonContent = new(
            JsonSerializer.Serialize(new
            {
-               infoEvent = infoEvent,
+               infoEvent,
                ExecutionID = ExecutionsID
            }),
           Encoding.UTF8,
           "application/json");
 
         using HttpResponseMessage response = await _client.PostAsync(
-            _settingsAPI.UriRecurringEvent + _settingsAPI.ApiExecutionDetails, 
+            _settingsAPI.UriRecurringEvent + _settingsAPI.ApiExecutionDetails,
             jsonContent);
 
-                
+
     }
 }
