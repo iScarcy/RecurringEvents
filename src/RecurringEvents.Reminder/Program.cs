@@ -72,6 +72,7 @@ if (events.Any())
         (
             e => 
             {
+                //bot_auguri
                 webClientAPI.InsertExecutionDetails(e, executionID);
             }
         );
