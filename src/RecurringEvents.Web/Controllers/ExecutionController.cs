@@ -4,16 +4,28 @@ using RecurringEvents.Domain.ValueObject;
 
 namespace RecurringEvents.Web.Controllers;
 
+/// <summary>
+/// Controller per gestire le esecuzione
+/// </summary>
 [ApiController]
 [Route("api/[controller]")]
 public class ExecutionController : ControllerBase
 {
+    
     private readonly IExecutionsService _service;
+    
+    /// <summary>
+    /// costruttore
+    /// </summary>
     public ExecutionController(IExecutionsService service)
     {
         _service = service;
     }
 
+    /// <summary>
+    /// prendi la data dell'ultima esecuzione 
+    /// </summary>
+    /// <returns></returns>
     [HttpGet()]
     public async Task<ActionResult> GetDate()
     {
@@ -27,4 +39,23 @@ public class ExecutionController : ControllerBase
             return Problem(ex.Message);
         }
     }
+
+    /// <summary>
+    /// Inserimento di una nuova esecuzione
+    /// </summary>
+    /// <param name="dateRange"></param>
+    /// <returns></returns>
+    [HttpPost()]
+    public async Task<ActionResult> AddExecution(DateRange dateRange)
+    {
+        try 
+        {
+            var result = await _service.NewExecution(dateRange);
+            return Ok(result);
+        }catch(Exception ex)
+        {
+            return Problem(ex.Message);
+        }
+    }
+
 }

@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using RecurringEvents.Application.Interface.Repository;
+using RecurringEvents.Domain.Entities;
 using RecurringEvents.Domain.ValueObject;
 
 namespace RecurringEvents.Infrastructure.Repository;
@@ -21,9 +22,15 @@ public class ExecutionsRepositoryService : IExecutionsRepository
         return await Task.FromResult(dateTo);
     }
 
-    public int InsertExecution(DateRange dateRange)
+    public async Task<int> InsertExecution(DateRange dateRange)
     {
-        throw new NotImplementedException();
+        Executions execution = new Executions();
+        execution.DateFrom = dateRange.From;
+        execution.DateTo = dateRange.To;
+        execution.Cancelled = false;
+        await _context.Executions.AddAsync(execution);
+        _context.SaveChanges();
+        return execution.Id;
     }
 
     public void InsertExecutionDetails(Event events, int ExecutionID)

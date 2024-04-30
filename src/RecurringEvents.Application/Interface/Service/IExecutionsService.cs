@@ -6,8 +6,8 @@ public interface IExecutionsService
 {
     Task<DateTime> GetLastExecution();
 
-    int NewExecution(DateRange dateRange);
+    Task<int> NewExecution(DateRange dateRange);
 
-    void NewExecutionDetails(List<Event> events, int ExecutionID);
+    void NewExecutionDetails(Event infoEvent, int ExecutionID);
     void FinishExecution(int Id);
 }

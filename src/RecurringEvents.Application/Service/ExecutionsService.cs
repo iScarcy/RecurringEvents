@@ -22,12 +22,13 @@ public class ExecutionsService : IExecutionsService
         return await Task.FromResult(dateFrom);
     }
 
-    public int NewExecution(DateRange dateRange)
+    public async Task<int> NewExecution(DateRange dateRange)
     {
-        throw new NotImplementedException();
+       int executionID = await _executionsRepository.InsertExecution(dateRange);
+       return executionID; 
     }
 
-    public void NewExecutionDetails(List<Event> events, int ExecutionID)
+    public void NewExecutionDetails(Event infoEvent, int ExecutionID)
     {
         throw new NotImplementedException();
     }
