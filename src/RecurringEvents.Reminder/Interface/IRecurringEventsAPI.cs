@@ -6,5 +6,5 @@ public interface IRecurringEventsAPI
 {
     Task<DateTime> GetLastExecutions();
 
-    Task<int> InsertNewExecution();
+    Task<int> InsertNewExecution(DateRange date);
 }

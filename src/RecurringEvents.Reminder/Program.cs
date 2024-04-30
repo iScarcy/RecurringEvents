@@ -38,8 +38,10 @@ configRecurringEventSettings.Bind(optsRecurringEventSettings);
 
 Console.WriteLine($"Batch Size {optsRecurringEventSettings.ApiSystemWasStarted}");
 
-//2. Lettura dal db (o da altro) dei giorni delle schedulazioni.                  
 IRecurringEventsAPI webClientAPI = new RecurringEventsClientAPI(client, optsRecurringEventSettings);
+int executionID = 0;
+
+//2. Lettura dal db (o da altro) dei giorni delle schedulazioni.                  
 
 DateTime dateFrom = await webClientAPI.GetLastExecutions();
 dateFrom = dateFrom.AddDays(1);
@@ -47,3 +49,8 @@ DateTime dateTo = DateTime.Now;
 DateRange lastExecution = new DateRange(dateFrom, dateTo);
 Console.WriteLine(lastExecution.From);
 Console.WriteLine(lastExecution.To);
+
+//3.Inserire su db una riga della schedulazione avviata e farsi restituire un codice identificativo.
+
+executionID = await webClientAPI.InsertNewExecution(lastExecution);
+Console.WriteLine(executionID);

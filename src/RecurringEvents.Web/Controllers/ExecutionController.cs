@@ -26,7 +26,7 @@ public class ExecutionController : ControllerBase
     /// prendi la data dell'ultima esecuzione 
     /// </summary>
     /// <returns></returns>
-    [HttpGet()]
+    [HttpGet("LastDate")]
     public async Task<ActionResult> GetDate()
     {
         try
