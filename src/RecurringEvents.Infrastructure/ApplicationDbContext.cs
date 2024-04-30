@@ -17,4 +17,6 @@ public class ApplicationDbContext : DbContext
     public DbSet<NameDay> NameDay{get; set;}
 
     public DbSet<Executions> Executions{get; set;}
+
+    public DbSet<ExecutionsDetails> ExecutionsDetails { get; set; }
 }

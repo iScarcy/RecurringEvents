@@ -15,10 +15,8 @@ public class ExecutionsRepositoryService : IExecutionsRepository
     }
  
     public async Task<DateTime> GetLastExecution()
-    {
-        
-        var dateTo =  _context.Executions.Where(x => x.Cancelled == false).Select(x => x.DateTo).OrderByDescending(x => x.Date).FirstOrDefault();
-        
+    {        
+        var dateTo =  _context.Executions.Where(x => x.Cancelled == false).Select(x => x.DateTo).OrderByDescending(x => x.Date).FirstOrDefault();        
         return await Task.FromResult(dateTo);
     }
 
@@ -34,12 +32,18 @@ public class ExecutionsRepositoryService : IExecutionsRepository
         return execution.Id;
     }
 
-    public void InsertExecutionDetails(Event events, int ExecutionID)
+    public async Task InsertExecutionDetails(Event infoEvent, int executionID)
     {
-        throw new NotImplementedException();
+        ExecutionsDetails executionsDetails = new ExecutionsDetails();
+        executionsDetails.EventType = infoEvent.type;
+        executionsDetails.DateEvent = infoEvent.date;
+        executionsDetails.Description = infoEvent.description;
+        executionsDetails.ExecutionsId = executionID;
+        await _context.ExecutionsDetails.AddAsync(executionsDetails);
+        _context.SaveChanges();
     }
 
-    public void UpdateExecution(int Id)
+    public Task UpdateExecution(int Id)
     {
         throw new NotImplementedException();
     }

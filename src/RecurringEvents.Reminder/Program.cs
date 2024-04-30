@@ -54,3 +54,24 @@ Console.WriteLine(lastExecution.To);
 
 executionID = await webClientAPI.InsertNewExecution(lastExecution);
 Console.WriteLine(executionID);
+
+//3.Chiamata all 'api di RecurringEvents.Web per avere eventi nell'intervallo di date indicate.
+
+IEnumerable<Event> events = await webClientAPI.GetEvents(lastExecution);
+
+/*
+4.Per ogni evento restituito dall'api: 
+                - inviare un messaggio rabbit su TeleScarcy
+                - inserire su db una riga con info dell'evento e il codice indentificativo della schedulazione
+*/
+
+if (events.Any()) 
+{ 
+    events.ToList<Event>().ForEach
+        (
+            e => 
+            {
+                webClientAPI.InsertExecutionDetails(e, executionID);
+            }
+        );
+}

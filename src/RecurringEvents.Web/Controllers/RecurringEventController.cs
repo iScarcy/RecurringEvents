@@ -71,9 +71,7 @@ public class RecurringEventController : ControllerBase
     public Task<List<Event>> SystemWasStarted(DateTime from, DateTime to) 
     {
         DateRange date = new DateRange(from, to);
-        Console.WriteLine(date.From);
-        Console.WriteLine(date.To);
-        
+               
         SistemWasStarted systemEvent = new SistemWasStarted(date);       
         return _mediator.Send(systemEvent);
          

@@ -28,7 +28,12 @@ public class ExecutionsService : IExecutionsService
        return executionID; 
     }
 
-    public void NewExecutionDetails(Event infoEvent, int ExecutionID)
+    public async Task NewExecutionDetails(Event infoEvent, int ExecutionID)
+    {
+        await _executionsRepository.InsertExecutionDetails(infoEvent, ExecutionID);
+    }
+
+    Task IExecutionsService.FinishExecution(int Id)
     {
         throw new NotImplementedException();
     }

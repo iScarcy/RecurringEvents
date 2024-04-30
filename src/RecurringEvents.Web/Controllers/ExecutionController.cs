@@ -54,7 +54,26 @@ public class ExecutionController : ControllerBase
             return Ok(result);
         }catch(Exception ex)
         {
-            return Problem(ex.Message);
+            return Problem(ex.Message + Environment.NewLine + ex.StackTrace);
+        }
+    }
+
+    /// <summary>
+    /// Inserisce il dettaglio di un evento
+    /// </summary>
+    /// <param name="infoEvent"></param>
+    /// <param name="executionId"></param>
+    /// <returns></returns>
+    [HttpPost("details")]
+    public async Task<ActionResult> AddExecDetails(Event infoEvent, int executionId) 
+    { 
+        try 
+        {
+            await _service.NewExecutionDetails(infoEvent, executionId);
+            return Ok();
+        }catch(Exception ex) 
+        { 
+            return Problem(ex.Message+ Environment.NewLine + ex.StackTrace);
         }
     }
 

@@ -19,6 +19,8 @@ public class RecurringEventsClientAPI : IRecurringEventsAPI
         _settingsAPI = settings;
     }
 
+   
+
     public async Task<DateTime> GetLastExecutions()
     {
         await using Stream stream =
@@ -49,5 +51,32 @@ public class RecurringEventsClientAPI : IRecurringEventsAPI
         }
 
         return executionID;
+    }
+
+    public async Task<IEnumerable<Event>> GetEvents(DateRange date)
+    {
+        await using Stream stream =
+        await _client.GetStreamAsync(_settingsAPI.UriRecurringEvent + String.Format(_settingsAPI.ApiSystemWasStarted, date.From.ToString("yyy-MM-dd"), date.To.ToString("yyy-MM-dd")));
+        var events =
+        await JsonSerializer.DeserializeAsync<List<Event>>(stream);
+        return events;
+    }
+
+    public async Task InsertExecutionDetails(Event infoEvent, int ExecutionsID)
+    {
+        using StringContent jsonContent = new(
+           JsonSerializer.Serialize(new
+           {
+               infoEvent = infoEvent,
+               ExecutionID = ExecutionsID
+           }),
+          Encoding.UTF8,
+          "application/json");
+
+        using HttpResponseMessage response = await _client.PostAsync(
+            _settingsAPI.UriRecurringEvent + _settingsAPI.ApiExecutionDetails, 
+            jsonContent);
+
+                
     }
 }
