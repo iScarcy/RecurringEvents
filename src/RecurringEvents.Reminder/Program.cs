@@ -4,6 +4,7 @@ using RecurringEvents.Reminder;
 using RecurringEvents.Reminder.Configurations;
 using RecurringEvents.Reminder.Interface;
 using RecurringEvents.Reminder.Models;
+using RecurringEvents.Reminder.Service;
 
 using HttpClient client = new();
 client.DefaultRequestHeaders.Accept.Clear();
@@ -38,7 +39,7 @@ configRecurringEventSettings.Bind(optsRecurringEventSettings);
 
 Console.WriteLine($"Batch Size {optsRecurringEventSettings.ApiSystemWasStarted}");
 
-IRecurringEventsAPI webClientAPI = new RecurringEventsClientAPI(client, optsRecurringEventSettings);
+IRecurringEventsAPI webClientAPI = new RecurringEventsService(client, optsRecurringEventSettings);
 int executionID = 0;
 
 //2. Lettura dal db (o da altro) dei giorni delle schedulazioni.                  

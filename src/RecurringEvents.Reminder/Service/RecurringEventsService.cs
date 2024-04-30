@@ -10,11 +10,11 @@ using RecurringEvents.Reminder.Models;
 
 namespace RecurringEvents.Reminder.Service;
 
-public class RecurringEventsClientAPI : IRecurringEventsAPI
+public class RecurringEventsService : IRecurringEventsAPI
 {
     private HttpClient _client = new();
     private RecurringEventSettings _settingsAPI;
-    public RecurringEventsClientAPI(HttpClient client, RecurringEventSettings settings)
+    public RecurringEventsService(HttpClient client, RecurringEventSettings settings)
     {
         _client = client;
         _settingsAPI = settings;
