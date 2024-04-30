@@ -9,5 +9,9 @@ public class Executions
 
     public DateTime DateTo {get; set;}
 
+    public DateTime DateStart { get; set; }
+
+    public DateTime? DateEnd { get; set; }
+
     public bool Cancelled {get; set;}
 }

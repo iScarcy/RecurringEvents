@@ -17,7 +17,7 @@ public class ExecutionsRepositoryService : IExecutionsRepository
     public async Task<DateTime> GetLastExecution()
     {
         
-        var dateTo =  _context.Executions.Select(x => x.DateTo).OrderByDescending(x => x.Date).FirstOrDefault();
+        var dateTo =  _context.Executions.Where(x => x.Cancelled == false).Select(x => x.DateTo).OrderByDescending(x => x.Date).FirstOrDefault();
         
         return await Task.FromResult(dateTo);
     }
@@ -27,6 +27,7 @@ public class ExecutionsRepositoryService : IExecutionsRepository
         Executions execution = new Executions();
         execution.DateFrom = dateRange.From;
         execution.DateTo = dateRange.To;
+        execution.DateStart = DateTime.Now;
         execution.Cancelled = false;
         await _context.Executions.AddAsync(execution);
         _context.SaveChanges();
