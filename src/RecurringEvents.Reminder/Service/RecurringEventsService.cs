@@ -21,6 +21,8 @@ public class RecurringEventsService : IRecurringEventsAPI
         _client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/vnd.github.v3+json"));
         _client.DefaultRequestHeaders.Add("User-Agent", ".NET Foundation Repository Reporter");
+
+        
     }
 
 

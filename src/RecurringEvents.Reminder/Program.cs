@@ -1,4 +1,5 @@
 ﻿using System.Net.Http.Headers;
+using System.Text;
 using Microsoft.Extensions.Configuration;
 using RecurringEvents.Reminder;
 using RecurringEvents.Reminder.Configurations;
@@ -6,11 +7,18 @@ using RecurringEvents.Reminder.Enums;
 using RecurringEvents.Reminder.Interface;
 using RecurringEvents.Reminder.Models;
 using RecurringEvents.Reminder.Service;
-
+using Serilog;
 
 IRecurringEventsAPI webClientAPI;
 IRecurringEventsBrokerMessage brokerService;
 ReminderManager reminderManager;
+
+Log.Logger = new LoggerConfiguration()
+   .WriteTo.File(@"log/log-.txt", rollingInterval: RollingInterval.Day)
+   .CreateLogger();
+
+StringBuilder log= new StringBuilder();
+log.AppendLine($"RecurringEvents.Reminder Execution:'{DateTime.Now}'");
 
 try
 {
@@ -23,7 +31,7 @@ try
                     - inviare un messaggio rabbit su TeleScarcy
                     - inserire su db una riga con info dell'evento e il codice indentificativo della schedulazione
              6. Aggiornare la schedulazione come completata
-             */
+      */        
     //1.Lettura file di configurazione
     var builder = new ConfigurationBuilder();
 
@@ -46,15 +54,20 @@ try
     configRabbitSettings.Bind(optsRabbitSettings);
     brokerService = new BrokerMessageService(optsRabbitSettings);
 
-    reminderManager = new ReminderManager(webClientAPI, brokerService);
+    reminderManager = new ReminderManager(webClientAPI, brokerService, log);
 
+  
     Reminder reminder = await reminderManager.GetReminder();
 
     await reminderManager.SendReminder(reminder);
+
+    Log.Information(log.ToString());
 }
-catch (Exception e)
+catch (Exception ex)
 {
-    Console.WriteLine(e.ToString());
+    log.AppendLine($"Reminder error, details:'{ex.Message}', stack:'{ex.StackTrace}'");
+    Log.Error(log.ToString());
 }
 
 
+ 
