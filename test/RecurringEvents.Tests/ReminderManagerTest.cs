@@ -39,6 +39,30 @@ namespace RecurringEvents.Tests
         }
 
         [Test]
+        public void SendReminder_get_and_send_reminder()
+        {
+           _mockBrokerMessageService = new Mock<IRecurringEventsBrokerMessage>();
+
+            _mockRecurringEventsAPI
+                .Setup(r => r.FinishExecution(It.IsAny<int>()))
+                .Returns(Task.FromResult(0));
+                         
+
+            _reminderManager = new ReminderManager(_mockRecurringEventsAPI.Object, _mockBrokerMessageService.Object);
+
+            List<Event> events = new List<Event>()
+            {
+                new Event(Reminder.Enums.EventType.BirthDay,new DateTime(1983,08,22), "Giuseppe Scarcella")
+            };
+
+            var reminder = new RecurringEvents.Reminder.Models.Reminder() { Id = 123, Events = events };
+
+            _reminderManager.SendReminder(reminder);
+
+            Assert.Pass();
+        }
+
+        [Test]
         public void SendReminder_test_send_broker_message()
         {
             initBrokerMessageService();
