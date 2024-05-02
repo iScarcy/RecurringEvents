@@ -10,11 +10,7 @@ public class RecurringEventSettings
     public string? ApiExecution { get; set; }
 
     public string? ApiExecutionDetails { get; set; }
+
+    public string? ApiFinishExecution { get; set; }
 }
 
-
-/*
-  "ApiExecution": "/api/Execution",
-    "ApiNewExecutionDetails": "/api/Execution/Details",
-    "ApiLastExecution": "/api/Execution/LastDate"
- */

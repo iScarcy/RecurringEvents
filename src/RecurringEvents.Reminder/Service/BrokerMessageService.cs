@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 
 namespace RecurringEvents.Reminder.Service
@@ -30,11 +32,12 @@ namespace RecurringEvents.Reminder.Service
                                       arguments: null);
 
 
-                var body = Encoding.UTF8.GetBytes(message);
+                var body = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(message));
                 channel.BasicPublish(exchange: string.Empty,
                                      routingKey: _rabbitSettings.EventQueue,
                                      basicProperties: null,
                                      body: body);
+
 
             }
         }

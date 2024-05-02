@@ -77,4 +77,23 @@ public class ExecutionController : ControllerBase
         }
     }
 
+
+    /// <summary>
+    /// Aggiorna esecuzione
+    /// </summary>
+    /// <param name="executionId"></param>
+    /// <returns></returns>
+    [HttpPatch("finishExecution/{executionId}")]
+    public async Task<ActionResult> FinishExecution(int executionId)
+    {
+        try
+        {
+            await _service.FinishExecution(executionId);
+            return Ok();
+        }
+        catch (Exception ex)
+        {
+            return Problem(ex.Message + Environment.NewLine + ex.StackTrace);
+        }
+    }
 }

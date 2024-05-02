@@ -14,10 +14,13 @@ public class RecurringEventsService : IRecurringEventsAPI
 {
     private HttpClient _client = new();
     private RecurringEventSettings _settingsAPI;
-    public RecurringEventsService(HttpClient client, RecurringEventSettings settings)
+    public RecurringEventsService(RecurringEventSettings settings)
     {
-        _client = client;
-        _settingsAPI = settings;
+        
+        _client.DefaultRequestHeaders.Accept.Clear();
+        _client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/vnd.github.v3+json"));
+        _client.DefaultRequestHeaders.Add("User-Agent", ".NET Foundation Repository Reporter");
     }
 
 
@@ -31,7 +34,7 @@ public class RecurringEventsService : IRecurringEventsAPI
         return dateFrom;
     }
 
-    public async Task<int> InsertNewExecution(DateRange date)
+    public async Task<int> StartExecution(DateRange date)
     {
         using StringContent jsonContent = new(
            JsonSerializer.Serialize(date),
@@ -79,5 +82,14 @@ public class RecurringEventsService : IRecurringEventsAPI
             jsonContent);
 
 
+    }
+
+    public async Task FinishExecution(int ExecutionsID)
+    {
+        StringContent content = new StringContent(String.Empty);
+        
+        using HttpResponseMessage response = await _client.PatchAsync(
+                _settingsAPI.UriRecurringEvent + string.Format(_settingsAPI.ApiFinishExecution, ExecutionsID), content
+            );
     }
 }

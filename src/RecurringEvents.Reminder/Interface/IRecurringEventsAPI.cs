@@ -6,9 +6,11 @@ public interface IRecurringEventsAPI
 {
     Task<DateTime> GetLastExecutions();
 
-    Task<int> InsertNewExecution(DateRange date);
+    Task<int> StartExecution(DateRange date);
 
     Task<IEnumerable<Event>> GetEvents(DateRange date);
 
     Task InsertExecutionDetails(Event infoEvent, int ExecutionsID);
+
+    Task FinishExecution(int ExecutionsID);
 }

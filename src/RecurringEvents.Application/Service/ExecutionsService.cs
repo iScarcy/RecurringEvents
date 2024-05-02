@@ -11,11 +11,7 @@ public class ExecutionsService : IExecutionsService
     {
         _executionsRepository = executionsRepository;;
     }
-    public void FinishExecution(int Id)
-    {
-        throw new NotImplementedException();
-    }
-
+   
     public async Task<DateTime> GetLastExecution()
     {
         DateTime dateFrom = await _executionsRepository.GetLastExecution();
@@ -33,8 +29,8 @@ public class ExecutionsService : IExecutionsService
         await _executionsRepository.InsertExecutionDetails(infoEvent, ExecutionID);
     }
 
-    Task IExecutionsService.FinishExecution(int Id)
+    public async Task FinishExecution(int Id)
     {
-        throw new NotImplementedException();
+        await _executionsRepository.UpdateExecution(Id);
     }
 }

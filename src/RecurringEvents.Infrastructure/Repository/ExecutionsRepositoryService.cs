@@ -13,10 +13,10 @@ public class ExecutionsRepositoryService : IExecutionsRepository
     {
         _context = context;
     }
- 
+
     public async Task<DateTime> GetLastExecution()
-    {        
-        var dateTo =  _context.Executions.Where(x => x.Cancelled == false).Select(x => x.DateTo).OrderByDescending(x => x.Date).FirstOrDefault();        
+    {
+        var dateTo = _context.Executions.Where(x => x.Cancelled == false).Select(x => x.DateTo).OrderByDescending(x => x.Date).FirstOrDefault();
         return await Task.FromResult(dateTo);
     }
 
@@ -43,8 +43,17 @@ public class ExecutionsRepositoryService : IExecutionsRepository
         _context.SaveChanges();
     }
 
-    public Task UpdateExecution(int Id)
+    public async Task UpdateExecution(int Id)
     {
-        throw new NotImplementedException();
+        var exec = await _context.Executions.Where(x => x.Id == Id).FirstOrDefaultAsync<Executions>();
+        if (exec != null)
+        {
+            exec.DateEnd = DateTime.Now;
+            _context.SaveChanges();
+        }
+        else
+        {
+            throw new Exception("UpdateExecution non è stato trovata nessuna exec da aggionare");
+        }
     }
 }
