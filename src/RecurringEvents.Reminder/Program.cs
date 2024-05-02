@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using RecurringEvents.Reminder;
 using RecurringEvents.Reminder.Configurations;
+using RecurringEvents.Reminder.Enums;
 using RecurringEvents.Reminder.Interface;
 using RecurringEvents.Reminder.Models;
 using RecurringEvents.Reminder.Service;
@@ -12,6 +13,9 @@ client.DefaultRequestHeaders.Accept.Add(
     new MediaTypeWithQualityHeaderValue("application/vnd.github.v3+json"));
 client.DefaultRequestHeaders.Add("User-Agent", ".NET Foundation Repository Reporter");
 
+IRecurringEventsAPI webClientAPI;
+IRecurringEventsBrokerMessage brokerService;
+int executionID = 0;
 Console.WriteLine("Hello, World!");
 
 /*TO DO STEP:
@@ -39,8 +43,13 @@ configRecurringEventSettings.Bind(optsRecurringEventSettings);
 
 Console.WriteLine($"Batch Size {optsRecurringEventSettings.ApiSystemWasStarted}");
 
-IRecurringEventsAPI webClientAPI = new RecurringEventsService(client, optsRecurringEventSettings);
-int executionID = 0;
+webClientAPI = new RecurringEventsService(client, optsRecurringEventSettings);
+
+var optsRabbitSettings = new RabbitSettings();
+var configRabbitSettings = config.GetSection("RabbitSettings");
+configRabbitSettings.Bind(optsRabbitSettings);
+brokerService = new BrokerMessageService(optsRabbitSettings);
+
 
 //2. Lettura dal db (o da altro) dei giorni delle schedulazioni.                  
 
@@ -66,13 +75,26 @@ IEnumerable<Event> events = await webClientAPI.GetEvents(lastExecution);
                 - inserire su db una riga con info dell'evento e il codice indentificativo della schedulazione
 */
 
-if (events.Any()) 
-{ 
+if (events.Any())
+{
     events.ToList<Event>().ForEach
         (
-            e => 
+            e =>
             {
-                //bot_auguri
+                string messageText = string.Empty;
+                string key = string.Empty;
+                switch (e.type)
+                {
+                    case RecurringEvents.Reminder.Enums.EventType.BirthDay:
+                        key = BrokerKeyType.Wish.ToString();
+                        messageText = $"Il {e.date.Day}/{e.date.Month}, {e.description} ha compiuto {DateTime.Now.Year - e.date.Year} anni.";
+                        break;
+                    case RecurringEvents.Reminder.Enums.EventType.NameDay:
+                        key = BrokerKeyType.Wish.ToString();
+                        messageText = $"Il {e.date.Day}/{e.date.Month}, {e.description} ha fatto l'onomastico.";
+                        break;
+                }
+                BrokerMessage message = new BrokerMessage() { Key = key, Message = messageText };
                 webClientAPI.InsertExecutionDetails(e, executionID);
             }
         );

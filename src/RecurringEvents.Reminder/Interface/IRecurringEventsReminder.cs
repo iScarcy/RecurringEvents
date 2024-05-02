@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace RecurringEvents.Reminder.Interface
 {
-    public interface IRecurringEventsBrokerMessage
+    internal interface IRecurringEventsReminder
     {
-        void SendMessage(BrokerMessage message);
+        List<Event> GetReminder();
+        void SendReminder(IEnumerable<Event> events);
     }
 }
