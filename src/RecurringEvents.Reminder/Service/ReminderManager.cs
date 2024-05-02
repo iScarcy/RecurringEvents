@@ -18,12 +18,12 @@ namespace RecurringEvents.Reminder.Service
             _brokerService = brokerService;
         }
 
-        public List<Event> GetReminder()
+        public Models.Reminder GetReminder()
         {
             throw new NotImplementedException();
         }
 
-        public void SendReminder(IEnumerable<Event> events)
+        public void SendReminder(Models.Reminder reminder)
         {
             throw new NotImplementedException();
         }

@@ -9,7 +9,7 @@ namespace RecurringEvents.Reminder.Interface
 {
     internal interface IRecurringEventsReminder
     {
-        List<Event> GetReminder();
-        void SendReminder(IEnumerable<Event> events);
+        RecurringEvents.Reminder.Models.Reminder GetReminder();
+        void SendReminder(RecurringEvents.Reminder.Models.Reminder reminder);
     }
 }

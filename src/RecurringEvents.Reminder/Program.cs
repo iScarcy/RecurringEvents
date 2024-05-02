@@ -15,6 +15,7 @@ client.DefaultRequestHeaders.Add("User-Agent", ".NET Foundation Repository Repor
 
 IRecurringEventsAPI webClientAPI;
 IRecurringEventsBrokerMessage brokerService;
+//ReminderManager reminderManager
 int executionID = 0;
 Console.WriteLine("Hello, World!");
 
@@ -50,6 +51,7 @@ var configRabbitSettings = config.GetSection("RabbitSettings");
 configRabbitSettings.Bind(optsRabbitSettings);
 brokerService = new BrokerMessageService(optsRabbitSettings);
 
+//reminderManager = new ReminderManager(webClientAPI, brokerService);
 
 //2. Lettura dal db (o da altro) dei giorni delle schedulazioni.                  
 
