@@ -21,3 +21,7 @@ src/RecurringEvents.Reminder/obj
 
 src/RecurringEvents.Web/RecurringEvents.Web.csproj.user
 
+
+test/RecurringEvents.Tests/obj
+test/RecurringEvents.Tests/bin
+
