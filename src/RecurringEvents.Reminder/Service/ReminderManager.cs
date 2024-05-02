@@ -1,6 +1,8 @@
 ﻿using RecurringEvents.Reminder.Enums;
 using RecurringEvents.Reminder.Interface;
 using RecurringEvents.Reminder.Models;
+using Serilog;
+using Serilog.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,13 +15,18 @@ namespace RecurringEvents.Reminder.Service
     {
         private readonly IRecurringEventsAPI _eventsApi;
         private readonly IRecurringEventsBrokerMessage _brokerService;
-        private StringBuilder _messageLog;
-        public ReminderManager(IRecurringEventsAPI clientEventsApi, IRecurringEventsBrokerMessage brokerService, StringBuilder log
-            )
+
+        private Logger _log;
+        public ReminderManager(IRecurringEventsAPI clientEventsApi, IRecurringEventsBrokerMessage brokerService)
         {
             _eventsApi = clientEventsApi;
             _brokerService = brokerService;
-            _messageLog = log;
+
+            _log = new LoggerConfiguration()
+           .WriteTo.File(@"log/log-.txt", rollingInterval: RollingInterval.Day)
+           .CreateLogger();
+
+            _log.Information($"ReminderManager Execution:'{DateTime.Now}'");
         }
 
         public async Task<Models.Reminder> GetReminder()
@@ -27,31 +34,31 @@ namespace RecurringEvents.Reminder.Service
             try
             {
                 //2. Lettura dal db (o da altro) dei giorni delle schedulazioni.                  
-                _messageLog.AppendLine("GetReminder");
-                _messageLog.AppendLine(" - GetLastExecutions");
+                _log.Information("GetReminder");
+                _log.Information(" - GetLastExecutions");
                 DateTime dateFrom = await _eventsApi.GetLastExecutions();
                 dateFrom = dateFrom.AddDays(1);
                 DateTime dateTo = DateTime.Now;
                 DateRange lastExecution = new DateRange(dateFrom, dateTo);
-                _messageLog.AppendLine($"lastExecution.From: {lastExecution.From}");
-                _messageLog.AppendLine($"lastExecution.To: {lastExecution.To}");
-                
+                 _log.Information($"lastExecution.From: {lastExecution.From}");
+                _log.Information($"lastExecution.To: {lastExecution.To}");
+
 
                 //3.Inserire su db una riga della schedulazione avviata e farsi restituire un codice identificativo.
-                _messageLog.AppendLine(" - StartExecution ");
+                _log.Information(" - StartExecution ");
                 int executionID = await _eventsApi.StartExecution(lastExecution);
-                _messageLog.AppendLine(" - executionID:'{executionID}'");
-                
+                _log.Information(" - executionID:'{executionID}'");
+
                 //4.Chiamata all 'api di RecurringEvents.Web per avere eventi nell'intervallo di date indicate.
 
-                _messageLog.AppendLine(" - GetEvents");
+                _log.Information(" - GetEvents");
                 IEnumerable<Event> events = await _eventsApi.GetEvents(lastExecution);
-                _messageLog.AppendLine($" - Events Found: {events.Count()}");
+                _log.Information($" - Events Found: {events.Count()}");
                 return new Models.Reminder() { Id = executionID, Events = events };
             }
             catch (Exception ex)
             {
-                _messageLog.AppendLine($"GetReminder Error: '{ex.Message}', stack:'{ex.StackTrace}'");
+                _log.Error($"GetReminder Error: '{ex.Message}', stack:'{ex.StackTrace}'");
 
                 throw;
             }
@@ -61,7 +68,9 @@ namespace RecurringEvents.Reminder.Service
         {
             try
             {
-                _messageLog.AppendLine("SendReminder");
+                _log.Information("SendReminder");
+
+                int executionID = reminder.Id;
                 /*
                 4.Per ogni evento restituito dall'api: 
                                 - inviare un messaggio rabbit su TeleScarcy
@@ -70,9 +79,7 @@ namespace RecurringEvents.Reminder.Service
                 List<Event> events = new List<Event>();
                 if (reminder.Events.Any())
                 {
-                    events = reminder.Events.ToList();
-                    
-                    int executionID = reminder.Id;
+                    events = reminder.Events.ToList();                  
 
                     events.ToList<Event>().ForEach
                         (
@@ -92,19 +99,26 @@ namespace RecurringEvents.Reminder.Service
                                         break;
                                 }
                                 BrokerMessage message = new BrokerMessage() { Key = key, Message = messageText };
-                                _messageLog.AppendLine($" - BrokerMessage: key:'{key}', Message:'{messageText}'");
+                                _log.Information($" - BrokerMessage: key:'{key}', Message:'{messageText}'");
                                 _brokerService.SendMessage(message);
-                                _messageLog.AppendLine(" - InsertExecutionDetails");
+                                _log.Information(" - InsertExecutionDetails");
                                 await _eventsApi.InsertExecutionDetails(e, executionID);
                             }
                         );
-                    _messageLog.AppendLine(" - FinishExecution");
-                    await _eventsApi.FinishExecution(executionID);
+                    _log.Information(" - FinishExecution");
+
                 }
+                else
+                {
+                    _log.Information($" - Events was not found");
+                }
+
+                _log.Information(" - FinishExecution");
+                await _eventsApi.FinishExecution(executionID);
             }
             catch (Exception ex)
             {
-                _messageLog.AppendLine($"SendReminder Error: '{ex.Message}', stack:'{ex.StackTrace}'");
+                _log.Error($"SendReminder Error: '{ex.Message}', stack:'{ex.StackTrace}'");
 
                 throw;
             }

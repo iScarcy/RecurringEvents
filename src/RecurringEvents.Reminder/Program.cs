@@ -17,8 +17,7 @@ Log.Logger = new LoggerConfiguration()
    .WriteTo.File(@"log/log-.txt", rollingInterval: RollingInterval.Day)
    .CreateLogger();
 
-StringBuilder log= new StringBuilder();
-log.AppendLine($"RecurringEvents.Reminder Execution:'{DateTime.Now}'");
+Log.Information($"RecurringEvents.Reminder Start Execution:'{DateTime.Now}'");
 
 try
 {
@@ -31,8 +30,10 @@ try
                     - inviare un messaggio rabbit su TeleScarcy
                     - inserire su db una riga con info dell'evento e il codice indentificativo della schedulazione
              6. Aggiornare la schedulazione come completata
-      */        
+      */
     //1.Lettura file di configurazione
+
+    Log.Information("Init config RecurringEventSettings");
     var builder = new ConfigurationBuilder();
 
     builder.SetBasePath(Directory.GetCurrentDirectory())
@@ -45,29 +46,29 @@ try
     configRecurringEventSettings.Bind(optsRecurringEventSettings);
 
 
-    Console.WriteLine($"Batch Size {optsRecurringEventSettings.ApiSystemWasStarted}");
-
     webClientAPI = new RecurringEventsService(optsRecurringEventSettings);
+
+    Log.Information("Init config RabbitSettings");
 
     var optsRabbitSettings = new RabbitSettings();
     var configRabbitSettings = config.GetSection("RabbitSettings");
     configRabbitSettings.Bind(optsRabbitSettings);
     brokerService = new BrokerMessageService(optsRabbitSettings);
 
-    reminderManager = new ReminderManager(webClientAPI, brokerService, log);
 
-  
+    reminderManager = new ReminderManager(webClientAPI, brokerService);
+
+    Log.Information("GetReminder");
     Reminder reminder = await reminderManager.GetReminder();
 
     await reminderManager.SendReminder(reminder);
 
-    Log.Information(log.ToString());
+    Log.Information($"RecurringEvents.Reminder End Execution:'{DateTime.Now}'");
+
 }
 catch (Exception ex)
 {
-    log.AppendLine($"Reminder error, details:'{ex.Message}', stack:'{ex.StackTrace}'");
-    Log.Error(log.ToString());
+    Log.Error($"Reminder error, details:'{ex.Message}', stack:'{ex.StackTrace}'");
 }
 
 
- 
