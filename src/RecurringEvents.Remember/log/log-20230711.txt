@@ -1,8 +1,0 @@
-2023-07-11 14:54:05.691 +02:00 [INF] From: 01/01/2023, To: 01/09/2023
-2023-07-11 14:54:07.353 +02:00 [INF]  22/08/1983, Compleanno:Giuseppe Scarcella
-2023-07-11 14:54:07.479 +02:00 [INF]  21/07/1984, Compleanno:Francesca Beninati
-2023-07-11 14:54:07.520 +02:00 [INF]  18/05/1983, Compleanno:Davide Farronato
-2023-07-11 14:54:07.589 +02:00 [INF]  20/04/1984, Compleanno:Alessandro Magazzù
-2023-07-11 14:54:07.624 +02:00 [INF]  27/01/1946, Compleanno:Rita Narciso
-2023-07-11 14:54:07.663 +02:00 [INF]  05/04/1900, Compleanno:Pippo La Fauci
-2023-07-11 14:54:07.701 +02:00 [INF]  19/03/1900, Onomastico:Giuseppe Scarcella

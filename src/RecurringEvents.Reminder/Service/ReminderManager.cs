@@ -90,11 +90,11 @@ namespace RecurringEvents.Reminder.Service
                                 switch (e.type)
                                 {
                                     case RecurringEvents.Reminder.Enums.EventType.BirthDay:
-                                        key = BrokerKeyType.Wish.ToString();
+                                        key = BrokerKeyType.bot_auguri.ToString(); 
                                         messageText = $"Il {e.date.Day}/{e.date.Month}, {e.description} ha compiuto {DateTime.Now.Year - e.date.Year} anni.";
                                         break;
                                     case RecurringEvents.Reminder.Enums.EventType.NameDay:
-                                        key = BrokerKeyType.Wish.ToString();
+                                        key = BrokerKeyType.bot_auguri.ToString();
                                         messageText = $"Il {e.date.Day}/{e.date.Month}, {e.description} ha fatto l'onomastico.";
                                         break;
                                 }

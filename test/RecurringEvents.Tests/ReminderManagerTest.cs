@@ -43,11 +43,15 @@ namespace RecurringEvents.Tests
         {
             initBrokerMessageService();
 
+            _mockRecurringEventsAPI
+                .Setup(r => r.FinishExecution(It.IsAny<int>()))
+                .Returns(Task.FromResult(0));
+
             _reminderManager = new ReminderManager(_mockRecurringEventsAPI.Object, _brokerMessageService);
 
             List <Event> events = new List<Event>()
             {
-                new Event(Reminder.Enums.EventType.NameDay,new DateTime(22,08,1983), "Giuseppe Scarcella")
+                new Event(Reminder.Enums.EventType.BirthDay,new DateTime(1983,08,22), "Giuseppe Scarcella")
             };
 
             var reminder = new RecurringEvents.Reminder.Models.Reminder() { Id = 123, Events = events};

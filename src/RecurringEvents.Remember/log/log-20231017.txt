@@ -1,9 +1,0 @@
-2023-10-17 23:55:30.358 +02:00 [INF] From: 01/01/2023, To: 01/09/2023
-2023-10-17 23:55:31.614 +02:00 [INF]  22/08/1983, Compleanno:Giuseppe Scarcella
-2023-10-17 23:55:31.617 +02:00 [INF]  22/08/1983, Compleanno:Il 22/8, Giuseppe Scarcella ha compiuto 40 anni
-2023-10-17 23:56:58.388 +02:00 [INF] From: 01/01/2023, To: 01/09/2023
-2023-10-17 23:56:58.486 +02:00 [INF]  22/08/1983, Compleanno:Giuseppe Scarcella
-2023-10-17 23:56:58.490 +02:00 [INF]  22/08/1983, Compleanno:Il 22/8, Giuseppe Scarcella ha compiuto 40 anni
-2023-10-17 23:58:37.308 +02:00 [INF] From: 01/01/2023, To: 01/09/2023
-2023-10-17 23:58:37.476 +02:00 [INF]  22/08/1983, Compleanno:Giuseppe Scarcella
-2023-10-17 23:58:37.478 +02:00 [INF]  22/08/1983, Compleanno:Il 22/8, Giuseppe Scarcella ha compiuto 40 anni
