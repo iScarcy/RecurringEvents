@@ -50,7 +50,7 @@ namespace RecurringEvents.Tests
 
             _reminderManager = new ReminderManager(_mockRecurringEventsAPI.Object, _mockBrokerMessageService.Object);
 
-            List<Event> events = new List<Event>()
+            IEnumerable<Event> events = new List<Event>()
             {
                 new Event(Reminder.Enums.EventType.BirthDay,new DateTime(1983,08,22), "Giuseppe Scarcella")
             };
@@ -67,20 +67,38 @@ namespace RecurringEvents.Tests
         {
             initBrokerMessageService();
 
+            IEnumerable<Event> events = new List<Event>()
+            {
+                new Event(Reminder.Enums.EventType.BirthDay,new DateTime(1983,08,22), "Giuseppe Scarcella")
+            };
+
+
+
+            _mockRecurringEventsAPI
+                .Setup(x => x.GetLastExecution())
+                .Returns(Task.FromResult(DateTime.Now));
+
+            _mockRecurringEventsAPI
+                .Setup(x => x.StartExecution(It.IsAny<DateRange>()))
+                .Returns(Task.FromResult(1));
+
+            _mockRecurringEventsAPI
+              .Setup(x => x.GetEvents(It.IsAny<DateRange>()))
+              .Returns(Task.FromResult(events));
+
+
             _mockRecurringEventsAPI
                 .Setup(r => r.FinishExecution(It.IsAny<int>()))
                 .Returns(Task.FromResult(0));
 
             _reminderManager = new ReminderManager(_mockRecurringEventsAPI.Object, _brokerMessageService);
 
-            List <Event> events = new List<Event>()
-            {
-                new Event(Reminder.Enums.EventType.BirthDay,new DateTime(1983,08,22), "Giuseppe Scarcella")
-            };
 
-            var reminder = new RecurringEvents.Reminder.Models.Reminder() { Id = 123, Events = events};
 
-            _reminderManager.SendReminder(reminder);
+            var reminder = _reminderManager.GetReminder();
+                    
+
+            _reminderManager.SendReminder(reminder.Result);
 
             Assert.Pass();
         }

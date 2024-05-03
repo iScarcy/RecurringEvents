@@ -4,7 +4,7 @@ namespace RecurringEvents.Reminder.Interface;
 
 public interface IRecurringEventsAPI
 {
-    Task<DateTime> GetLastExecutions();
+    Task<DateTime> GetLastExecution();
 
     Task<int> StartExecution(DateRange date);
 

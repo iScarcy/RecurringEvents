@@ -36,8 +36,7 @@ namespace RecurringEvents.Reminder.Service
                 //2. Lettura dal db (o da altro) dei giorni delle schedulazioni.                  
                 _log.Information("GetReminder");
                 _log.Information(" - GetLastExecutions");
-                DateTime dateFrom = await _eventsApi.GetLastExecutions();
-                dateFrom = dateFrom.AddDays(1);
+                DateTime dateFrom = await _eventsApi.GetLastExecution();
                 DateTime dateTo = DateTime.Now;
                 DateRange lastExecution = new DateRange(dateFrom, dateTo);
                  _log.Information($"lastExecution.From: {lastExecution.From}");

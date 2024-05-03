@@ -27,7 +27,7 @@ public class RecurringEventsService : IRecurringEventsAPI
 
 
 
-    public async Task<DateTime> GetLastExecutions()
+    public async Task<DateTime> GetLastExecution()
     {
         await using Stream stream =
         await _client.GetStreamAsync(_settingsAPI.UriRecurringEvent + _settingsAPI.ApiLastExecution);
