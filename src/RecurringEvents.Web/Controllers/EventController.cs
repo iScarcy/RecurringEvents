@@ -36,9 +36,7 @@ namespace RecurringEvents.Web.Controllers
             try
             {
                 
-                var birthdays = await _peopleService.GetAll();
-                
-               // var namedays = await _nameDayService.GetEventsByDays(rangeDays);
+                var birthdays = await _peopleService.GetAll(); 
 
                 return Ok(birthdays);
 
@@ -76,16 +74,17 @@ namespace RecurringEvents.Web.Controllers
         [HttpGet("all")]
         public async Task<ActionResult> GetAll()
         {
-             try
+            try
             {
                 
                 var birthdays = await _peopleService.GetAll();
                 
-               // var namedays = await _nameDayService.GetEventsByDays(rangeDays);
+                var namedays = await _nameDayService.GetAll();
 
-                return Ok(birthdays);
+                return Ok(birthdays.Union(namedays));
 
-            }catch(Exception ex)
+            }
+            catch(Exception ex)
             {
                 return Problem(ex.Message);    
             }
