@@ -96,7 +96,7 @@ namespace RecurringEvents.Web.Controllers
         /// <param name="day"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        [HttpGet("days/{from}/{to}")]
+        [HttpGet("days")]
         public async Task<ActionResult> GetByDay(DateTime from, DateTime to)
         {
             try

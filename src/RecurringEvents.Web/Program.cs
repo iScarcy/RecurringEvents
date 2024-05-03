@@ -11,8 +11,7 @@ using RecurringEvents.Application;
 using RecurringEvents.Infrastructure;
 using RecurringEvents.Infrastructure.DomainEvents;
 using RecurringEvents.Web;
-
-
+using RecurringEvents.Web.Swagger;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,20 +20,16 @@ var dbConnectionStrings = builder.Configuration["ConnectionStrings:DefaultConnec
 
 string Service_URL =  builder.Configuration["AppSettings:Service_URL"] ;
 
-/*
-builder.WebHost.ConfigureKestrel(serverOptions =>
-{
-    
-    serverOptions.ListenAnyIP(port);
-});
-*/
  
 // Add services to the container.
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(PersonWasCreatedHandler).Assembly));
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(NameDayWasCreatedHanler).Assembly));
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(SistemWasStartedCreatedHanler).Assembly));
 //builder.Services.AddMediatR(typeof(PersonWasCreatedHandler));
-builder.Services.AddControllers();
+builder.Services.AddControllers(options =>
+{ 
+    options.Conventions.Add(new ProducesResponseTypeConvention());
+});
 
 builder.Services.AddApplication();
 

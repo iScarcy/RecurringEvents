@@ -24,16 +24,15 @@ public class SaintController : ControllerBase
     /// <param name="Data"></param>
     /// <returns></returns>
     [HttpPost]
-    public async Task<ActionResult> Add(Saint saint)
+    public async Task Add(Saint saint)
     {
         try
         {
-            await _saintRepository.Insert(saint);
-            return Ok();
+            await _saintRepository.Insert(saint);            
         }
         catch (Exception e)
         {
-            return Problem(e.Message);
+         
         }
     }
     /// <summary>
@@ -42,16 +41,9 @@ public class SaintController : ControllerBase
     /// </summary>
     /// <returns></returns>
     [HttpGet("allSaints")]
-    public async Task<ActionResult> Get()
+    public async Task<IEnumerable<Saint>> GetAll()
     {
-        try 
-        { 
-            var saints = await _saintRepository.GetAll();
-            return Ok(saints);
-        }catch(Exception e) 
-        {
-            return Problem(e.Message);
-        }
+       return await _saintRepository.GetAll();            
     } 
 
 }
