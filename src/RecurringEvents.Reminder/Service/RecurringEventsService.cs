@@ -61,10 +61,25 @@ public class RecurringEventsService : IRecurringEventsAPI
 
     public async Task<IEnumerable<Event>> GetEvents(DateRange date)
     {
-        await using Stream stream =
-        await _client.GetStreamAsync(_settingsAPI.UriRecurringEvent + string.Format(_settingsAPI.ApiSystemWasStarted, date.From.ToString("yyy-MM-dd"), date.To.ToString("yyy-MM-dd")));
-        var events =
-        await JsonSerializer.DeserializeAsync<List<Event>>(stream);
+      
+        IEnumerable<Event> events = new List<Event>();
+        using StringContent jsonContent = new(
+          JsonSerializer.Serialize(date),
+          Encoding.UTF8,
+          "application/json");
+        
+        using HttpResponseMessage response = await _client.PostAsync(
+       _settingsAPI.UriRecurringEvent + _settingsAPI.ApiSystemWasStarted,
+       jsonContent);
+
+        switch (response.StatusCode)
+        {
+            case HttpStatusCode.OK:
+                events = await response.Content.ReadFromJsonAsync<List<Event>>();
+                break;
+            default: throw new Exception($"Errore durante l'inserimento dell'esecuzione, DateFrom:'{date.From}', DateTo:'{date.To}'");
+        }
+               
         return events;
     }
 
