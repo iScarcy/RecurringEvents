@@ -44,6 +44,24 @@ public class SaintController : ControllerBase
     public async Task<IEnumerable<Saint>> GetAll()
     {
        return await _saintRepository.GetAll();            
-    } 
+    }
+
+    /// <summary>
+    /// allSaints
+    /// Recupera uno specifico santo censito nel sistema
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet()]
+    public async Task<Saint> Get(int idSaint)
+    {
+        return await _saintRepository.GetByID(idSaint);
+    }
+
+
+    [HttpPatch()]
+    public async Task UpdateSaint(Saint saint) 
+    { 
+        await _saintRepository.Update(saint);
+    }
 
 }

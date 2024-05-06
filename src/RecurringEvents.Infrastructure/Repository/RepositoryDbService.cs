@@ -34,9 +34,10 @@ namespace RecurringEvents.Infrastructure.Repository
             await _context.SaveChangesAsync();
         }
 
-        public Task Update(T entity)
+        public async Task Update(T entity)
         {
-            throw new NotImplementedException();
+           _context.Set<T>().Update(entity);
+            await _context.SaveChangesAsync();
         }
     }
 }

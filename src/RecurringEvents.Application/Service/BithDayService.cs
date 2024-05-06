@@ -25,6 +25,7 @@ namespace RecurringEvents.Application.Service
             var eventPeople = await _dataRepository.GetAll();
             var birthDays = from e in eventPeople
                     select new Event(EventType.BirthDay, e.DataBirth, e.Name);
+
             return birthDays;
         }
 
@@ -33,15 +34,17 @@ namespace RecurringEvents.Application.Service
             var eventPeople = await _dataProvider.GetEventsByDays(days);
             var birthDays = from e in eventPeople
                     select new Event(EventType.BirthDay, e.DataBirth, e.Name);
+
             return birthDays;
         }
 
         public async Task<IEnumerable<Event>> GetEventsByPerson(string Person)
         {
            var eventPeople = await _dataProvider.GetEventsByPerson(Person);
-            var birthDays = from e in eventPeople
+           var birthDays = from e in eventPeople
                     select new Event(EventType.BirthDay, e.DataBirth, e.Name);
-            return birthDays;
+
+           return birthDays;
         }
 
 

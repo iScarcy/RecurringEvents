@@ -49,8 +49,7 @@ public class RecurringEventController : ControllerBase
     /// NameDayWasCreated
     /// Evento evocato per registrare un onomastico.
     /// </summary>
-    /// <param name="personName"></param>
-    /// <param name="idSaint"></param>
+    /// <param name="nameDay"></param>    
     /// <returns></returns>
     [Route("NameDayWasCreated")]
     [HttpPost]
@@ -58,22 +57,19 @@ public class RecurringEventController : ControllerBase
     {
         var nameDayEvent = new NameDayWasCreated(nameDay);
         return _mediator.Send(nameDayEvent);
-    } 
+    }
 
-   
+
     /// <summary>
     /// Evento invocato quando il sistema si avvia per estrarre gli eventi del giorno
     /// </summary>
-    /// <param name="from"></param>
-    /// <param name="to"></param>
+    /// <param name="date"></param>
     /// <returns></returns>
     [HttpPost("SystemWasStarted")]
     public Task<List<Event>> SystemWasStarted(DateRange date) 
-    {
-      
+    {      
         SistemWasStarted systemEvent = new SistemWasStarted(date);       
-        return _mediator.Send(systemEvent);
-         
+        return _mediator.Send(systemEvent);         
     } 
 
     

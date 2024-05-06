@@ -61,6 +61,15 @@ namespace RecurringEvents.Domain {
         }
         
         /// <summary>
+        ///   Cerca una stringa localizzata simile a La data To non può essere inferirore alla data From.
+        /// </summary>
+        internal static string DateRangeTo {
+            get {
+                return ResourceManager.GetString("DateRangeTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Cerca una stringa localizzata simile a {0} è un campo obbligatorio.
         /// </summary>
         internal static string Mandatory {

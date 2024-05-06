@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
-
+using System.Diagnostics.Tracing;
+ 
 namespace RecurringEvents.Domain.Events;
 
 
@@ -13,7 +14,7 @@ public class BirthDay
 
     [Display(Name = "La data di nascita della persona")]
     [Required(ErrorMessageResourceType = typeof(ValidationErrors), ErrorMessageResourceName = nameof(ValidationErrors.Mandatory))]
-
+       
     public DateTime DataBirth {get; set;}
     
     public BirthDay(int id, string name, DateTime dataBirth) 
