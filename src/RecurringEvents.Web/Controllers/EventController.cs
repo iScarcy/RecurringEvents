@@ -120,20 +120,16 @@ namespace RecurringEvents.Web.Controllers
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
         [HttpGet("person/{person}")]
-        public async Task<ActionResult> GetByPerson(string person)
+        public async Task<IEnumerable<Event>> GetByPerson(string person)
         {
-            try
-            {
-                var birthdays = await _peopleService.GetEventsByPerson(person);
+           
+            var birthdays = await _peopleService.GetEventsByPerson(person);
                 
-                var namedays = await _nameDayService.GetEventsByPerson(person);
+            var namedays = await _nameDayService.GetEventsByPerson(person);
 
-                //IEnumerable<Event> event = birthdays.Union(namedays);
-                return Ok( birthdays.Union(namedays));
-            }catch(Exception ex)
-            {
-                return Problem(ex.Message);    
-            }
+            //IEnumerable<Event> event = birthdays.Union(namedays);
+            return await Task.FromResult(birthdays.Union(namedays));
+           
         }
     }
 }
