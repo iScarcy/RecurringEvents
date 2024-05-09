@@ -10,7 +10,7 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddApplication(this IServiceCollection service)
     {
-        service.AddScoped<IEventPeopleService<BirthDay>, BithDayService>();
+        service.AddScoped<IEventPeopleService<BirthDayDate>, BithDayService>();
         service.AddScoped<IEventPeopleService<NameDayDate>, NameDayService>();        
         service.AddScoped<IExecutionsService, ExecutionsService>();    
         return service;      

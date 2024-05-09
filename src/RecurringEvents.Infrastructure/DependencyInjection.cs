@@ -18,11 +18,10 @@ public static class DependencyInjection
             new MySqlServerVersion(new Version(10, 4, 17))));
         
         
-      //  service.AddScoped<IRepository<NameDay>, NameDayRepository>();
         service.AddScoped<IRepository<Saint>, RepositoryDbService<Saint>>();
-        service.AddScoped<IRepository<BirthDay>, RepositoryDbService<BirthDay>>();
-        service.AddScoped<IRepository<NameDayDate>, RepositoryNameDayDateService>();
-        service.AddScoped<IEventPeopleRepository<BirthDay>, BirthDaysService>();
+     
+     
+        service.AddScoped<IEventPeopleRepository<BirthDayDate>, BirthDayService>();
         service.AddScoped<IEventPeopleRepository<NameDayDate>, NameDayService>();
         service.AddScoped<IExecutionsRepository, ExecutionsRepositoryService>();
         

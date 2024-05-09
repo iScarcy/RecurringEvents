@@ -22,7 +22,8 @@ public class SistemWasStartedCreatedHanler : IRequestHandler<SistemWasStarted, L
         //compleanni
         
        var compleanni = from x in  _dbContext.BirthDay
-                                where //mesi precedenti
+                        join p in _dbContext.People on x.IdPerson equals p.Id
+                        where //mesi precedenti
                                 (   
                                     
                                     (   request.DateRange.From.Date.Month <= x.DataBirth.Date.Month 
@@ -51,7 +52,7 @@ public class SistemWasStartedCreatedHanler : IRequestHandler<SistemWasStarted, L
                                             (request.DateRange.To.Date.Day >= x.DataBirth.Date.Day )    
                                     )
                                 )                               
-                                select new Event(EventType.BirthDay, x.DataBirth,x.Name);
+                                select new Event(EventType.BirthDay, x.DataBirth, p.FullName);
       
        
        //onomastici

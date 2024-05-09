@@ -12,14 +12,14 @@ namespace RecurringEvents.Web.Controllers
     public class EventController : ControllerBase
     {
 
-        private readonly IEventPeopleService<BirthDay> _peopleService;
+        private readonly IEventPeopleService<BirthDayDate> _peopleService;
         private readonly IEventPeopleService<NameDayDate> _nameDayService;
     
         /// <summary>
         /// costruttore
         /// </summary>
      
-        public EventController(IEventPeopleService<BirthDay> peopleService, IEventPeopleService<NameDayDate> nameDaysService)
+        public EventController(IEventPeopleService<BirthDayDate> peopleService, IEventPeopleService<NameDayDate> nameDaysService)
         {
             _peopleService  = peopleService;
             _nameDayService = nameDaysService;

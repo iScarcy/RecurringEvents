@@ -10,21 +10,19 @@ using System.Threading.Tasks;
 
 namespace RecurringEvents.Application.Service
 {
-    public class BithDayService : IEventPeopleService<BirthDay>
+    public class BithDayService : IEventPeopleService<BirthDayDate>
     {
-        private readonly IEventPeopleRepository<BirthDay> _dataProvider;
-        private readonly IRepository<BirthDay> _dataRepository;
-        public BithDayService(IEventPeopleRepository<BirthDay> provider, IRepository<BirthDay> repository) 
+        private readonly IEventPeopleRepository<BirthDayDate> _dataProvider;
+        public BithDayService(IEventPeopleRepository<BirthDayDate> provider) 
         {
             _dataProvider = provider;
-            _dataRepository = repository;
         }
 
         public async Task<IEnumerable<Event>> GetAll()
         {
-            var eventPeople = await _dataRepository.GetAll();
+            var eventPeople = await _dataProvider.GetAll();
             var birthDays = from e in eventPeople
-                    select new Event(EventType.BirthDay, e.DataBirth, e.Name);
+                    select new Event(EventType.BirthDay, e.date, e.personName);
 
             return birthDays;
         }
@@ -33,7 +31,7 @@ namespace RecurringEvents.Application.Service
         {
             var eventPeople = await _dataProvider.GetEventsByDays(days);
             var birthDays = from e in eventPeople
-                    select new Event(EventType.BirthDay, e.DataBirth, e.Name);
+                    select new Event(EventType.BirthDay, e.date, e.personName);
 
             return birthDays;
         }
@@ -42,9 +40,9 @@ namespace RecurringEvents.Application.Service
         {
            var eventPeople = await _dataProvider.GetEventsByPerson(Person);
            var birthDays = from e in eventPeople
-                    select new Event(EventType.BirthDay, e.DataBirth, e.Name);
+                    select new Event(EventType.BirthDay, e.date, e.personName);
 
-           return birthDays;
+            return birthDays;
         }
 
 

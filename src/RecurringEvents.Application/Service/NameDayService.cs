@@ -13,17 +13,15 @@ namespace RecurringEvents.Application.Service;
 public class NameDayService : IEventPeopleService<NameDayDate>
 {
     private readonly IEventPeopleRepository<NameDayDate> _dataProvider;
-    private readonly IRepository<NameDayDate> _dataRepository;
 
-    public NameDayService(IEventPeopleRepository<NameDayDate> provider, IRepository<NameDayDate> repository)
+    public NameDayService(IEventPeopleRepository<NameDayDate> provider)
     {
         _dataProvider = provider;
-        _dataRepository = repository;
     }
 
     public async Task<IEnumerable<Event>> GetAll()
     {
-        var eventPeople = await _dataRepository.GetAll();
+        var eventPeople = await _dataProvider.GetAll();
 
         return NameDays2Events(eventPeople);
     }

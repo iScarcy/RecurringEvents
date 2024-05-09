@@ -18,7 +18,7 @@ namespace RecurringEvents.Infrastructure.Repository
             _context = context;
         }
 
-        public virtual async Task<IEnumerable<T>> GetAll()
+        public async Task<IEnumerable<T>> GetAll()
         {
             return await _context.Set<T>().ToListAsync();
         }
