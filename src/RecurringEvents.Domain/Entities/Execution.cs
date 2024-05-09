@@ -1,6 +1,9 @@
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace RecurringEvents.Domain.Entities;
 
-public class Executions
+[Table("Executions")]
+public class Execution
 {
      
     public int Id { get; set; }

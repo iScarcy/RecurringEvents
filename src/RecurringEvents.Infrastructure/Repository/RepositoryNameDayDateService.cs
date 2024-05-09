@@ -20,7 +20,8 @@ namespace RecurringEvents.Infrastructure.Repository
         {
             var onomastici = from n in _context.NameDay
                              join s in _context.Saints on n.IdSaint equals s.Id
-                             select new NameDayDate(s.Date, n.PersonName);
+                             join p in _context.People on n.idPerson equals p.Id
+                             select new NameDayDate(s.Date, p.FullName);
 
             IEnumerable<NameDayDate> nameDayDates= new List<NameDayDate>();
             if(onomastici.Any()) { 

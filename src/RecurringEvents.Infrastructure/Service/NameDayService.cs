@@ -18,6 +18,7 @@ public class NameDayService : IEventPeopleRepository<NameDayDate>
         //onomastici
         var onomastici = from n in _context.NameDay
                          join s in _context.Saints on n.IdSaint equals s.Id
+                         join p in _context.People on n.idPerson equals p.Id
                          where //mesi compresi
                                         (
 
@@ -46,7 +47,7 @@ public class NameDayService : IEventPeopleRepository<NameDayDate>
                                                     (days.To.Date.Day <= s.Date.Date.Day)
                                             )
                                         )
-                         select new NameDayDate(s.Date, n.PersonName);
+                         select new NameDayDate(s.Date, p.FullName);
 
         return await onomastici.ToListAsync();
     }
@@ -55,8 +56,9 @@ public class NameDayService : IEventPeopleRepository<NameDayDate>
     {
         var nameDays = from n in _context.NameDay
                        join s in _context.Saints on n.IdSaint equals s.Id
-                       where n.PersonName == person
-                       select new NameDayDate(s.Date, n.PersonName);
+                       join p in _context.People on n.idPerson equals p.Id
+                       where p.FullName == person
+                       select new NameDayDate(s.Date, p.FullName);
 
 
         return await nameDays.ToListAsync<NameDayDate>();

@@ -57,6 +57,7 @@ public class SistemWasStartedCreatedHanler : IRequestHandler<SistemWasStarted, L
        //onomastici
       var onomastici = from n in _dbContext.NameDay
                 join s in _dbContext.Saints on n.IdSaint equals s.Id
+                join p in _dbContext.People on n.idPerson equals p.Id
                  where //mesi compresi
                                 (   
                                     
@@ -86,7 +87,7 @@ public class SistemWasStartedCreatedHanler : IRequestHandler<SistemWasStarted, L
                                             (request.DateRange.To.Date.Day <= s.Date.Date.Day )    
                                     )
                                 )
-                select new Event(EventType.NameDay, s.Date, n.PersonName);
+                select new Event(EventType.NameDay, s.Date, p.FullName);
     
        foreach(var compleanno in compleanni){
             eventi.Add(compleanno);

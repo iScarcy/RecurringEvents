@@ -22,7 +22,7 @@ public class ExecutionsRepositoryService : IExecutionsRepository
 
     public async Task<int> InsertExecution(DateRange dateRange)
     {
-        Executions execution = new Executions();
+        Execution execution = new Execution();
         execution.DateFrom = dateRange.From;
         execution.DateTo = dateRange.To;
         execution.DateStart = DateTime.Now;
@@ -34,7 +34,7 @@ public class ExecutionsRepositoryService : IExecutionsRepository
 
     public async Task InsertExecutionDetails(Event infoEvent, int executionID)
     {
-        ExecutionsDetails executionsDetails = new ExecutionsDetails();
+        ExecutionsDetail executionsDetails = new ExecutionsDetail();
         executionsDetails.EventType = infoEvent.type;
         executionsDetails.DateEvent = infoEvent.date;
         executionsDetails.Description = infoEvent.description;
@@ -45,7 +45,7 @@ public class ExecutionsRepositoryService : IExecutionsRepository
 
     public async Task UpdateExecution(int Id)
     {
-        var exec = await _context.Executions.Where(x => x.Id == Id).FirstOrDefaultAsync<Executions>();
+        var exec = await _context.Executions.Where(x => x.Id == Id).FirstOrDefaultAsync<Execution>();
         if (exec != null)
         {
             exec.DateEnd = DateTime.Now;
