@@ -8,14 +8,12 @@ namespace RecurringEvents.Infrastructure.DomainEvents;
 
 public class PersonWasCreatedHandler : IRequestHandler<PersonWasCreated>
 {
-    private readonly ApplicationDbContext _dbContext;
-
+    
     private readonly IRepository<Person> _repoPerson;
     private readonly IRepository<BirthDay> _repoBirth;
 
-    public PersonWasCreatedHandler(ApplicationDbContext dbContext, IRepository<Person> repoPerson, IRepository<BirthDay> repoBirth)
+    public PersonWasCreatedHandler(IRepository<Person> repoPerson, IRepository<BirthDay> repoBirth)
     {
-        _dbContext = dbContext;
         _repoBirth= repoBirth;
         _repoPerson= repoPerson;
     }
