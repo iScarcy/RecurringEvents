@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace RecurringEvents.Domain.Entities
 {
     [Table("ExecutionsDetails")]
-    public class ExecutionsDetail
+    public class ExecutionsDetails
     {
         public int Id { get; set; }
         public EventType EventType { get; set; }

@@ -11,7 +11,7 @@ public interface IRepository<T> where T : class
 
     Task<T> GetByID(int ID) ;
 
-    Task Insert(T entity);
+    Task<T> Insert(T entity);
 
     Task Update(T entity);
 

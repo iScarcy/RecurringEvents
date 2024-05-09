@@ -34,7 +34,7 @@ public class ExecutionsRepositoryService : IExecutionsRepository
 
     public async Task InsertExecutionDetails(Event infoEvent, int executionID)
     {
-        ExecutionsDetail executionsDetails = new ExecutionsDetail();
+        ExecutionsDetails executionsDetails = new ExecutionsDetails();
         executionsDetails.EventType = infoEvent.type;
         executionsDetails.DateEvent = infoEvent.date;
         executionsDetails.Description = infoEvent.description;

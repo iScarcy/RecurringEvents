@@ -28,10 +28,11 @@ namespace RecurringEvents.Infrastructure.Repository
             return await _context.Set<T>().FindAsync(ID);
         }
 
-        public async Task Insert(T entity)
+        public async Task<T> Insert(T entity)
         {
             _context.Set<T>().Add(entity);
             await _context.SaveChangesAsync();
+            return entity;
         }
 
         public async Task Update(T entity)

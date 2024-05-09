@@ -17,9 +17,8 @@ public class Saint
     public DateTime Date { get; private init; }
     
     
-    public Saint(int Id, string Description, DateTime Date)
-    {
-        this.Id = Id;
+    public Saint(string Description, DateTime Date)
+    {        
         this.Description = Description;
         this.Date = Date;
     }

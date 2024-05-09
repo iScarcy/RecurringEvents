@@ -22,5 +22,5 @@ public class ApplicationDbContext : DbContext
 
     public DbSet<Execution> Executions{get; set;}
 
-    public DbSet<ExecutionsDetail> ExecutionsDetails { get; set; }
+    public DbSet<ExecutionsDetails> ExecutionsDetails { get; set; }
 }

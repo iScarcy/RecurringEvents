@@ -14,9 +14,8 @@ public class NameDay
     [Range(1,int.MaxValue, ErrorMessageResourceType = typeof(ValidationErrors), ErrorMessageResourceName = nameof(ValidationErrors.Mandatory))]
     public int IdSaint {get; init;}     
     
-    public NameDay(int id, int idPerson, int idSaint)
+    public NameDay(int idPerson, int idSaint)
     {
-        this.Id          = id;
         this.idPerson    = idPerson;
         this.IdSaint     = idSaint;    
     }

@@ -16,10 +16,13 @@ public class BirthDay
     [Required(ErrorMessageResourceType = typeof(ValidationErrors), ErrorMessageResourceName = nameof(ValidationErrors.Mandatory))]
        
     public DateTime DataBirth {get; set;}
-    
-    public BirthDay(int id, int idPerson, DateTime dataBirth) 
+
+    public BirthDay()
     {
-        Id = id;
+
+    }
+    public BirthDay(int idPerson, DateTime dataBirth) 
+    {   
         IdPerson = idPerson;
         DataBirth = dataBirth;
     }

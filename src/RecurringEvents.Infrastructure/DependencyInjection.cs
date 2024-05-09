@@ -19,8 +19,8 @@ public static class DependencyInjection
         
         
         service.AddScoped<IRepository<Saint>, RepositoryDbService<Saint>>();
-     
-     
+        service.AddScoped<IRepository<BirthDay>, RepositoryDbService<BirthDay>>();
+        service.AddScoped<IRepository<Person>, RepositoryDbService<Person>>();
         service.AddScoped<IEventPeopleRepository<BirthDayDate>, BirthDayService>();
         service.AddScoped<IEventPeopleRepository<NameDayDate>, NameDayService>();
         service.AddScoped<IExecutionsRepository, ExecutionsRepositoryService>();

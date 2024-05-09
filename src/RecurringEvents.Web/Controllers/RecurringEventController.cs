@@ -1,11 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
 
 using MediatR;
-using RecurringEvents.Domain.Events;
+using models = RecurringEvents.Web.Models;
 using RecurringEvents.Application.DomainEvents;
 using RecurringEvents.Domain.Entities;
 using RecurringEvents.Domain.ValueObject;
 using Microsoft.AspNetCore.Authorization;
+using RecurringEvents.Domain.Events;
 
 namespace RecurringEvents.Web.Controllers;
 
@@ -35,12 +36,15 @@ public class RecurringEventController : ControllerBase
     /// <param name="Name"></param>
     /// <param name="DataBirth"></param>
     /// <returns></returns>
-    [Authorize]
+   
     [Route("PersonWasCreated")]
     [HttpPost]
-    public Task AddBirthDay(BirthDay birthDay)
+    public Task AddBirthDay(models.Person person)
     {
-        var birthDayEvent = new PersonWasCreated(birthDay);
+        Person pers = new Person() { FullName = person.FullName, ObjIDRef = person.ObjIdRef };
+        BirthDay birthDay = new BirthDay() { DataBirth = person.BirthDay };
+    
+        var birthDayEvent = new PersonWasCreated(pers, birthDay);
         return _mediator.Send(birthDayEvent);
     }
 
