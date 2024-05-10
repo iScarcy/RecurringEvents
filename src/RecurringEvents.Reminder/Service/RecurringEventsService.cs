@@ -68,7 +68,7 @@ public class RecurringEventsService : IRecurringEventsAPI
           Encoding.UTF8,
           "application/json");
         
-        using HttpResponseMessage response = await _client.PostAsync(
+        using HttpResponseMessage response = await _client.PutAsync(
        _settingsAPI.UriRecurringEvent + _settingsAPI.ApiSystemWasStarted,
        jsonContent);
 

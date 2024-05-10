@@ -19,6 +19,11 @@ public class NameDayService : IEventPeopleService<NameDayDate>
         _dataProvider = provider;
     }
 
+    public Task ChangeDate(DateTime Date, string objID)
+    {
+        throw new NotImplementedException();
+    }
+
     public async Task<IEnumerable<Event>> GetAll()
     {
         var eventPeople = await _dataProvider.GetAll();

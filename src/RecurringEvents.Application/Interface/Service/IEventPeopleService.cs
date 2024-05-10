@@ -8,6 +8,6 @@ namespace RecurringEvents.Application.Interface.Service
     {
        Task<IEnumerable<Event>> GetEventsByPerson(string Person);
 
-       
+       Task ChangeDate(DateTime Date, string objID);
     }
 }

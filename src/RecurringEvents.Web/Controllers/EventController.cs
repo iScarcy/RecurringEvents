@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using RecurringEvents.Application.Interface.Service;
 using RecurringEvents.Domain.Events;
 using RecurringEvents.Domain.ValueObject;
-
+using RecurringEvents.Web.Models;
 
 namespace RecurringEvents.Web.Controllers
 {
@@ -90,28 +90,7 @@ namespace RecurringEvents.Web.Controllers
             }
         }
 
-        /// <summary>
-        /// Restituisce tutti gli eventi di un determinato giorno
-        /// </summary>
-        /// <param name="day"></param>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
-        [HttpPost("days")]
-        public async Task<ActionResult> GetByDay([FromBody] DateRange rangeDays)
-        {
-            try
-            {              
-                var birthdays = await _peopleService.GetEventsByDays(rangeDays);
-                
-                var namedays = await _nameDayService.GetEventsByDays(rangeDays);
-
-                return Ok(birthdays.Union(namedays));
-
-            }catch(Exception ex)
-            {
-                return Problem(ex.Message);    
-            }
-        }
+     
 
         /// <summary>
         /// Cerca tutti gli eventi legati ad una persona
@@ -130,6 +109,44 @@ namespace RecurringEvents.Web.Controllers
             //IEnumerable<Event> event = birthdays.Union(namedays);
             return await Task.FromResult(birthdays.Union(namedays));
            
+        }
+
+
+        /// <summary>
+        /// Restituisce tutti gli eventi di un determinato giorno
+        /// </summary>
+        /// <param name="day"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        [HttpPut("days")]
+        public async Task<ActionResult> GetByDay([FromBody] DateRange rangeDays)
+        {
+            try
+            {
+                var birthdays = await _peopleService.GetEventsByDays(rangeDays);
+
+                var namedays = await _nameDayService.GetEventsByDays(rangeDays);
+
+                return Ok(birthdays.Union(namedays));
+
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// ChangeBirtDayDete
+        /// aggiorna la data del compleanno di una persona travata tramite objID
+        /// </summary>
+        /// <param name="newBirthDay"></param>
+        /// <param name="objID"></param>
+        /// <returns></returns>
+        [HttpPatch("ChangeBirtDayDete")]
+        public async Task ChangeBirtDayDete(ChangeDateRequest changeDateRequest) 
+        { 
+            await _peopleService.ChangeDate(changeDateRequest.newBirthDay, changeDateRequest.objID);
         }
     }
 }

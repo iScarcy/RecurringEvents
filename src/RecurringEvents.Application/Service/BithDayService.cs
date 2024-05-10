@@ -18,6 +18,12 @@ namespace RecurringEvents.Application.Service
             _dataProvider = provider;
         }
 
+        public async Task ChangeDate(DateTime newDate, string objID)
+        {
+            BirthDayDate birthDay = await _dataProvider.GetEventByPersonRef(objID);
+            await _dataProvider.ChangeDate(birthDay, newDate);
+        }
+
         public async Task<IEnumerable<Event>> GetAll()
         {
             var eventPeople = await _dataProvider.GetAll();

@@ -13,7 +13,12 @@ public class NameDayService : IEventPeopleRepository<NameDayDate>
     {
         _context = context;
     }
-      
+
+    public Task ChangeDate(NameDayDate entity, DateTime newDate)
+    {
+        throw new NotImplementedException();
+    }
+
     public async Task<IEnumerable<NameDayDate>> GetAll()
     {
         var onomastici = from n in _context.NameDay.AsNoTracking()
@@ -24,11 +29,15 @@ public class NameDayService : IEventPeopleRepository<NameDayDate>
         IEnumerable<NameDayDate> nameDayDates = new List<NameDayDate>();
         if (onomastici.Any())
         {
-            nameDayDates = await onomastici.ToListAsync<NameDayDate>();
+            nameDayDates = await onomastici.ToListAsync();
         }
         return nameDayDates;
     }
 
+    public Task<NameDayDate> GetEventByPersonRef(string personRefID)
+    {
+        throw new NotImplementedException();
+    }
 
     public async Task<IEnumerable<NameDayDate>> GetEventsByDays(DateRange days)
     {
@@ -81,8 +90,6 @@ public class NameDayService : IEventPeopleRepository<NameDayDate>
         return await nameDays.ToListAsync<NameDayDate>();
     }
 
-    
-
-}
+}  
 
 
