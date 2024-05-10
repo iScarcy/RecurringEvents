@@ -4,9 +4,7 @@
     {
         public string FullName { get; set; }
 
-        public DateTime BirthDay { get; set; }
-
-        public DateTime NameDay { get; set; }
+        public DateTime BirthDay { get; set; }      
         
         public string? ObjIdRef { get; set; }
     }
