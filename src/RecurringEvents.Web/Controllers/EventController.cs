@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RecurringEvents.Application.Interface.Service;
-using RecurringEvents.Domain.Events;
+using RecurringEvents.Domain.Entities;
 using RecurringEvents.Domain.ValueObject;
 using RecurringEvents.Web.Models;
 
@@ -12,14 +12,14 @@ namespace RecurringEvents.Web.Controllers
     public class EventController : ControllerBase
     {
 
-        private readonly IEventPeopleService<BirthDayDate> _peopleService;
-        private readonly IEventPeopleService<NameDayDate> _nameDayService;
+        private readonly IEventPeopleService<BirthDay> _peopleService;
+        private readonly IEventPeopleService<NameDay> _nameDayService;
     
         /// <summary>
         /// costruttore
         /// </summary>
      
-        public EventController(IEventPeopleService<BirthDayDate> peopleService, IEventPeopleService<NameDayDate> nameDaysService)
+        public EventController(IEventPeopleService<BirthDay> peopleService, IEventPeopleService<NameDay> nameDaysService)
         {
             _peopleService  = peopleService;
             _nameDayService = nameDaysService;
@@ -146,7 +146,7 @@ namespace RecurringEvents.Web.Controllers
         [HttpPatch("ChangeBirtDayDete")]
         public async Task ChangeBirtDayDete(ChangeDateRequest changeDateRequest) 
         { 
-            await _peopleService.ChangeDate(changeDateRequest.newBirthDay, changeDateRequest.objID);
+            await _peopleService.ChangeDate(changeDateRequest.objID,changeDateRequest.newBirthDay);
         }
     }
 }

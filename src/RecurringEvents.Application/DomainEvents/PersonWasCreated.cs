@@ -1,6 +1,5 @@
 using MediatR;
 using RecurringEvents.Domain.Entities;
-using RecurringEvents.Domain.Events;
 using RecurringEvents.Domain.ValueObject;
 
 namespace RecurringEvents.Application.DomainEvents;

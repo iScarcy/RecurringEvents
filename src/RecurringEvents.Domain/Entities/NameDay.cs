@@ -12,7 +12,7 @@ public class NameDay
 
     [Display(Name = "Il codice identificativo del santo")]
     [Range(1,int.MaxValue, ErrorMessageResourceType = typeof(ValidationErrors), ErrorMessageResourceName = nameof(ValidationErrors.Mandatory))]
-    public int IdSaint {get; init;}     
+    public int IdSaint {get; set;}     
     
     public NameDay(int idPerson, int idSaint)
     {

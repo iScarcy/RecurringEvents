@@ -1,17 +1,17 @@
 using MediatR;
 using RecurringEvents.Application.DomainEvents;
 using RecurringEvents.Application.Interface.Service;
+using RecurringEvents.Domain.Entities;
 using RecurringEvents.Domain.ValueObject;
-
 namespace RecurringEvents.Infrastructure.DomainEvents;
 
 public class SistemWasStartedCreatedHanler : IRequestHandler<SistemWasStarted, List<Event>>
 {
    
-    private readonly IEventPeopleService<BirthDayDate> _peopleService;
-    private readonly IEventPeopleService<NameDayDate> _nameDayService;
+    private readonly IEventPeopleService<BirthDay> _peopleService;
+    private readonly IEventPeopleService<NameDay> _nameDayService;
     
-    public SistemWasStartedCreatedHanler(IEventPeopleService<BirthDayDate> peopleService, IEventPeopleService<NameDayDate> nameDaysService)
+    public SistemWasStartedCreatedHanler(IEventPeopleService<BirthDay> peopleService, IEventPeopleService<NameDay> nameDaysService)
     {
         _peopleService  = peopleService;
         _nameDayService = nameDaysService;

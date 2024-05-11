@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.Tracing;
  
-namespace RecurringEvents.Domain.Events;
+namespace RecurringEvents.Domain.Entities;
 
 
 public class BirthDay 

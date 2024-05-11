@@ -10,13 +10,15 @@ public class Saint
 
     [Display(Name = "Il nome del santo")]
     [Required(ErrorMessageResourceType = typeof(ValidationErrors), ErrorMessageResourceName = nameof(ValidationErrors.Mandatory))]
-    public string Description { get; private init;}
+    public string Description { get; set;}
 
     [Display(Name = "La data del santo")]
     [Required(ErrorMessageResourceType = typeof(ValidationErrors), ErrorMessageResourceName = nameof(ValidationErrors.Mandatory))]
-    public DateTime Date { get; private init; }
+    public DateTime Date { get; set; }
     
-    
+    public Saint(){
+        
+    }
     public Saint(string Description, DateTime Date)
     {        
         this.Description = Description;

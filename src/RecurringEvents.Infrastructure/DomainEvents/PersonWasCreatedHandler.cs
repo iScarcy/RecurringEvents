@@ -1,7 +1,6 @@
 using RecurringEvents.Application.DomainEvents;
 using MediatR;
 using RecurringEvents.Application.Interface.Repository;
-using RecurringEvents.Domain.Events;
 using RecurringEvents.Domain.Entities;
 
 namespace RecurringEvents.Infrastructure.DomainEvents;

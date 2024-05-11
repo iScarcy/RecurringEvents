@@ -6,7 +6,6 @@ using RecurringEvents.Application.DomainEvents;
 using RecurringEvents.Domain.Entities;
 using RecurringEvents.Domain.ValueObject;
 using Microsoft.AspNetCore.Authorization;
-using RecurringEvents.Domain.Events;
 
 namespace RecurringEvents.Web.Controllers;
 

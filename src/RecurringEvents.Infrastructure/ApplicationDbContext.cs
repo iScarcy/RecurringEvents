@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RecurringEvents.Domain.Entities;
-using RecurringEvents.Domain.Events;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RecurringEvents.Infrastructure;

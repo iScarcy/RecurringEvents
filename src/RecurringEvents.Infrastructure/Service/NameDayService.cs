@@ -5,7 +5,7 @@ using RecurringEvents.Domain.ValueObject;
 
 namespace RecurringEvents.Infrastructure.Service;
 
-public class NameDayService : IEventPeopleRepository<NameDayDate>
+public class NameDayService : IEventPeopleRepository<NameDay>
 {
     private readonly ApplicationDbContext _context;
 
@@ -14,32 +14,59 @@ public class NameDayService : IEventPeopleRepository<NameDayDate>
         _context = context;
     }
 
-    public Task ChangeDate(NameDayDate entity, DateTime newDate)
+    public async Task ChangeEventDate(string personRefID, DateTime deteEvent)
     {
-        throw new NotImplementedException();
+          
+         var onomastico = from x in _context.NameDay.AsNoTracking()
+                        join p in _context.People.AsNoTracking() on x.idPerson equals p.Id
+                        join s in _context.Saints.AsNoTracking() on x.IdSaint equals s.Id
+                        where p.ObjIDRef == personRefID
+                        select new NameDay(x.idPerson, x.IdSaint);
+        
+        if(!onomastico.Any())
+            throw new ArgumentNullException(nameof(onomastico));
+        else
+        {
+            NameDay nameDay = await onomastico.FirstAsync();
+            Saint saint = new Saint();
+            var ss = from s in _context.Saints.AsNoTracking()
+            where s.Date == deteEvent
+            select s;
+
+            if(!ss.Any())
+                throw new ArgumentNullException(nameof(saint));
+            else 
+                saint = ss.FirstOrDefault();
+                
+            nameDay.IdSaint = saint.Id;
+            _context.NameDay.Update(nameDay);
+
+            await _context.SaveChangesAsync();
+        }  
     }
 
-    public async Task<IEnumerable<NameDayDate>> GetAll()
+    public async Task<IEnumerable<EventPeople>> GetAll()
     {
         var onomastici = from n in _context.NameDay.AsNoTracking()
                          join s in _context.Saints.AsNoTracking() on n.IdSaint equals s.Id
                          join p in _context.People.AsNoTracking() on n.idPerson equals p.Id
-                         select new NameDayDate(s.Date, p.FullName);
+                         select new EventPeople(s.Date, p.FullName);
 
-        IEnumerable<NameDayDate> nameDayDates = new List<NameDayDate>();
         if (onomastici.Any())
         {
-            nameDayDates = await onomastici.ToListAsync();
+            return await onomastici.ToListAsync();
+        }else{
+            throw new ArgumentNullException(nameof(onomastici));
         }
-        return nameDayDates;
+
     }
 
-    public Task<NameDayDate> GetEventByPersonRef(string personRefID)
+    public Task<NameDay> GetEventByPersonRef(string personRefID)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<IEnumerable<NameDayDate>> GetEventsByDays(DateRange days)
+    public async Task<IEnumerable<EventPeople>> GetEventsByDays(DateRange days)
     {
         //onomastici
         var onomastici = from n in _context.NameDay.AsNoTracking()
@@ -73,21 +100,21 @@ public class NameDayService : IEventPeopleRepository<NameDayDate>
                                                     (days.To.Date.Day <= s.Date.Date.Day)
                                             )
                                         )
-                         select new NameDayDate(s.Date, p.FullName);
+                         select new EventPeople(s.Date, p.FullName);
 
         return await onomastici.ToListAsync();
     }
 
-    public async Task<IEnumerable<NameDayDate>> GetEventsByPerson(string person)
+    public async Task<IEnumerable<EventPeople>> GetEventsByPerson(string person)
     {
         var nameDays = from n in _context.NameDay.AsNoTracking()
                        join s in _context.Saints.AsNoTracking() on n.IdSaint equals s.Id
                        join p in _context.People.AsNoTracking() on n.idPerson equals p.Id
                        where p.FullName == person
-                       select new NameDayDate(s.Date, p.FullName);
+                       select new EventPeople(s.Date, p.FullName);
 
 
-        return await nameDays.ToListAsync<NameDayDate>();
+        return await nameDays.ToListAsync();
     }
 
 }  
