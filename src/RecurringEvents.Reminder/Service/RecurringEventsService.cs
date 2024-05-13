@@ -77,7 +77,7 @@ public class RecurringEventsService : IRecurringEventsAPI
             case HttpStatusCode.OK:
                 events = await response.Content.ReadFromJsonAsync<List<Event>>();
                 break;
-            default: throw new Exception($"Errore durante l'inserimento dell'esecuzione, DateFrom:'{date.From}', DateTo:'{date.To}'");
+            default: throw new Exception($"Errore durante l'inserimento dell'esecuzione, DateFrom:'{date.From}', DateTo:'{date.To}', {response.Content}");
         }
                
         return events;

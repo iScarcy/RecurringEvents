@@ -68,7 +68,7 @@ public class RecurringEventController : ControllerBase
     /// </summary>
     /// <param name="date"></param>
     /// <returns></returns>
-    [HttpPost("SystemWasStarted")]
+    [HttpPut("SystemWasStarted")]
     public Task<List<Event>> SystemWasStarted(DateRange date) 
     {      
         SistemWasStarted systemEvent = new SistemWasStarted(date);       

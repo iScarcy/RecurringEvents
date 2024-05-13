@@ -40,12 +40,9 @@ public class BirthDayService : IEventPeopleRepository<BirthDay>
                          select new EventPeople(n.DataBirth, p.FullName);
 
        
-        if (compleanni.Any())
-        {
-            return await compleanni.ToListAsync();
-        }else{
-            throw new ArgumentNullException(nameof(compleanni));
-        }
+       
+        return await compleanni.ToListAsync();
+       
         
     }
 
@@ -97,11 +94,9 @@ public class BirthDayService : IEventPeopleRepository<BirthDay>
                                 )
                          select new EventPeople(x.DataBirth, p.FullName);
 
-        if (compleanni.Any())
-        {
-            return await compleanni.ToListAsync();
-        } else 
-            throw new ArgumentNullException(nameof(compleanni));
+        
+          return await compleanni.ToListAsync();
+       
 
     }
 
@@ -111,10 +106,9 @@ public class BirthDayService : IEventPeopleRepository<BirthDay>
                          join p in _context.People.AsNoTracking() on x.IdPerson equals p.Id
                          where p.FullName.ToLower() == person.ToLower()
                          select new EventPeople(x.DataBirth, p.FullName);
-       if(compleanni.Any())
-            return await compleanni.ToListAsync();
-        else 
-            throw new ArgumentNullException(nameof(compleanni));
+     
+        return await compleanni.ToListAsync();
+       
     }
 
    

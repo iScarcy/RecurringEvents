@@ -52,18 +52,26 @@ public class NameDayService : IEventPeopleRepository<NameDay>
                          join p in _context.People.AsNoTracking() on n.idPerson equals p.Id
                          select new EventPeople(s.Date, p.FullName);
 
-        if (onomastici.Any())
-        {
-            return await onomastici.ToListAsync();
-        }else{
-            throw new ArgumentNullException(nameof(onomastici));
-        }
+        
+        return await onomastici.ToListAsync();
+      
 
     }
 
-    public Task<NameDay> GetEventByPersonRef(string personRefID)
+    public async Task<NameDay> GetEventByPersonRef(string personRefID)
     {
-        throw new NotImplementedException();
+        var onomastico = from n in _context.NameDay.AsNoTracking()
+                         join s in _context.Saints.AsNoTracking() on n.IdSaint equals s.Id
+                         join p in _context.People.AsNoTracking() on n.idPerson equals p.Id
+                         where p.ObjIDRef == personRefID
+                         select n;
+        
+                          
+
+        if (onomastico.Any())
+            return await onomastico.FirstOrDefaultAsync();
+        else
+            throw new ArgumentNullException(nameof(onomastico));
     }
 
     public async Task<IEnumerable<EventPeople>> GetEventsByDays(DateRange days)
