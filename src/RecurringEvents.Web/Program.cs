@@ -35,6 +35,16 @@ builder.Services.AddApplication();
 
 builder.Services.AddInfrastructure(dbConnectionStrings);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CorsPolicy", builder =>
+    {
+        builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader();
+    });
+});
+
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -66,12 +76,9 @@ var app = builder.Build();
  app.UseSwagger();
  app.UseSwaggerUI();
 
-
- 
-
 app.UseAuthentication();
 app.UseAuthorization();
-
+app.UseCors("CorsPolicy");
 app.MapControllers();
 
  
