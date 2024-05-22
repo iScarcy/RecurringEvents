@@ -64,8 +64,8 @@ public class ExecutionController : ControllerBase
     /// <param name="infoEvent"></param>
     /// <param name="executionId"></param>
     /// <returns></returns>
-    [HttpPost("details")]
-    public async Task<ActionResult> AddExecDetails(Event infoEvent, int executionId) 
+    [HttpPost("details/{executionId}")]
+    public async Task<ActionResult> AddExecDetails([FromBody]Event infoEvent, int executionId) 
     { 
         try 
         {

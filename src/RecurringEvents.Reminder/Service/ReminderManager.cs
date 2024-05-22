@@ -37,7 +37,8 @@ namespace RecurringEvents.Reminder.Service
                 _log.Information("GetReminder");
                 _log.Information(" - GetLastExecutions");
                 DateTime dateFrom = await _eventsApi.GetLastExecution();
-                DateTime dateTo = DateTime.Now;
+                dateFrom = dateFrom.AddDays(1);
+                 DateTime dateTo = DateTime.Now;
                 DateRange lastExecution = new DateRange(dateFrom, dateTo);
                  _log.Information($"lastExecution.From: {lastExecution.From}");
                 _log.Information($"lastExecution.To: {lastExecution.To}");
@@ -46,7 +47,7 @@ namespace RecurringEvents.Reminder.Service
                 //3.Inserire su db una riga della schedulazione avviata e farsi restituire un codice identificativo.
                 _log.Information(" - StartExecution ");
                 int executionID = await _eventsApi.StartExecution(lastExecution);
-                _log.Information(" - executionID:'{executionID}'");
+                _log.Information($" - executionID:'{executionID}'");
 
                 //4.Chiamata all 'api di RecurringEvents.Web per avere eventi nell'intervallo di date indicate.
 

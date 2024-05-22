@@ -85,17 +85,20 @@ public class RecurringEventsService : IRecurringEventsAPI
 
     public async Task InsertExecutionDetails(Event infoEvent, int ExecutionsID)
     {
-        using StringContent jsonContent = new(
+         StringContent jsonContent = new(
            JsonSerializer.Serialize(new
            {
-               infoEvent,
-               ExecutionID = ExecutionsID
+              infoEvent.type,
+              infoEvent.date,
+              infoEvent.description
            }),
           Encoding.UTF8,
           "application/json");
 
+
+        string url = _settingsAPI.UriRecurringEvent + string.Format(_settingsAPI.ApiExecutionDetails, ExecutionsID);
         using HttpResponseMessage response = await _client.PostAsync(
-            _settingsAPI.UriRecurringEvent + _settingsAPI.ApiExecutionDetails,
+             url ,
             jsonContent);
 
 
@@ -106,7 +109,8 @@ public class RecurringEventsService : IRecurringEventsAPI
         StringContent content = new StringContent(String.Empty);
         
         using HttpResponseMessage response = await _client.PatchAsync(
-                _settingsAPI.UriRecurringEvent + string.Format(_settingsAPI.ApiFinishExecution, ExecutionsID), content
+                _settingsAPI.UriRecurringEvent + string.Format(_settingsAPI.ApiFinishExecution, ExecutionsID), 
+                content
             );
     }
 }

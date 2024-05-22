@@ -119,22 +119,17 @@ namespace RecurringEvents.Web.Controllers
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
         [HttpPut("days")]
-        public async Task<ActionResult> GetByDay([FromBody] DateRange rangeDays)
+        public async Task<IEnumerable<Event>> GetByDay([FromBody] DateRange rangeDays)
         {
-            try
-            {
-                var birthdays = await _peopleService.GetEventsByDays(rangeDays);
+           var birthdays = await _peopleService.GetEventsByDays(rangeDays);
 
-                var namedays = await _nameDayService.GetEventsByDays(rangeDays);
+            var namedays = await _nameDayService.GetEventsByDays(rangeDays);
 
-                return Ok(birthdays.Union(namedays));
+            return  birthdays.Union(namedays);
 
-            }
-            catch (Exception ex)
-            {
-                return Problem(ex.Message);
-            }
+            
         }
+
 
         /// <summary>
         /// ChangeBirtDayDete
