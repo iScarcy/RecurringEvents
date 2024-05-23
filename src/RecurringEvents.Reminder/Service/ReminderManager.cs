@@ -37,11 +37,13 @@ namespace RecurringEvents.Reminder.Service
                 _log.Information("GetReminder");
                 _log.Information(" - GetLastExecutions");
                 DateTime dateFrom = await _eventsApi.GetLastExecution();
-                dateFrom = dateFrom.AddDays(1);
-                 DateTime dateTo = DateTime.Now;
-                DateRange lastExecution = new DateRange(dateFrom, dateTo);
-                 _log.Information($"lastExecution.From: {lastExecution.From}");
-                _log.Information($"lastExecution.To: {lastExecution.To}");
+                DateTime date_from = dateFrom.AddDays(1).Date;
+                DateTime date_to = DateTime.Now.Date;
+                
+                _log.Information($"From: {date_from}");
+                _log.Information($"To: {date_to}");
+                DateRange lastExecution = new DateRange(date_from, date_to);
+                
 
 
                 //3.Inserire su db una riga della schedulazione avviata e farsi restituire un codice identificativo.
