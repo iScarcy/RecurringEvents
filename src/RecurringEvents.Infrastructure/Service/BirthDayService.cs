@@ -63,39 +63,12 @@ public class BirthDayService : IEventPeopleRepository<BirthDay>
     {
         var compleanni = from x in _context.BirthDay.AsNoTracking()
                          join p in _context.People.AsNoTracking() on x.IdPerson equals p.Id
-                         where //mesi precedenti
-                                (
-
-                                    (days.From.Date.Month <= x.DataBirth.Date.Month
-                                        &&
-                                        days.To.Date.Month > x.DataBirth.Date.Month
-
-                                    )
-                                    || //mese from minore e mese to uguale + giorno to minore uguale al giorno del compleanno
-                                    (
-                                        (
-                                            (days.From.Date.Month < x.DataBirth.Date.Month)
-                                            &&
-                                            (days.To.Date.Month == x.DataBirth.Date.Month)
-                                            &&
-                                            (days.To.Date.Day >= x.DataBirth.Date.Day)
-                                        )
-
-                                    ) || //mesi uguali e giorno compresi
-                                    (
-                                       (days.From.Date.Month == x.DataBirth.Date.Month)
-                                            &&
-                                            (days.To.Date.Month == x.DataBirth.Date.Month)
-                                            &&
-                                            (days.From.Date.Day <= x.DataBirth.Date.Day)
-                                            &&
-                                            (days.To.Date.Day >= x.DataBirth.Date.Day)
-                                    )
-                                )
+                         where (days.From.Month <= x.DataBirth.Date.Month && days.From.Day <= x.DataBirth.Date.Day && days.To.Month > x.DataBirth.Date.Month)
+                                  ||
+                                  (days.From.Month <= x.DataBirth.Date.Month && days.To.Month == x.DataBirth.Date.Month && days.To.Day >= x.DataBirth.Date.Day)
                          select new EventPeople(x.DataBirth, p.FullName);
-
-        
-          return await compleanni.ToListAsync();
+       
+        return await compleanni.ToListAsync();
        
 
     }
