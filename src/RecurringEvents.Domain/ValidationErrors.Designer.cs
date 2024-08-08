@@ -22,7 +22,7 @@ namespace RecurringEvents.Domain {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class ValidationErrors {
+    public class ValidationErrors {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -63,7 +63,7 @@ namespace RecurringEvents.Domain {
         /// <summary>
         ///   Cerca una stringa localizzata simile a La data To non può essere inferirore alla data From.
         /// </summary>
-        internal static string DateRangeTo {
+        public static string DateRangeTo {
             get {
                 return ResourceManager.GetString("DateRangeTo", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace RecurringEvents.Domain {
         /// <summary>
         ///   Cerca una stringa localizzata simile a {0} è un campo obbligatorio.
         /// </summary>
-        internal static string Mandatory {
+        public static string Mandatory {
             get {
                 return ResourceManager.GetString("Mandatory", resourceCulture);
             }

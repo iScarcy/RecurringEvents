@@ -94,7 +94,28 @@ namespace RecurringEvents.Web.Controllers
             }
         }
 
-     
+        /// <summary>
+        /// Restituisce tutti gli anniversari
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        [HttpGet("anniversary")]
+        public async Task<ActionResult> GetAnniversary()
+        {
+            try
+            {
+
+                var events = await _eventService.GetAll();
+                var anniversary = events.Where(x=> x.type == EventType.Anniversary)?.ToList(); 
+                return Ok(anniversary);
+
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+            }
+        }
+
 
         /// <summary>
         /// Cerca tutti gli eventi legati ad una persona

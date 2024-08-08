@@ -15,6 +15,7 @@
     <EmbeddedResource Update="ValidationErrors.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ValidationErrors.Designer.cs</LastGenOutput>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
 </Project>

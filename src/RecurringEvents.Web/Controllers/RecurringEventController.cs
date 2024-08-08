@@ -6,6 +6,7 @@ using RecurringEvents.Application.DomainEvents;
 using RecurringEvents.Domain.Entities;
 using RecurringEvents.Domain.ValueObject;
 using Microsoft.AspNetCore.Authorization;
+using RecurringEvents.Web.Models;
 
 namespace RecurringEvents.Web.Controllers;
 
@@ -40,7 +41,7 @@ public class RecurringEventController : ControllerBase
     [HttpPost]
     public Task AddBirthDay(models.Person person)
     {
-        Person pers = new Person() { FullName = person.FullName, ObjIDRef = person.ObjIdRef };
+        Domain.Entities.Person pers = new Domain.Entities.Person() { FullName = person.FullName, ObjIDRef = person.ObjIdRef };
         BirthDay birthDay = new BirthDay() { DataBirth = person.BirthDay };
     
         var birthDayEvent = new PersonWasCreated(pers, birthDay);
@@ -56,9 +57,9 @@ public class RecurringEventController : ControllerBase
     /// <returns></returns>
     [Route("NameDayWasCreated")]
     [HttpPost]
-    public Task AddNameDay(NameDay nameDay)
-    {
-        var nameDayEvent = new NameDayWasCreated(nameDay);
+    public Task AddNameDay(NameDayRequest request)
+    {   
+        var nameDayEvent = new NameDayWasCreated(request.ObjID, request.IdStaint);
         return _mediator.Send(nameDayEvent);
     }
 

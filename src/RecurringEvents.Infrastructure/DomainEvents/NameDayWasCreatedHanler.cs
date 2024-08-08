@@ -15,10 +15,14 @@ public class NameDayWasCreatedHanler : IRequestHandler<NameDayWasCreated>
 
     async Task IRequestHandler<NameDayWasCreated>.Handle(NameDayWasCreated request, CancellationToken cancellationToken)
     {
-        NameDay nameDay = request.NameDay;
-        var saint   = _dbContext.Saints.Find(nameDay.IdSaint);
-        if(saint != null)
+        
+        var saint   = _dbContext.Saints.Find(request.SaintKeyRif);
+        var persona = _dbContext.People.Where(x => x.ObjIDRef == request.PersonKeyRif)?.FirstOrDefault();
+        
+        if(saint != null && persona !=null)
         {
+            NameDay nameDay = new NameDay(persona.Id, saint.Id);
+            
             await _dbContext.NameDay.AddAsync(nameDay);
             await _dbContext.SaveChangesAsync();
         }else{

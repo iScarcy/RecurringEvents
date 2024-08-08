@@ -1,16 +1,27 @@
 using MediatR;
-using RecurringEvents.Domain.Entities;
+using System.ComponentModel.DataAnnotations;
+using System.Xml.Linq;
+
+using RecurringEvents.Domain;
+ 
 
 namespace RecurringEvents.Application.DomainEvents;
 
 public class NameDayWasCreated : IRequest
 {
-    
-    public NameDay NameDay { get; set; }
+    [Display(Name = "La GUID della persona")]
+    [Required(ErrorMessageResourceType = typeof(ValidationErrors), ErrorMessageResourceName = nameof(ValidationErrors.Mandatory))]
 
-    public NameDayWasCreated(NameDay nameDay)
+    public string PersonKeyRif { get; set; }
+
+    [Display(Name = "Il codice identificativo del santo")]
+    [Required(ErrorMessageResourceType = typeof(ValidationErrors), ErrorMessageResourceName = nameof(ValidationErrors.Mandatory))]
+
+    public int SaintKeyRif { get; set; }
+
+    public NameDayWasCreated(string personaKeyRif, int saintKeyRif)
     {
-        
-        NameDay = nameDay;
+        this.PersonKeyRif = personaKeyRif;
+        this.SaintKeyRif = saintKeyRif;        
     }
 }
