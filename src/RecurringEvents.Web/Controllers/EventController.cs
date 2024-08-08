@@ -14,15 +14,17 @@ namespace RecurringEvents.Web.Controllers
 
         private readonly IEventPeopleService<BirthDay> _peopleService;
         private readonly IEventPeopleService<NameDay> _nameDayService;
+        private readonly IRecurringEventService _eventService;
     
         /// <summary>
         /// costruttore
         /// </summary>
      
-        public EventController(IEventPeopleService<BirthDay> peopleService, IEventPeopleService<NameDay> nameDaysService)
+        public EventController(IEventPeopleService<BirthDay> peopleService, IEventPeopleService<NameDay> nameDaysService, IRecurringEventService eventService)
         {
             _peopleService  = peopleService;
             _nameDayService = nameDaysService;
+            _eventService   = eventService;
         }
         
         /// <summary>
@@ -81,7 +83,9 @@ namespace RecurringEvents.Web.Controllers
                 
                 var namedays = await _nameDayService.GetAll();
 
-                return Ok(birthdays.Union(namedays));
+                var events = await _eventService.GetAll();
+
+                return Ok(birthdays.Union(namedays).Union(events));
 
             }
             catch(Exception ex)
@@ -99,14 +103,14 @@ namespace RecurringEvents.Web.Controllers
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
         [HttpGet("person/{person}")]
-        public async Task<IEnumerable<Event>> GetByPerson(string person)
+        public async Task<IEnumerable<RecurringEvent>> GetByPerson(string person)
         {
            
             var birthdays = await _peopleService.GetEventsByPerson(person);
                 
             var namedays = await _nameDayService.GetEventsByPerson(person);
 
-            //IEnumerable<Event> event = birthdays.Union(namedays);
+            //IEnumerable<RecurringEvent> event = birthdays.Union(namedays);
             return await Task.FromResult(birthdays.Union(namedays));
            
         }
@@ -119,13 +123,15 @@ namespace RecurringEvents.Web.Controllers
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
         [HttpPut("days")]
-        public async Task<IEnumerable<Event>> GetByDay([FromBody] DateRange rangeDays)
+        public async Task<IEnumerable<RecurringEvent>> GetByDay([FromBody] DateRange rangeDays)
         {
-           var birthdays = await _peopleService.GetEventsByDays(rangeDays);
+            var birthdays = await _peopleService.GetEventsByDays(rangeDays);
 
             var namedays = await _nameDayService.GetEventsByDays(rangeDays);
 
-            return  birthdays.Union(namedays);
+            var events = await _eventService.GetEventsByDays(rangeDays);
+            
+            return  birthdays.Union(namedays).Union(events);
 
             
         }

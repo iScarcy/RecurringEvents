@@ -8,7 +8,7 @@ public interface IExecutionsRepository
 
     Task<int> InsertExecution(DateRange dateRange);
 
-    Task InsertExecutionDetails(Event infoEvent, int executionID);
+    Task InsertExecutionDetails(RecurringEvent infoEvent, int executionID);
     Task UpdateExecution(int Id);
 }
 

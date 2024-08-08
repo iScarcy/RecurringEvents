@@ -69,7 +69,7 @@ public class RecurringEventController : ControllerBase
     /// <param name="date"></param>
     /// <returns></returns>
     [HttpPut("SystemWasStarted")]
-    public Task<List<Event>> SystemWasStarted(DateRange date) 
+    public Task<List<RecurringEvent>> SystemWasStarted(DateRange date) 
     {      
         SistemWasStarted systemEvent = new SistemWasStarted(date);       
         return _mediator.Send(systemEvent);         

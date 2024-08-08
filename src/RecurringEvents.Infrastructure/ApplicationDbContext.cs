@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RecurringEvents.Domain.Entities;
+using RecurringEvents.Domain.ValueObject;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RecurringEvents.Infrastructure;
@@ -22,4 +23,6 @@ public class ApplicationDbContext : DbContext
     public DbSet<Execution> Executions{get; set;}
 
     public DbSet<ExecutionsDetails> ExecutionsDetails { get; set; }
+
+    public DbSet<Event> Events { get; set; }
 }

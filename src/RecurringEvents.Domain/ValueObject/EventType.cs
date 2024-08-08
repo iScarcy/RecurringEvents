@@ -10,12 +10,12 @@ namespace RecurringEvents.Domain.ValueObject
     public enum EventType 
     {
         [Display(Name = "Compleanno")]
-        BirthDay,
+        BirthDay = 0,
         [Display(Name = "Onomastico")]
-        NameDay,
+        NameDay = 1,
         [Display(Name = "Anniversario")]
-        Anniversary,
+        Anniversary = 2,
         [Display(Name = "Promemoria")]
-        Reminder
+        Reminder = 3
     }
 }

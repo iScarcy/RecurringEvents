@@ -4,6 +4,6 @@ using RecurringEvents.Domain.ValueObject;
 //eventi ricorrenti generici
 public interface IRecurringEventService
 {
-    Task<IEnumerable<Event>> GetAll();
-    Task<IEnumerable<Event>> GetEventsByDays(DateRange days);
+    Task<IEnumerable<RecurringEvent>> GetAll();
+    Task<IEnumerable<RecurringEvent>> GetEventsByDays(DateRange days);
 }

@@ -26,12 +26,12 @@ namespace RecurringEvents.Application.Service
            await _dataProvider.ChangeEventDate(personRefID, dateEvent);
         }
 
-        public async Task<IEnumerable<Event>> GetAll()
+        public async Task<IEnumerable<RecurringEvent>> GetAll()
         {
             
             var eventPeople = await _dataProvider.GetAll();
             var birthDays = from e in eventPeople
-                    select new Event(EventType.BirthDay, e.date, e.personName);
+                    select new RecurringEvent(EventType.BirthDay, e.date, e.personName);
 
             return birthDays;
         }
@@ -44,20 +44,20 @@ namespace RecurringEvents.Application.Service
            return await _dataProvider.GetEventByPersonRef(personRefID);
         }
 
-        public async Task<IEnumerable<Event>> GetEventsByDays(DateRange days)
+        public async Task<IEnumerable<RecurringEvent>> GetEventsByDays(DateRange days)
         {
             var eventPeople = await _dataProvider.GetEventsByDays(days);
             var birthDays = from e in eventPeople
-                    select new Event(EventType.BirthDay, e.date, e.personName);
+                    select new RecurringEvent(EventType.BirthDay, e.date, e.personName);
 
             return birthDays;
         }
 
-        public async Task<IEnumerable<Event>> GetEventsByPerson(string Person)
+        public async Task<IEnumerable<RecurringEvent>> GetEventsByPerson(string Person)
         {
            var eventPeople = await _dataProvider.GetEventsByPerson(Person);
            var birthDays = from e in eventPeople
-                    select new Event(EventType.BirthDay, e.date, e.personName);
+                    select new RecurringEvent(EventType.BirthDay, e.date, e.personName);
 
             return birthDays;
         }

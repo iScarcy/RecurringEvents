@@ -24,7 +24,7 @@ public class ExecutionsService : IExecutionsService
        return executionID; 
     }
 
-    public async Task NewExecutionDetails(Event infoEvent, int ExecutionID)
+    public async Task NewExecutionDetails(RecurringEvent infoEvent, int ExecutionID)
     {
         await _executionsRepository.InsertExecutionDetails(infoEvent, ExecutionID);
     }

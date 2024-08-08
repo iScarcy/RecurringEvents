@@ -32,7 +32,7 @@ public class ExecutionsRepositoryService : IExecutionsRepository
         return execution.Id;
     }
 
-    public async Task InsertExecutionDetails(Event infoEvent, int executionID)
+    public async Task InsertExecutionDetails(RecurringEvent infoEvent, int executionID)
     {
         ExecutionsDetails executionsDetails = new ExecutionsDetails();
         executionsDetails.EventType = infoEvent.type;

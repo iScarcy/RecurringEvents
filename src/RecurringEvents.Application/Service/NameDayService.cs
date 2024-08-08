@@ -26,7 +26,7 @@ public class NameDayService : IEventPeopleService<NameDay>
         throw new NotImplementedException();
     }
 
-    public async Task<IEnumerable<Event>> GetAll()
+    public async Task<IEnumerable<RecurringEvent>> GetAll()
     {
         var eventPeople = await _dataProvider.GetAll();
 
@@ -38,24 +38,24 @@ public class NameDayService : IEventPeopleService<NameDay>
         throw new NotImplementedException();
     }
 
-    public async Task<IEnumerable<Event>> GetEventsByDays(DateRange days)
+    public async Task<IEnumerable<RecurringEvent>> GetEventsByDays(DateRange days)
     {
         var eventPeople = await _dataProvider.GetEventsByDays(days);
 
         return NameDays2Events(eventPeople);
     }
 
-    public async Task<IEnumerable<Event>> GetEventsByPerson(string Person)
+    public async Task<IEnumerable<RecurringEvent>> GetEventsByPerson(string Person)
     {
         var eventPeople = await _dataProvider.GetEventsByPerson(Person);
 
         return NameDays2Events(eventPeople);
     }
 
-    private IEnumerable<Event> NameDays2Events(IEnumerable<EventPeople> eventPeople)
+    private IEnumerable<RecurringEvent> NameDays2Events(IEnumerable<EventPeople> eventPeople)
     {
         var nameDays = from e in eventPeople
-                       select new Event(EventType.NameDay, e.date, e.personName);
+                       select new RecurringEvent(EventType.NameDay, e.date, e.personName);
 
         return nameDays;
     }
