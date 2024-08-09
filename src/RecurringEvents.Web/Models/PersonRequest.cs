@@ -1,6 +1,6 @@
 ﻿namespace RecurringEvents.Web.Models
 {
-    public class Person
+    public class PersonRequest
     {
         public string FullName { get; set; }
 

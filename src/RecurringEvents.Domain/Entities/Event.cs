@@ -13,5 +13,17 @@ namespace RecurringEvents.Domain.Entities
         public EventType EventType { get; set; }
         public DateTime DateEvent { get; set; }
         public string Description { get; set; } = string.Empty;
+
+        public Event() 
+        { 
+        }
+
+        public Event(EventType eventType, DateTime dateEvent, string description)
+        {
+           this.EventType = eventType;
+           this.DateEvent = dateEvent;
+           this.Description = description;
+        }
+
     }
 }

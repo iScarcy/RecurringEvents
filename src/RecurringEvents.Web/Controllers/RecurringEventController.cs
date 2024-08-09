@@ -39,7 +39,7 @@ public class RecurringEventController : ControllerBase
    
     [Route("PersonWasCreated")]
     [HttpPost]
-    public Task AddBirthDay(models.Person person)
+    public Task AddBirthDay(models.PersonRequest person)
     {
         Domain.Entities.Person pers = new Domain.Entities.Person() { FullName = person.FullName, ObjIDRef = person.ObjIdRef };
         BirthDay birthDay = new BirthDay() { DataBirth = person.BirthDay };
@@ -74,7 +74,18 @@ public class RecurringEventController : ControllerBase
     {      
         SistemWasStarted systemEvent = new SistemWasStarted(date);       
         return _mediator.Send(systemEvent);         
-    } 
+    }
 
-    
+    /// <summary>
+    /// Evento invocato quando il sistema si avvia per estrarre gli eventi del giorno
+    /// </summary>
+    /// <param name="date"></param>
+    /// <returns></returns>
+    [HttpPost("EventWasCreated")]
+    public Task EventWasCreated(EventRequest request)
+    {        
+        EventWasCreated eventWasCreated = new EventWasCreated(request.EventType,request.DateEvent, request.Description);
+        return _mediator.Send(eventWasCreated);
+    }
+
 }
