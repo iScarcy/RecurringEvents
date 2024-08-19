@@ -3,6 +3,8 @@ using RecurringEvents.Application.DomainEvents;
 using RecurringEvents.Application.Interface.Service;
 using RecurringEvents.Domain.Entities;
 using RecurringEvents.Domain.ValueObject;
+using System.Linq;
+
 namespace RecurringEvents.Infrastructure.DomainEvents;
 
 public class SistemWasStartedCreatedHanler : IRequestHandler<SistemWasStarted, List<RecurringEvent>>
@@ -28,7 +30,7 @@ public class SistemWasStartedCreatedHanler : IRequestHandler<SistemWasStarted, L
 
         var events = await _eventService.GetEventsByDays(request.DateRange);
 
-        return birthdays.Union(namedays).Union(events).ToList();
+        return (birthdays.Union(namedays).Union(events)).ToList().OrderBy(x => x.date).ToList<RecurringEvent>();
         
     }
 }

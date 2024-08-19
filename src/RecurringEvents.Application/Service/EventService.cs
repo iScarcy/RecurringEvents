@@ -28,12 +28,14 @@ namespace RecurringEvents.Application.Service
 
         public async Task<IEnumerable<RecurringEvent>> GetEventsByDays(DateRange days)
         {
-            IEnumerable<Event> events = await _repository.GetAll();
-            var recurringEvents = from e in events
-                                 where (days.From.Month <= e.DateEvent.Date.Month && days.From.Day <= e.DateEvent.Date.Day && days.To.Month > e.DateEvent.Date.Month)
-                                 ||
-                                 (days.From.Month <= e.DateEvent.Date.Month && days.To.Month == e.DateEvent.Date.Month && days.To.Day >= e.DateEvent.Date.Day)
-                                 select new RecurringEvent(e.EventType, e.DateEvent, e.Description);
+            IEnumerable<Event> events = await _repository.GetAll();           
+            var recurringEvents = from x in events
+                            where
+                               (new DateTime(1900, x.DateEvent.Month, x.DateEvent.Day)).CompareTo((new DateTime(1900, days.From.Month, days.From.Day))) >= 0
+                               &&
+                               (new DateTime(1900, x.DateEvent.Month, x.DateEvent.Day)).CompareTo((new DateTime(1900, days.To.Month, days.To.Day))) <= 0
+                            select new RecurringEvent(x.EventType, x.DateEvent, x.Description);
+
             return recurringEvents;
         }
     }

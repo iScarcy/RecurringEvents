@@ -74,19 +74,7 @@ public class NameDayService : IEventPeopleRepository<NameDay>
             throw new ArgumentNullException(nameof(onomastico));
     }
 
-    public async Task<IEnumerable<EventPeople>> GetEventsByDays(DateRange days)
-    {
-        //onomastici
-        var onomastici = from n in _context.NameDay.AsNoTracking()
-                         join s in _context.Saints.AsNoTracking() on n.IdSaint equals s.Id
-                         join p in _context.People.AsNoTracking() on n.idPerson equals p.Id
-                         where (days.From.Month <= s.Date.Date.Month && days.From.Day <= s.Date.Date.Day && days.To.Month > s.Date.Date.Month)
-                                  ||
-                                  (days.From.Month <= s.Date.Date.Month && days.To.Month == s.Date.Date.Month && days.To.Day >= s.Date.Date.Day)                         
-                         select new EventPeople(s.Date, p.FullName);
-
-        return await onomastici.ToListAsync();
-    }
+   
 
     public async Task<IEnumerable<EventPeople>> GetEventsByPerson(string person)
     {

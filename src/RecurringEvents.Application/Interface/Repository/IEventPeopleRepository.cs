@@ -12,8 +12,6 @@ namespace RecurringEvents.Application.Interface.Repository
         Task<IEnumerable<EventPeople>> GetAll();
         Task<IEnumerable<EventPeople>> GetEventsByPerson(string personName);
         
-        Task<IEnumerable<EventPeople>> GetEventsByDays(DateRange days);
-
         Task<T> GetEventByPersonRef(string personRefID);
 
         Task ChangeEventDate(string personRefID, DateTime deteEvent);

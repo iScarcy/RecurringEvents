@@ -40,9 +40,16 @@ public class NameDayService : IEventPeopleService<NameDay>
 
     public async Task<IEnumerable<RecurringEvent>> GetEventsByDays(DateRange days)
     {
-        var eventPeople = await _dataProvider.GetEventsByDays(days);
+        var events = await _dataProvider.GetAll();
 
-        return NameDays2Events(eventPeople);
+        var nameDays = events.Where(x =>
+
+                          (new DateTime(1900, x.date.Month, x.date.Day)).CompareTo((new DateTime(1900, days.From.Month, days.From.Day))) >= 0
+                           &&
+                           (new DateTime(1900, x.date.Month, x.date.Day)).CompareTo((new DateTime(1900, days.To.Month, days.To.Day))) <= 0
+                           );
+
+        return NameDays2Events(nameDays);
     }
 
     public async Task<IEnumerable<RecurringEvent>> GetEventsByPerson(string Person)
