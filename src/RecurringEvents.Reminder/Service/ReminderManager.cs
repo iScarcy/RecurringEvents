@@ -99,6 +99,15 @@ namespace RecurringEvents.Reminder.Service
                                         key = BrokerKeyType.bot_auguri.ToString();
                                         messageText = $"Il {e.date.Day}/{e.date.Month}, {e.description} ha fatto l'onomastico.";
                                         break;
+                                    case RecurringEvents.Reminder.Enums.EventType.Anniversary:
+                                        key = BrokerKeyType.bot_auguri.ToString();
+                                        messageText = $"Il {e.date.Day}/{e.date.Month}, ricorda l'anniversario: {e.description} ";
+                                        break;
+                                    case RecurringEvents.Reminder.Enums.EventType.Reminder:
+                                        key = BrokerKeyType.bot_reminder.ToString();
+                                        messageText = $"Il {e.date.Day}/{e.date.Month}, reminder: {e.description} ";
+                                        break;
+                                         
                                 }
                                 BrokerMessage message = new BrokerMessage() { Key = key, Message = messageText };
                                 _log.Information($" - BrokerMessage: key:'{key}', Message:'{messageText}'");

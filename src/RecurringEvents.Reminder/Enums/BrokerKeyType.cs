@@ -11,6 +11,7 @@ namespace RecurringEvents.Reminder.Enums
      
     public enum BrokerKeyType
     {
-        bot_auguri
+        bot_auguri,
+        bot_reminder
     }
 }
