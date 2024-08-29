@@ -32,7 +32,7 @@ namespace RecurringEvents.Web.Controllers
         /// </summary>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        [HttpGet("birdays")]
+        [HttpGet("birthdays")]
         public async Task<ActionResult> GetBirthdays() 
         {
             try

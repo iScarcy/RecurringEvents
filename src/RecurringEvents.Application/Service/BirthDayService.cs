@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 
 namespace RecurringEvents.Application.Service
 {
-    public class BithDayService : IEventPeopleService<BirthDay>
+    public class BirthDayService : IEventPeopleService<BirthDay>
     {
         private readonly IEventPeopleRepository<BirthDay> _dataProvider;
-        public BithDayService(IEventPeopleRepository<BirthDay> provider) 
+        public BirthDayService(IEventPeopleRepository<BirthDay> provider) 
         {
             _dataProvider = provider;
         }
