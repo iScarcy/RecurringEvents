@@ -37,7 +37,7 @@ public class BirthDayService : IEventPeopleRepository<BirthDay>
     {
         var compleanni = from n in _context.BirthDay.AsNoTracking()
                          join p in _context.People.AsNoTracking() on n.IdPerson equals p.Id
-                         select new EventPeople(n.DataBirth, p.FullName);
+                         select new EventPeople(p.ObjIDRef, n.DataBirth, p.FullName);
 
 
 
@@ -65,7 +65,7 @@ public class BirthDayService : IEventPeopleRepository<BirthDay>
         var compleanni = from x in _context.BirthDay.AsNoTracking()
                          join p in _context.People.AsNoTracking() on x.IdPerson equals p.Id
                          where p.FullName.ToLower() == person.ToLower()
-                         select new EventPeople(x.DataBirth, p.FullName);
+                         select new EventPeople(p.ObjIDRef, x.DataBirth, p.FullName);
 
         return await compleanni.ToListAsync();
 

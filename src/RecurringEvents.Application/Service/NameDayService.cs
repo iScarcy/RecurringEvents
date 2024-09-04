@@ -62,7 +62,7 @@ public class NameDayService : IEventPeopleService<NameDay>
     private IEnumerable<RecurringEvent> NameDays2Events(IEnumerable<EventPeople> eventPeople)
     {
         var nameDays = from e in eventPeople
-                       select new RecurringEvent(EventType.NameDay, e.date, e.personName);
+                       select new RecurringEvent(e.objRef, EventType.NameDay, e.date, e.personName);
 
         return nameDays;
     }

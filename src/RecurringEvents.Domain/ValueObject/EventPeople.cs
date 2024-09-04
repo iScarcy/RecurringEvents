@@ -1,6 +1,6 @@
 namespace RecurringEvents.Domain.ValueObject;
 
-public record EventPeople(DateTime date, string personName)
+public record EventPeople(string objRef, DateTime date, string personName)
 {
 
 }   

@@ -159,16 +159,31 @@ namespace RecurringEvents.Web.Controllers
 
 
         /// <summary>
-        /// ChangeBirtDayDete
+        /// ChangeBirthDay
         /// aggiorna la data del compleanno di una persona travata tramite objID
         /// </summary>
         /// <param name="newBirthDay"></param>
         /// <param name="objID"></param>
         /// <returns></returns>
-        [HttpPatch("ChangeBirtDayDete")]
-        public async Task ChangeBirtDayDete(ChangeDateRequest changeDateRequest) 
+        [HttpPatch("ChangeBirthDay")]
+        public async Task ChangeBirthDayDate(ChangeDateRequest changeDateRequest) 
         { 
-            await _peopleService.ChangeDate(changeDateRequest.objID,changeDateRequest.newBirthDay);
+            await _peopleService.ChangeDate(changeDateRequest.objID,changeDateRequest.newDataEvent);
         }
+
+        /// <summary>
+        /// ChangeEventDate
+        /// aggiorna la data di un evento
+        /// </summary>
+        /// <param name="newBirthDay"></param>
+        /// <param name="objID"></param>
+        /// <returns></returns>
+        [HttpPatch("ChangeEventDate")]
+        public async Task ChangeEventDate(ChangeDateRequest changeDateRequest)
+        {
+            await _eventService.ChangeDate(changeDateRequest.objID, changeDateRequest.newDataEvent);
+        }
+
+
     }
 }

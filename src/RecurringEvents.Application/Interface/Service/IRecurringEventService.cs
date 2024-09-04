@@ -6,4 +6,6 @@ public interface IRecurringEventService
 {
     Task<IEnumerable<RecurringEvent>> GetAll();
     Task<IEnumerable<RecurringEvent>> GetEventsByDays(DateRange days);
+
+    Task ChangeDate(string objID, DateTime dateEvent);
 }

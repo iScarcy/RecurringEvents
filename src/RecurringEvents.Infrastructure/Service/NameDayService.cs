@@ -50,7 +50,7 @@ public class NameDayService : IEventPeopleRepository<NameDay>
         var onomastici = from n in _context.NameDay.AsNoTracking()
                          join s in _context.Saints.AsNoTracking() on n.IdSaint equals s.Id
                          join p in _context.People.AsNoTracking() on n.idPerson equals p.Id
-                         select new EventPeople(s.Date, p.FullName);
+                         select new EventPeople(p.ObjIDRef, s.Date, p.FullName);
 
         
         return await onomastici.ToListAsync();
@@ -82,7 +82,7 @@ public class NameDayService : IEventPeopleRepository<NameDay>
                        join s in _context.Saints.AsNoTracking() on n.IdSaint equals s.Id
                        join p in _context.People.AsNoTracking() on n.idPerson equals p.Id
                        where p.FullName == person
-                       select new EventPeople(s.Date, p.FullName);
+                       select new EventPeople(p.ObjIDRef, s.Date, p.FullName);
 
 
         return await nameDays.ToListAsync();

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using RecurringEvents.Domain.ValueObject;
+using System.ComponentModel.DataAnnotations;
 
 namespace RecurringEvents.Web.Models
 {
@@ -8,9 +9,8 @@ namespace RecurringEvents.Web.Models
     public class ChangeDateRequest
     {
         [Required]
-        public DateTime newBirthDay { get; set; }
+        public DateTime newDataEvent { get; set; }
         [Required]
-        public string objID { get; set; }
-
+        public string objID { get; set; }      
     }
 }

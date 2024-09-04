@@ -10,7 +10,7 @@ namespace RecurringEvents.Application.Interface.Service
 
        Task<T> GetEventByPersonRef(string personRefID);
 
-      Task ChangeDate(string personRefID, DateTime dateEvent);
+     // Task ChangeDate(string personRefID, DateTime dateEvent);
 
     }
 }

@@ -31,7 +31,7 @@ namespace RecurringEvents.Application.Service
             
             var eventPeople = await _dataProvider.GetAll();
             var birthDays = from e in eventPeople
-                    select new RecurringEvent(EventType.BirthDay, e.date, e.personName);
+                    select new RecurringEvent(e.objRef, EventType.BirthDay, e.date, e.personName);
 
             return birthDays;
         }
@@ -53,7 +53,7 @@ namespace RecurringEvents.Application.Service
                            (new DateTime(1900, x.date.Month, x.date.Day)).CompareTo((new DateTime(1900, days.From.Month, days.From.Day))) >= 0
                            &&
                            (new DateTime(1900, x.date.Month, x.date.Day)).CompareTo((new DateTime(1900, days.To.Month, days.To.Day))) <= 0
-                         select new RecurringEvent(EventType.BirthDay, x.date, x.personName);
+                         select new RecurringEvent(x.objRef, EventType.BirthDay, x.date, x.personName);
 
             return birthDays;
         }
@@ -62,7 +62,7 @@ namespace RecurringEvents.Application.Service
         {
            var eventPeople = await _dataProvider.GetEventsByPerson(Person);
            var birthDays = from e in eventPeople
-                    select new RecurringEvent(EventType.BirthDay, e.date, e.personName);
+                    select new RecurringEvent(e.objRef, EventType.BirthDay, e.date, e.personName);
 
             return birthDays;
         }
