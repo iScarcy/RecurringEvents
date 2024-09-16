@@ -13,6 +13,6 @@ namespace RecurringEvents.Web.Models
         [Display(Name = "Il codice identificativo del santo")]
         [Required(ErrorMessageResourceType = typeof(ValidationErrors), ErrorMessageResourceName = nameof(ValidationErrors.Mandatory))]
                 
-        public int IdStaint { get; set; }
+        public int IdSaint { get; set; }
     }
 }

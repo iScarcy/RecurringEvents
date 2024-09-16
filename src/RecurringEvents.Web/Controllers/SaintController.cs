@@ -8,14 +8,14 @@ namespace RecurringEvents.Web.Controllers;
 [Route("api/[controller]")]
 public class SaintController : ControllerBase
 {
-     private readonly IRepository<Saint> _saintRepository ;
+    private readonly IRepository<Saint> _saintRepository;
 
     public SaintController(IRepository<Saint> saintRepository)
     {
         _saintRepository = saintRepository;
     }
-     
-    
+
+
     /// <summary>
     /// Add
     /// Censisce un nuovo santo del giorno
@@ -24,15 +24,15 @@ public class SaintController : ControllerBase
     /// <param name="Data"></param>
     /// <returns></returns>
     [HttpPost]
-    public async Task Add(Saint saint)
+    public async Task<Saint> Add(Saint saint)
     {
         try
         {
-            await _saintRepository.Insert(saint);            
+           return await _saintRepository.Insert(saint);
         }
         catch (Exception e)
         {
-         
+            throw new Exception($"Error add new saint:'{saint.Description}', date:'{saint.Date.ToString("dd/MM")}', error:'{e.Message}'");
         }
     }
     /// <summary>
@@ -40,10 +40,10 @@ public class SaintController : ControllerBase
     /// Recupera tutti i santi censiti nel sistema
     /// </summary>
     /// <returns></returns>
-    [HttpGet("allSaints")]
+    [HttpGet()]
     public async Task<IEnumerable<Saint>> GetAll()
     {
-       return await _saintRepository.GetAll();            
+        return await _saintRepository.GetAll();
     }
 
     /// <summary>
@@ -51,7 +51,7 @@ public class SaintController : ControllerBase
     /// Recupera uno specifico santo censito nel sistema
     /// </summary>
     /// <returns></returns>
-    [HttpGet()]
+    [HttpGet("{id}")]
     public async Task<Saint> Get(int idSaint)
     {
         return await _saintRepository.GetByID(idSaint);

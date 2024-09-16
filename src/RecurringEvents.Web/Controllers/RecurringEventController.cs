@@ -59,7 +59,7 @@ public class RecurringEventController : ControllerBase
     [HttpPost]
     public Task AddNameDay(NameDayRequest request)
     {   
-        var nameDayEvent = new NameDayWasCreated(request.ObjID, request.IdStaint);
+        var nameDayEvent = new NameDayWasCreated(request.ObjID, request.IdSaint);
         return _mediator.Send(nameDayEvent);
     }
 
