@@ -40,6 +40,7 @@ public class SaintController : ControllerBase
     /// Recupera tutti i santi censiti nel sistema
     /// </summary>
     /// <returns></returns>
+    [Route("/api/saints")]
     [HttpGet()]
     public async Task<IEnumerable<Saint>> GetAll()
     {
