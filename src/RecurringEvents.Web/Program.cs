@@ -32,6 +32,8 @@ builder.Services.AddControllers(options =>
     options.Conventions.Add(new ProducesResponseTypeConvention());
 });
 
+builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
+
 builder.Services.AddApplication();
 
 builder.Services.AddInfrastructure(dbConnectionStrings);

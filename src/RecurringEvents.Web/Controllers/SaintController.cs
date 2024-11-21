@@ -40,7 +40,7 @@ public class SaintController : ControllerBase
     /// Recupera tutti i santi censiti nel sistema
     /// </summary>
     /// <returns></returns>
-    [Route("/api/saints")]
+   
     [HttpGet()]
     public async Task<IEnumerable<Saint>> GetAll()
     {
@@ -59,7 +59,7 @@ public class SaintController : ControllerBase
     }
 
 
-    [HttpPatch()]
+    [HttpPut("{id}")]
     public async Task UpdateSaint(Saint saint) 
     { 
         await _saintRepository.Update(saint);
