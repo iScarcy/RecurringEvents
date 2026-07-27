@@ -25,7 +25,14 @@ namespace RecurringEvents.Infrastructure.DomainEvents
             if(request == null ) 
                  throw new Exception("EventWasCreated request is null");
 
-            Event envt = new Event(request.eventType, request.dateEvent, request.description);
+            Event envt = new Event
+            {
+                EventID = request.EventID,
+                EventType = request.eventType.ID,
+                DateEvent = request.DateEvent,
+                Description = request.Description,
+                Recurring = request.Recurring
+            };
            
             
             await _dbContext.Events.AddAsync(envt);

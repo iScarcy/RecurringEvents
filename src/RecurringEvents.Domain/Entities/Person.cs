@@ -12,6 +12,8 @@ namespace RecurringEvents.Domain.Entities
     {
         public int Id { get; set; }
         public string FullName { get; set; } = string.Empty;
+        public DateTime DateBirth { get; set; }
+        public int? IdSaint { get; set; }
         public string ObjIDRef { get; set; } = string.Empty;
     }
 }

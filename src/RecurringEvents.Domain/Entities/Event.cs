@@ -1,29 +1,13 @@
-﻿using RecurringEvents.Domain.ValueObject;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace RecurringEvents.Domain.Entities
+namespace RecurringEvents.Domain.Entities;
+
+[Table("Events")]
+public class Event
 {
-    public class Event
-    {
-        public int Id { get; set; }
-        public EventType EventType { get; set; }
-        public DateTime DateEvent { get; set; }
-        public string Description { get; set; } = string.Empty;
-
-        public Event() 
-        { 
-        }
-
-        public Event(EventType eventType, DateTime dateEvent, string description)
-        {
-           this.EventType = eventType;
-           this.DateEvent = dateEvent;
-           this.Description = description;
-        }
-
-    }
+   public string EventID { get; set; } = string.Empty;
+   public int EventType { get; set; }
+   public DateTime DateEvent { get; set; }
+   public string Description { get; set; } = string.Empty;
+   public bool Recurring { get; set; } = false;
 }

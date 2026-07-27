@@ -8,23 +8,17 @@ namespace RecurringEvents.Infrastructure.DomainEvents;
 public class PersonWasCreatedHandler : IRequestHandler<PersonWasCreated>
 {
     
-    private readonly IRepository<Person> _repoPerson;
-    private readonly IRepository<BirthDay> _repoBirth;
+    private readonly IRepository<Person> _repoPerson; 
 
-    public PersonWasCreatedHandler(IRepository<Person> repoPerson, IRepository<BirthDay> repoBirth)
+    public PersonWasCreatedHandler(IRepository<Person> repoPerson)
     {
-        _repoBirth= repoBirth;
-        _repoPerson= repoPerson;
+          _repoPerson= repoPerson;
     }
     
 
     async Task IRequestHandler<PersonWasCreated>.Handle(PersonWasCreated request, CancellationToken cancellationToken)
     {
         Person person = await _repoPerson.Insert(request.person);
-        
-        BirthDay birthDay = new BirthDay(person.Id, request.birthDay.DataBirth);
-        await _repoBirth.Insert(birthDay);
-         
         
     }
 }

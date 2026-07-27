@@ -15,14 +15,9 @@ public class ApplicationDbContext : DbContext
 
     
     public DbSet<Person> People { get; set;}
-
-    public DbSet<BirthDay> BirthDay{get; set;}
+ 
 
     public DbSet<NameDay> NameDay{get; set;}
-
-    public DbSet<Execution> Executions{get; set;}
-
-    public DbSet<ExecutionsDetails> ExecutionsDetails { get; set; }
 
     public DbSet<Event> Events { get; set; }
 }

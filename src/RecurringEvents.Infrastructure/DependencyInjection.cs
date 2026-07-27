@@ -19,12 +19,11 @@ public static class DependencyInjection
         
         service.AddScoped<IRepository<Saint>, RepositoryDbService<Saint>>();
         service.AddScoped<IRepository<Person>, RepositoryDbService<Person>>();
-        service.AddScoped<IRepository<BirthDay>, RepositoryDbService<BirthDay>>();
+        service.AddScoped<IRepository<EventTypes>, RepositoryDbService<EventTypes>>();
         service.AddScoped<IRepository<Event>, RepositoryDbService<Event>>();
-        service.AddScoped<IEventPeopleRepository<BirthDay>, BirthDayService>();
-        service.AddScoped<IEventPeopleRepository<NameDay>, NameDayService>();
+       // service.AddScoped<IEventPeopleRepository<EventPeople>, BirthDayService>();
+       // service.AddScoped<IEventPeopleRepository<NameDay>, NameDayService>();
   
-        service.AddScoped<IExecutionsRepository, ExecutionsRepositoryService>();
         
         return service;
     }

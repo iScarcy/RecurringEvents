@@ -5,7 +5,7 @@ using RecurringEvents.Domain.ValueObject;
 
 namespace RecurringEvents.Infrastructure.Service;
 
-public class BirthDayService : IEventPeopleRepository<BirthDay>
+public class BirthDayService : IEventPeopleRepository<EventPeople>
 {
     private readonly ApplicationDbContext _context;
     public BirthDayService(ApplicationDbContext context)
@@ -15,45 +15,37 @@ public class BirthDayService : IEventPeopleRepository<BirthDay>
 
 
     public async Task ChangeEventDate(string personRefID, DateTime dateEvent)
-    {
-        BirthDay birthDay = new BirthDay();
-        var compleanno = from x in _context.BirthDay.AsNoTracking()
-                         join p in _context.People.AsNoTracking() on x.IdPerson equals p.Id
-                         where p.ObjIDRef == personRefID
-                         select x;
+    { 
+        var person = await _context.People.Where(x => x.ObjIDRef == personRefID).FirstOrDefaultAsync();                 
 
-        if (!compleanno.Any())
-            throw new ArgumentNullException(nameof(compleanno));
+        if (person == null)
+            throw new ArgumentNullException(nameof(person));
         else
         {
-            birthDay = await compleanno.FirstOrDefaultAsync();
-            birthDay.DataBirth = dateEvent;
-            _context.BirthDay.Update(birthDay);
+            person.DateBirth = dateEvent;
+            _context.People.Update(person);
+            
             await _context.SaveChangesAsync();
         }
     }
 
     public async Task<IEnumerable<EventPeople>> GetAll()
     {
-        var compleanni = from n in _context.BirthDay.AsNoTracking()
-                         join p in _context.People.AsNoTracking() on n.IdPerson equals p.Id
-                         select new EventPeople(p.ObjIDRef, n.DataBirth, p.FullName);
-
-
+        var compleanni = from p in _context.People.AsNoTracking() 
+                         select new EventPeople(p.ObjIDRef, p.DateBirth, p.FullName);
 
         return await compleanni.ToListAsync();
 
 
     }
 
-    public async Task<BirthDay> GetEventByPersonRef(string personRefID)
+    public async Task<EventPeople> GetEventByPersonRef(string personRefID)
     {
-        var compleanno = from x in _context.BirthDay.AsNoTracking()
-                         join p in _context.People.AsNoTracking() on x.IdPerson equals p.Id
+        var compleanno = from p in _context.People.AsNoTracking()  
                          where p.ObjIDRef == personRefID
-                         select x;
+                         select new EventPeople(p.ObjIDRef, p.DateBirth, p.FullName);
 
-        if (compleanno.Any())
+        if (compleanno != null)
             return await compleanno.FirstOrDefaultAsync();
         else
             throw new ArgumentNullException(nameof(compleanno));
@@ -62,13 +54,18 @@ public class BirthDayService : IEventPeopleRepository<BirthDay>
 
     public async Task<IEnumerable<EventPeople>> GetEventsByPerson(string person)
     {
+        /*
         var compleanni = from x in _context.BirthDay.AsNoTracking()
                          join p in _context.People.AsNoTracking() on x.IdPerson equals p.Id
                          where p.FullName.ToLower() == person.ToLower()
                          select new EventPeople(p.ObjIDRef, x.DataBirth, p.FullName);
 
         return await compleanni.ToListAsync();
-
+        */
+        var compleanni = from p in _context.People.AsNoTracking()
+                         where p.FullName.ToLower() == person.ToLower()
+                         select new EventPeople(p.ObjIDRef, p.DateBirth, p.FullName);
+        return await compleanni.ToListAsync();
     }
 
 

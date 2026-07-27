@@ -24,8 +24,7 @@ string Service_URL =  builder.Configuration["AppSettings:Service_URL"] ;
 // Add services to the container.
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(PersonWasCreatedHandler).Assembly));
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(NameDayWasCreatedHanler).Assembly));
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(SistemWasStartedCreatedHanler).Assembly));
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(SistemWasStartedCreatedHanler).Assembly));
+
 //builder.Services.AddMediatR(typeof(PersonWasCreatedHandler));
 builder.Services.AddControllers(options =>
 { 

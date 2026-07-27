@@ -12,15 +12,19 @@ namespace RecurringEvents.Application.DomainEvents
 {
     public class EventWasCreated : IRequest
     {
-        public EventType eventType {get;}
-        public DateTime dateEvent  {get;}
-        public string description  {get;} 
-      
-        public EventWasCreated(EventType eventType, DateTime dateEvent, string des)
+      //  public EventType eventType {get;}
+        public string EventID {get;} = Guid.NewGuid().ToString();
+        public EventTypes eventType {get;} = new EventTypes();
+        public DateTime DateEvent  {get;}
+        public string Description   {get;} = string.Empty;
+        public  bool Recurring {get;} = false; 
+        
+        public EventWasCreated(EventTypes eventType, DateTime dateEvent, string description, bool recurring = false)
         {
             this.eventType = eventType;
-            this.dateEvent = dateEvent; 
-            this.description = des;
+            this.DateEvent = dateEvent;
+            this.Description = description;
+            this.Recurring = recurring;
         }
     }
 }

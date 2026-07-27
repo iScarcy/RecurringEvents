@@ -33,8 +33,8 @@ public class RecurringEventController : ControllerBase
     /// AddBirthDay
     /// Evento evocato per registrare un compleanno 
     /// </summary>
-    /// <param name="Name"></param>
-    /// <param name="DataBirth"></param>
+    /// <param name="person"></param>
+ 
     /// <returns></returns>
    
     [Route("PersonWasCreated")]
@@ -42,9 +42,9 @@ public class RecurringEventController : ControllerBase
     public Task AddBirthDay(models.PersonRequest person)
     {
         Domain.Entities.Person pers = new Domain.Entities.Person() { FullName = person.FullName, ObjIDRef = person.ObjIdRef };
-        BirthDay birthDay = new BirthDay() { DataBirth = person.BirthDay };
+       
     
-        var birthDayEvent = new PersonWasCreated(pers, birthDay);
+        var birthDayEvent = new PersonWasCreated(pers);
         return _mediator.Send(birthDayEvent);
     }
 
@@ -53,7 +53,7 @@ public class RecurringEventController : ControllerBase
     /// NameDayWasCreated
     /// Evento evocato per registrare un onomastico.
     /// </summary>
-    /// <param name="nameDay"></param>    
+    /// <param name="request"></param>    
     /// <returns></returns>
     [Route("NameDayWasCreated")]
     [HttpPost]
@@ -64,22 +64,11 @@ public class RecurringEventController : ControllerBase
     }
 
 
+    
     /// <summary>
     /// Evento invocato quando il sistema si avvia per estrarre gli eventi del giorno
     /// </summary>
-    /// <param name="date"></param>
-    /// <returns></returns>
-    [HttpPut("SystemWasStarted")]
-    public Task<List<RecurringEvent>> SystemWasStarted(DateRange date) 
-    {      
-        SistemWasStarted systemEvent = new SistemWasStarted(date);       
-        return _mediator.Send(systemEvent);         
-    }
-
-    /// <summary>
-    /// Evento invocato quando il sistema si avvia per estrarre gli eventi del giorno
-    /// </summary>
-    /// <param name="date"></param>
+    /// <param name="request"></param>
     /// <returns></returns>
     [HttpPost("EventWasCreated")]
     public Task EventWasCreated(EventRequest request)

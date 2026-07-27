@@ -7,12 +7,9 @@ namespace RecurringEvents.Application.DomainEvents;
 public class PersonWasCreated : IRequest
 {
     public Person person;
-    public BirthDay birthDay;
     
-    public PersonWasCreated(Person person, BirthDay birthDay)
+    public PersonWasCreated(Person person)
     {
         this.person = person;
-        this.birthDay = birthDay;
-        
     }
 }

@@ -12,18 +12,16 @@ namespace RecurringEvents.Web.Controllers
     public class EventController : ControllerBase
     {
 
-        private readonly IEventPeopleService<BirthDay> _peopleService;
-        private readonly IEventPeopleService<NameDay> _nameDayService;
+        private readonly IEventPeopleService<Person> _peopleService;
         private readonly IRecurringEventService _eventService;
     
         /// <summary>
         /// costruttore
         /// </summary>
      
-        public EventController(IEventPeopleService<BirthDay> peopleService, IEventPeopleService<NameDay> nameDaysService, IRecurringEventService eventService)
+        public EventController(IEventPeopleService<Person> peopleService, IRecurringEventService eventService)
         {
             _peopleService  = peopleService;
-            _nameDayService = nameDaysService;
             _eventService   = eventService;
         }
         
@@ -47,7 +45,7 @@ namespace RecurringEvents.Web.Controllers
                 return Problem(ex.Message);    
             }
         }
-
+    /*
         /// <summary>
         /// Restituisce tutti gli onomastici
         /// </summary>
@@ -184,6 +182,6 @@ namespace RecurringEvents.Web.Controllers
             await _eventService.ChangeDate(changeDateRequest.objID, changeDateRequest.newDataEvent);
         }
 
-
+    */
     }
 }

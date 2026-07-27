@@ -18,10 +18,11 @@ namespace RecurringEvents.Application.Service
             _repository= dataProvider;
         }
 
+        /* 
         public async Task ChangeDate(string objID, DateTime dateEvent)
         {
           int ID = Int32.Parse(objID);
-          Event nvt = await _repository.GetByID(ID);
+          W_Event nvt = await _repository.GetByID(ID);
           if (nvt != null) 
           {
                 nvt.DateEvent = dateEvent;
@@ -32,15 +33,13 @@ namespace RecurringEvents.Application.Service
                 throw new Exception("Evento non trovato");
             }
         }
-
-        public async Task<IEnumerable<RecurringEvent>> GetAll()
+        */
+        public async Task<IEnumerable<Event>> GetAll()
         {
            IEnumerable<Event> events =  await _repository.GetAll();
-           var recurringEvents = from e in events
-                          select new RecurringEvent(e.Id.ToString(), e.EventType, e.DateEvent, e.Description);
-           return recurringEvents;
+           return events;
         }
-
+    /*
         public async Task<IEnumerable<RecurringEvent>> GetEventsByDays(DateRange days)
         {
             IEnumerable<Event> events = await _repository.GetAll();           
@@ -52,6 +51,6 @@ namespace RecurringEvents.Application.Service
                             select new RecurringEvent(x.Id.ToString(), x.EventType, x.DateEvent, x.Description);
 
             return recurringEvents;
-        }
+        }*/
     }
 }
