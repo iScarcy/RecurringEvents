@@ -13,9 +13,11 @@ namespace RecurringEvents.Application.Service
     public class EventService : IRecurringEventService 
     {
         private readonly IRepository<Event> _repository;
-        public EventService(IRepository<Event> dataProvider)
+        private readonly IRepository<RecurringEvent> _recurringEventRepository;
+        public EventService(IRepository<Event> dataProvider, IRepository<RecurringEvent> recurringEventRepository)
         {
             _repository= dataProvider;
+            _recurringEventRepository = recurringEventRepository;
         }
 
         /* 
@@ -34,9 +36,9 @@ namespace RecurringEvents.Application.Service
             }
         }
         */
-        public async Task<IEnumerable<Event>> GetAll()
+        public async Task<IEnumerable<RecurringEvent>> GetAll()
         {
-           IEnumerable<Event> events =  await _repository.GetAll();
+           IEnumerable<RecurringEvent> events =  await _recurringEventRepository.GetAll();
            return events;
         }
     /*

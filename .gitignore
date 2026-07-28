@@ -25,3 +25,5 @@ src/RecurringEvents.Web/RecurringEvents.Web.csproj.user
 test/RecurringEvents.Tests/obj
 test/RecurringEvents.Tests/bin
 
+.DS_Store
+src/.DS_Store

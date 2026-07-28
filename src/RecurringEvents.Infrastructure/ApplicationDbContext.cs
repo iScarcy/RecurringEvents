@@ -10,6 +10,11 @@ public class ApplicationDbContext : DbContext
     {
         
     }
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<RecurringEvent>()
+            .HasKey(e => new { e.EventID, e.EventTypeID });
+    }
 
     public DbSet<Saint> Saints{get; set;}
 
@@ -20,4 +25,6 @@ public class ApplicationDbContext : DbContext
     public DbSet<NameDay> NameDay{get; set;}
 
     public DbSet<Event> Events { get; set; }
+
+    public DbSet<RecurringEvent> RecurringEvents { get; set; }
 }

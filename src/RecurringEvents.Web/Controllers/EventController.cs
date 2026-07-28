@@ -30,15 +30,15 @@ namespace RecurringEvents.Web.Controllers
         /// </summary>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        [HttpGet("birthdays")]
-        public async Task<ActionResult> GetBirthdays() 
+        [HttpGet("recurring")]
+        public async Task<ActionResult> GetAll() 
         {
             try
             {
                 
-                var birthdays = await _peopleService.GetAll(); 
+               var events = await _eventService.GetAll();
 
-                return Ok(birthdays);
+                return Ok(events);
 
             }catch(Exception ex)
             {

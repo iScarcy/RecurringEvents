@@ -6,7 +6,7 @@ namespace RecurringEvents.Application.Service;
 
 public class PeopleService : IEventPeopleService<Person>
 {
-    public Task<IEnumerable<Event>> GetAll()
+    public Task<IEnumerable<RecurringEvent>> GetAll()
     {
         throw new NotImplementedException();
     }
