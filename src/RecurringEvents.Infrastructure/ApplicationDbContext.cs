@@ -13,7 +13,7 @@ public class ApplicationDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<RecurringEvent>()
-            .HasKey(e => new { e.EventID, e.EventTypeID });
+            .HasKey(e => new { e.EventID, e.EventType });
     }
 
     public DbSet<Saint> Saints{get; set;}
