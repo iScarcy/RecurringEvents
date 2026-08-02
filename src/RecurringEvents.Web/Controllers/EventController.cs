@@ -45,6 +45,24 @@ namespace RecurringEvents.Web.Controllers
                 return Problem(ex.Message);    
             }
         }
+
+        /// <summary>
+        /// Restituisce tutti i tipi di eventi
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("types")]
+        public async Task<ActionResult> GetEventTypes()
+        {
+            try
+            {
+                var eventTypes = await _eventService.GetEventTypes();
+                return Ok(eventTypes);
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+            }
+        }
     /*
         /// <summary>
         /// Restituisce tutti gli onomastici
