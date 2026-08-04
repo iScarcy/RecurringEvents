@@ -11,8 +11,7 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddApplication(this IServiceCollection service)
     {
-        service.AddScoped<IEventPeopleService<Person>, PeopleService>();
-        service.AddScoped<IRecurringEventService, EventService>();
+         service.AddScoped<IRecurringEventService, EventService>();
            
         return service;      
     }

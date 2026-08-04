@@ -7,6 +7,7 @@ using RecurringEvents.Domain.Entities;
 using RecurringEvents.Domain.ValueObject;
 using Microsoft.AspNetCore.Authorization;
 using RecurringEvents.Web.Models;
+using RecurringEvents.Application.Interface.Service;
 
 namespace RecurringEvents.Web.Controllers;
 
@@ -18,53 +19,19 @@ namespace RecurringEvents.Web.Controllers;
 [Route("api/[controller]")]
 public class RecurringEventController : ControllerBase
 {
-    private readonly IMediator _mediator;
-   
+    private readonly IMediator _mediator; 
     /// <summary>
     /// costruttori
     /// </summary>
     /// <param name="mediator"></param>
     public RecurringEventController(IMediator mediator)
     {
-        _mediator = mediator;       
-    }
-
-    /// <summary>
-    /// AddBirthDay
-    /// Evento evocato per registrare un compleanno 
-    /// </summary>
-    /// <param name="person"></param>
- 
-    /// <returns></returns>
-   
-    [Route("PersonWasCreated")]
-    [HttpPost]
-    public Task AddBirthDay(models.PersonRequest person)
-    {
-        Domain.Entities.Person pers = new Domain.Entities.Person() { FullName = person.FullName, ObjIDRef = person.ObjIdRef };
+        _mediator = mediator;
        
-    
-        var birthDayEvent = new PersonWasCreated(pers);
-        return _mediator.Send(birthDayEvent);
     }
 
-
-    /// <summary>
-    /// NameDayWasCreated
-    /// Evento evocato per registrare un onomastico.
-    /// </summary>
-    /// <param name="request"></param>    
-    /// <returns></returns>
-    [Route("NameDayWasCreated")]
-    [HttpPost]
-    public Task AddNameDay(NameDayRequest request)
-    {   
-        var nameDayEvent = new NameDayWasCreated(request.ObjID, request.IdSaint);
-        return _mediator.Send(nameDayEvent);
-    }
-
-
-    
+   
+  
     /// <summary>
     /// Evento invocato quando il sistema si avvia per estrarre gli eventi del giorno
     /// </summary>
@@ -73,8 +40,16 @@ public class RecurringEventController : ControllerBase
     [HttpPost("EventWasCreated")]
     public Task EventWasCreated(EventRequest request)
     {        
-        EventWasCreated eventWasCreated = new EventWasCreated(request.EventType,request.DateEvent, request.Description);
+        
+        EventWasCreated eventWasCreated = new EventWasCreated(request.EventTypeDescription,  request.DateEvent, request.Description);
         return _mediator.Send(eventWasCreated);
     }
 
+    [HttpPatch("EventWasUpdated")]
+    public Task EventWasUpdated(EventRequest request)
+    {        
+        
+        EventWasUpdated eventWasUpdated = new EventWasUpdated(request.EventID, request.EventTypeDescription, request.DateEvent, request.Description);
+        return _mediator.Send(eventWasUpdated);
+    }
 }

@@ -5,7 +5,8 @@ namespace RecurringEvents.Web.Models
 {
     public class EventRequest
     {
-        public EventTypes EventType { set; get; }
+        public string EventID { set; get; } = string.Empty;
+        public string EventTypeDescription { set; get; }
         public DateTime DateEvent { set; get; }
         public string Description { set; get; } = string.Empty;
     }

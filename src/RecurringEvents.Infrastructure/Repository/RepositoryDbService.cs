@@ -28,6 +28,11 @@ namespace RecurringEvents.Infrastructure.Repository
             return await _context.Set<T>().FindAsync(ID);
         }
 
+        public Task<T> GetValueAsync(string key, string value)
+        {
+           return _context.Set<T>().Where(x => EF.Property<string>(x, key) == value).FirstOrDefaultAsync(); 
+        }
+
         public async Task<T> Insert(T entity)
         {
             _context.Set<T>().Add(entity);

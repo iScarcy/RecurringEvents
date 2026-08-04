@@ -17,7 +17,6 @@ public static class DependencyInjection
             new MySqlServerVersion(new Version(10, 4, 17))));
         
         
-        service.AddScoped<IRepository<Saint>, RepositoryDbService<Saint>>();
         service.AddScoped<IRepository<Person>, RepositoryDbService<Person>>();
         service.AddScoped<IRepository<EventTypes>, RepositoryDbService<EventTypes>>();
         service.AddScoped<IRepository<Event>, RepositoryDbService<Event>>();

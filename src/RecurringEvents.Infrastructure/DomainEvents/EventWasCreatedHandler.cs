@@ -12,6 +12,7 @@ namespace RecurringEvents.Infrastructure.DomainEvents
 {
     public class EventWasCreatedHandler : IRequestHandler<EventWasCreated>
     {
+     
         private readonly ApplicationDbContext _dbContext;
         public EventWasCreatedHandler(ApplicationDbContext dbContext)
         {
@@ -25,13 +26,18 @@ namespace RecurringEvents.Infrastructure.DomainEvents
             if(request == null ) 
                  throw new Exception("EventWasCreated request is null");
 
+            EventTypes eventTypes = _dbContext.EventTypes.Where(x => x.EventType == request.EventType).FirstOrDefault();
+            if(eventTypes == null)
+            {
+                throw new Exception("EventType not found");
+            }
+            
             Event envt = new Event
             {
                 EventID = request.EventID,
-                EventType = request.eventType.ID,
+                EventType = eventTypes.ID,
                 DateEvent = request.DateEvent,
-                Description = request.Description,
-                Recurring = request.Recurring
+                Description = request.Description
             };
            
             

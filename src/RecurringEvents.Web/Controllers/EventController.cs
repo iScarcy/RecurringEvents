@@ -12,40 +12,47 @@ namespace RecurringEvents.Web.Controllers
     public class EventController : ControllerBase
     {
 
-        private readonly IEventPeopleService<Person> _peopleService;
+        
         private readonly IRecurringEventService _eventService;
     
         /// <summary>
         /// costruttore
         /// </summary>
      
-        public EventController(IEventPeopleService<Person> peopleService, IRecurringEventService eventService)
+        public EventController(IRecurringEventService eventService)
         {
-            _peopleService  = peopleService;
             _eventService   = eventService;
         }
-        
-        /// <summary>
-        /// Restituisce tutti i compleanni 
-        /// </summary>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
-        [HttpGet("recurring")]
-        public async Task<ActionResult> GetAll() 
+
+    [HttpGet]
+    public async Task<ActionResult> GetAll() 
+    {
+        try
+        {
+            
+            var events = await _eventService.GetAll();
+
+            return Ok(events);
+
+        }catch(Exception ex)
+        {
+            return Problem(ex.Message);    
+        }
+    }
+            
+        [HttpGet("{objID}")]
+        public async Task<ActionResult> GetEventByID(string objID)
         {
             try
             {
-                
-               var events = await _eventService.GetAll();
-
-                return Ok(events);
-
-            }catch(Exception ex)
+                var eventItem = await _eventService.GetEventByID(objID);
+                return Ok(eventItem);
+            }
+            catch (Exception ex)
             {
-                return Problem(ex.Message);    
+                return Problem(ex.Message);
             }
         }
-
         /// <summary>
         /// Restituisce tutti i tipi di eventi
         /// </summary>
@@ -63,6 +70,20 @@ namespace RecurringEvents.Web.Controllers
                 return Problem(ex.Message);
             }
         }
+
+        [HttpPatch]
+        public async Task<ActionResult> UpdateEvent(string objID, Event eventToUpdate)
+        {
+            try
+            {
+                await _eventService.UpdateEvent(objID, eventToUpdate);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+            }
+        }  
     /*
         /// <summary>
         /// Restituisce tutti gli onomastici

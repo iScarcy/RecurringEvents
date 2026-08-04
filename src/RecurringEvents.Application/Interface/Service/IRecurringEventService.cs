@@ -6,7 +6,7 @@ using RecurringEvents.Domain.ValueObject;
 public interface IRecurringEventService
 {
     Task<IEnumerable<RecurringEvent>> GetAll();
-   // Task<IEnumerable<Event>> GetEventsByDays(DateRange days);
-
-   // Task ChangeDate(string objID, DateTime dateEvent);
+    Task<IEnumerable<EventTypes>> GetEventTypes();
+    Task<RecurringEvent> GetEventByID(string objID);
+    Task UpdateEvent(string objID, Event eventToUpdate);
 }

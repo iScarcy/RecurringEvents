@@ -14,17 +14,17 @@ namespace RecurringEvents.Application.DomainEvents
     {
       //  public EventType eventType {get;}
         public string EventID {get;} = Guid.NewGuid().ToString();
-        public EventTypes eventType {get;} = new EventTypes();
+        public string EventType {get;} = string.Empty;
+      
         public DateTime DateEvent  {get;}
         public string Description   {get;} = string.Empty;
-        public  bool Recurring {get;} = false; 
         
-        public EventWasCreated(EventTypes eventType, DateTime dateEvent, string description, bool recurring = false)
+        public EventWasCreated(string eventType, DateTime dateEvent, string description)
         {
-            this.eventType = eventType;
+            this.EventType = eventType;
             this.DateEvent = dateEvent;
             this.Description = description;
-            this.Recurring = recurring;
+                                    
         }
     }
 }

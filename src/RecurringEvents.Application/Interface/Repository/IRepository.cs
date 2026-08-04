@@ -11,6 +11,8 @@ public interface IRepository<T> where T : class
 
     Task<T> GetByID(int ID) ;
 
+    Task<T> GetValueAsync(string key, string value);
+
     Task<T> Insert(T entity);
 
     Task Update(T entity);

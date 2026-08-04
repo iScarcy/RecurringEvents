@@ -16,15 +16,14 @@ public class ApplicationDbContext : DbContext
             .HasKey(e => new { e.EventID, e.EventType });
     }
 
-    public DbSet<Saint> Saints{get; set;}
 
     
     public DbSet<Person> People { get; set;}
  
 
-    public DbSet<NameDay> NameDay{get; set;}
-
     public DbSet<Event> Events { get; set; }
 
     public DbSet<RecurringEvent> RecurringEvents { get; set; }
+
+    public DbSet<EventTypes> EventTypes { get; set; }
 }
