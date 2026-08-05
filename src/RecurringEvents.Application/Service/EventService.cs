@@ -22,22 +22,17 @@ namespace RecurringEvents.Application.Service
             _eventTypesRepository = eventTypesRepository;
         }
 
-        /* 
-        public async Task ChangeDate(string objID, DateTime dateEvent)
+        public Task DeleteEvent(string objID)
         {
-          int ID = Int32.Parse(objID);
-          W_Event nvt = await _repository.GetByID(ID);
-          if (nvt != null) 
-          {
-                nvt.DateEvent = dateEvent;
-                await _repository.Update(nvt);
-            }
-            else
+            var eventItem = _repository.GetValueAsync("EventID", objID)?.Result;
+            if (eventItem == null)
             {
                 throw new Exception("Evento non trovato");
             }
+            return _repository.Delete("EventID", objID);
         }
-        */
+
+      
         public async Task<IEnumerable<RecurringEvent>> GetAll()
         {
            IEnumerable<RecurringEvent> events =  await _recurringEventRepository.GetAll();

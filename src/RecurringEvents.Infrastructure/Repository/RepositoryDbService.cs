@@ -18,6 +18,12 @@ namespace RecurringEvents.Infrastructure.Repository
             _context = context;
         }
 
+        public Task Delete(string key, string value)
+        {
+           _context.Set<T>().Remove(_context.Set<T>().Where(x => EF.Property<string>(x, key) == value).FirstOrDefault());
+            return _context.SaveChangesAsync();
+        }
+
         public async Task<IEnumerable<T>> GetAll()
         {
             return await _context.Set<T>().ToListAsync();

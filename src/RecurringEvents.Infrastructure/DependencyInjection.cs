@@ -4,7 +4,7 @@ using RecurringEvents.Application.Interface.Repository;
 using RecurringEvents.Domain.Entities;
 using RecurringEvents.Domain.ValueObject;
 using RecurringEvents.Infrastructure.Repository;
-using RecurringEvents.Infrastructure.Service;
+
 namespace RecurringEvents.Infrastructure;
 
 public static class DependencyInjection

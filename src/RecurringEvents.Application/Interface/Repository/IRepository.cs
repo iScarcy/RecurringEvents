@@ -17,6 +17,6 @@ public interface IRepository<T> where T : class
 
     Task Update(T entity);
 
-    // Task Delete(int ID);
+     Task Delete(string key, string value);
     
 }

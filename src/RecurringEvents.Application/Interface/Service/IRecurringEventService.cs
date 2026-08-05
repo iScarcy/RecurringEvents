@@ -9,4 +9,5 @@ public interface IRecurringEventService
     Task<IEnumerable<EventTypes>> GetEventTypes();
     Task<RecurringEvent> GetEventByID(string objID);
     Task UpdateEvent(string objID, Event eventToUpdate);
+    Task DeleteEvent(string objID);
 }
