@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "dgSpecHash": "drMEQT/ED08=",
+  "success": true,
+  "projectFilePath": "/Users/peppe/App/dotnet/RecurringEvents/src/RecurringEvents.Worker/RecurringEvents.Worker.csproj",
+  "expectedPackageFiles": [
+    "/Users/peppe/.nuget/packages/microsoft.extensions.configuration/10.0.10/microsoft.extensions.configuration.10.0.10.nupkg.sha512",
+    "/Users/peppe/.nuget/packages/microsoft.extensions.configuration.abstractions/10.0.10/microsoft.extensions.configuration.abstractions.10.0.10.nupkg.sha512",
+    "/Users/peppe/.nuget/packages/microsoft.extensions.configuration.binder/10.0.10/microsoft.extensions.configuration.binder.10.0.10.nupkg.sha512",
+    "/Users/peppe/.nuget/packages/microsoft.extensions.configuration.fileextensions/10.0.10/microsoft.extensions.configuration.fileextensions.10.0.10.nupkg.sha512",
+    "/Users/peppe/.nuget/packages/microsoft.extensions.configuration.json/10.0.10/microsoft.extensions.configuration.json.10.0.10.nupkg.sha512",
+    "/Users/peppe/.nuget/packages/microsoft.extensions.fileproviders.abstractions/10.0.10/microsoft.extensions.fileproviders.abstractions.10.0.10.nupkg.sha512",
+    "/Users/peppe/.nuget/packages/microsoft.extensions.fileproviders.physical/10.0.10/microsoft.extensions.fileproviders.physical.10.0.10.nupkg.sha512",
+    "/Users/peppe/.nuget/packages/microsoft.extensions.filesystemglobbing/10.0.10/microsoft.extensions.filesystemglobbing.10.0.10.nupkg.sha512",
+    "/Users/peppe/.nuget/packages/microsoft.extensions.primitives/10.0.10/microsoft.extensions.primitives.10.0.10.nupkg.sha512",
+    "/Users/peppe/.nuget/packages/rabbitmq.client/7.2.2/rabbitmq.client.7.2.2.nupkg.sha512",
+    "/Users/peppe/.nuget/packages/system.io.pipelines/10.0.10/system.io.pipelines.10.0.10.nupkg.sha512",
+    "/Users/peppe/.nuget/packages/system.text.encodings.web/10.0.10/system.text.encodings.web.10.0.10.nupkg.sha512",
+    "/Users/peppe/.nuget/packages/system.text.json/10.0.10/system.text.json.10.0.10.nupkg.sha512",
+    "/Users/peppe/.nuget/packages/system.threading.ratelimiting/8.0.0/system.threading.ratelimiting.8.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
