@@ -2,10 +2,13 @@
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using RecurringEvents.Worker.Configurations;
+using RecurringEvents.Worker.Models;
+using RecurringEvents.Worker.Service;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Text.Json;
 
-  var builder = new ConfigurationBuilder();
+var builder = new ConfigurationBuilder();
 
     builder.SetBasePath(Directory.GetCurrentDirectory())
     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
@@ -37,6 +40,17 @@ consumer.ReceivedAsync += async (model, ea) =>
     var message = Encoding.UTF8.GetString(body);
     Console.WriteLine($" [x] Received {message}");
 
+    var msg = JsonSerializer.Deserialize<Message>(message);
+     Console.WriteLine($" [x] Service: {msg?.service}, Action: {msg?.action}");   
+    var content = msg?.content;
+
+    if (content != null)
+    {
+        var contentType = content.GetType().Name;
+        
+        Console.WriteLine($" [x] Content type: {contentType}");
+    } 
+   
     int dots = message.Split('.').Length - 1;
     await Task.Delay(dots * 1000);
 
