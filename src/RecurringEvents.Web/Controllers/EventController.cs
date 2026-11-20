@@ -70,6 +70,28 @@ namespace RecurringEvents.Web.Controllers
                 return Problem(ex.Message);
             }
         }
+
+
+        /// <summary>
+        /// Crea un nuovo evento
+        /// </summary>
+        /// <param name="newEvent"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult> CreateEvent(Event newEvent)
+        {
+            try
+            {
+                var createdEvent = await _eventService.CreateEvent(newEvent);
+                return Ok(createdEvent);
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+            }
+        }
+
+
         /// <summary>
         /// Aggiorna un evento tramite objID
         /// </summary>

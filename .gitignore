@@ -27,3 +27,5 @@ test/RecurringEvents.Tests/bin
 
 .DS_Store
 src/.DS_Store
+
+.vscode

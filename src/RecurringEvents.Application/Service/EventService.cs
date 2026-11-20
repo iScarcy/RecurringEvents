@@ -22,6 +22,11 @@ namespace RecurringEvents.Application.Service
             _eventTypesRepository = eventTypesRepository;
         }
 
+        public async Task<Event> CreateEvent(Event eventToCreate)
+        {
+            return await _repository.Insert(eventToCreate);  
+        }
+
         public Task DeleteEvent(string objID)
         {
             var eventItem = _repository.GetValueAsync("EventID", objID)?.Result;

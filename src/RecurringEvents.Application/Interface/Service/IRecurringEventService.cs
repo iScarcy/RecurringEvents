@@ -10,4 +10,6 @@ public interface IRecurringEventService
     Task<RecurringEvent> GetEventByID(string objID);
     Task UpdateEvent(string objID, Event eventToUpdate);
     Task DeleteEvent(string objID);
+
+    Task<Event> CreateEvent(Event eventToCreate);
 }

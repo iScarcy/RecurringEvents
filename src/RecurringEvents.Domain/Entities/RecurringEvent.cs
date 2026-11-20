@@ -11,6 +11,6 @@ public class RecurringEvent
     public int EventTypeID { get; set; }
     public string EventType { get; set; } = string.Empty;
 
-    public int EntityTypeID	 { get; set; }
+    public bool Editable	 { get; set; }
   
 }

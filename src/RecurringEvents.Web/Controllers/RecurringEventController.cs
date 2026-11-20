@@ -27,7 +27,7 @@ public class RecurringEventController : ControllerBase
     public RecurringEventController(IMediator mediator)
     {
         _mediator = mediator;
-       
+        
     }
 
    
