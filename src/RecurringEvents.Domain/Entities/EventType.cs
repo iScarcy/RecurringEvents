@@ -7,6 +7,6 @@ public class EventTypes
 {
     public int ID { get; set; }
     public string EventType { get; set; } = string.Empty;
-    public int EntityType { get; set; }
+    public int? EntityType { get; set; }
     public bool Recurring { get; set; } = false;
 }
